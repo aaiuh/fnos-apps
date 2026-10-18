@@ -1,0 +1,47 @@
+{
+  "schema_version": "2",
+  "source_info": {
+    "name": "aaiuh飞牛应用源",
+    "author": "aaiuh",
+    "homepage": "https://github.com/aaiuh/fnos-apps",
+    "description": "飞牛 fnOS 原生应用集合。免费开源，跟随各应用上游更新。"
+  },
+  "apps": {
+    "hindsight": {
+      "display_name": "Hindsight 记忆库",
+      "desc": "Agent 长期记忆系统，原生运行于飞牛 fnOS，不依赖 Docker。内置 PostgreSQL 与向量检索，支持 onnx 语义嵌入与 flashrank 重排，提供 REST/MCP 接口与 Web 控制台。支持飞牛应用备份与恢复。",
+      "platform": [
+        "x86"
+      ],
+      "categories": [
+        "AI赋能"
+      ],
+      "icon_url": "https://raw.githubusercontent.com/aaiuh/hindsight-fnos/main/Hindsight/ICON.PNG",
+      "preview_urls": [],
+      "readme_url": "https://raw.githubusercontent.com/aaiuh/hindsight-fnos/main/Hindsight/README.md",
+      "bug_report_url": "https://github.com/aaiuh/hindsight-fnos/issues",
+      "maintainer": "aaiuh",
+      "maintainer_url": "https://github.com/aaiuh",
+      "distributor": "aaiuh",
+      "distributor_url": "https://github.com/aaiuh",
+      "run_as": "package",
+      "install_type": "root",
+      "is_docker": false,
+      "service_port": "8888",
+      "releases": {
+        "1.0.0-3": {
+          "changelog": "跟随上游 Hindsight 1.0.0-3。原生运行，不依赖 Docker；内置 PostgreSQL 与向量检索，onnx 语义嵌入 + flashrank 重排；支持飞牛应用备份与恢复。",
+          "updated_at": "2026-10-18",
+          "os_min_version": "1.1.0",
+          "packages": {
+            "x86": {
+              "download_url": "https://github.com/aaiuh/hindsight-fnos/releases/download/v1.0.0-3/Hindsight-1.0.0-3-x86.fpk",
+              "sha256": "acb17a7dda9db5a80a49b307b64346306916e74b9f42d67d18ccec571b164b3f",
+              "size": 81920
+            }
+          }
+        }
+      }
+    }
+  }
+}

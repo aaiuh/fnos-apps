@@ -1,6 +1,12 @@
 name: 生成集合源索引
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - "apps.txt"
+      - "build/**"
+      - ".github/workflows/**"
   workflow_dispatch:
   schedule:
     # 每 6 小时刷新一次，抓各应用仓库的新版本

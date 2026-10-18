@@ -9,7 +9,7 @@
   "apps": {
     "Hindsight": {
       "display_name": "Hindsight 记忆库",
-      "desc": "Agent 长期记忆系统，原生运行于飞牛 fnOS，不依赖 Docker。内置 PostgreSQL 与向量检索，支持 onnx 语义嵌入与 flashrank 重排，提供 REST/MCP 接口与 Web 控制台。支持飞牛应用备份与恢复。",
+      "desc": "Agent 长期记忆系统，原生运行于飞牛 fnOS，不依赖 Docker。内置 PostgreSQL 与向量检索，支持 onnx 语义嵌入与 flashrank 重排，提供 REST/MCP 接口与 Web 控制台。支持飞牛应用备份与恢复。管理界面需要系统已安装 Node.js 20 以上（不随包携带）。",
       "platform": [
         "x86"
       ],
@@ -110,6 +110,42 @@
               "download_url": "https://github.com/aaiuh/hindsight-fnos/releases/download/v1.0.0-12/Hindsight-1.0.0-12-x86.fpk",
               "sha256": "fa707967323bb85ebae4f3ab76e59aee376f75832b5b6277bbfff7f306b0894f",
               "size": 74250
+            }
+          }
+        },
+        "1.0.0-13": {
+          "changelog": "跟随上游 Hindsight 1.0.0-13。原生运行，不依赖 Docker；内置 PostgreSQL 与向量检索，onnx 语义嵌入 + flashrank 重排；含官方管理控制台（需系统已装 Node.js 20 以上）；支持飞牛应用备份与恢复。",
+          "updated_at": "2026-10-18",
+          "os_min_version": "1.1.0",
+          "packages": {
+            "x86": {
+              "download_url": "https://github.com/aaiuh/hindsight-fnos/releases/download/v1.0.0-13/Hindsight-1.0.0-13-x86.fpk",
+              "sha256": "26094c5a179850864cfd05a9e1faf54c81453af63cc137b718ce701aec928cec",
+              "size": 75211
+            }
+          }
+        },
+        "1.0.0-14": {
+          "changelog": "跟随上游 Hindsight 1.0.0-14。原生运行，不依赖 Docker；内置 PostgreSQL 与向量检索，onnx 语义嵌入 + flashrank 重排；含官方管理控制台（需系统已装 Node.js 20 以上）；支持飞牛应用备份与恢复。",
+          "updated_at": "2026-10-18",
+          "os_min_version": "1.1.0",
+          "packages": {
+            "x86": {
+              "download_url": "https://github.com/aaiuh/hindsight-fnos/releases/download/v1.0.0-14/Hindsight-1.0.0-14-x86.fpk",
+              "sha256": "4ddd8f60863ee634bf03caee0383bf4275bfe63bf63905109a46093dd99314fe",
+              "size": 69982
+            }
+          }
+        },
+        "1.0.0-15": {
+          "changelog": "跟随上游 Hindsight 1.0.0-15。原生运行，不依赖 Docker；内置 PostgreSQL 与向量检索，onnx 语义嵌入 + flashrank 重排；含官方管理控制台（需系统已装 Node.js 20 以上）；支持飞牛应用备份与恢复。",
+          "updated_at": "2026-10-18",
+          "os_min_version": "1.1.0",
+          "packages": {
+            "x86": {
+              "download_url": "https://github.com/aaiuh/hindsight-fnos/releases/download/v1.0.0-15/Hindsight-1.0.0-15-x86.fpk",
+              "sha256": "7612995c27ba9b018f2502769118dac4be156e4c6fc636a12962c8fe01dd5112",
+              "size": 68067
             }
           }
         }

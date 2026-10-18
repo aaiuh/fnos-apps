@@ -40,6 +40,18 @@
               "size": 64401
             }
           }
+        },
+        "9.9.9": {
+          "changelog": "跟随上游 Hindsight 1.0.0-6。原生运行，不依赖 Docker；内置 PostgreSQL 与向量检索，onnx 语义嵌入 + flashrank 重排；支持飞牛应用备份与恢复。",
+          "updated_at": "2026-10-18",
+          "os_min_version": "1.1.0",
+          "packages": {
+            "x86": {
+              "download_url": "https://github.com/aaiuh/hindsight-fnos/releases/download/v1.0.0-6/Hindsight-1.0.0-6-x86.fpk",
+              "sha256": "346c3931a57cec36679bbf6d123e77d668117271ab8228507564b27ac35b0a47",
+              "size": 64401
+            }
+          }
         }
       }
     }

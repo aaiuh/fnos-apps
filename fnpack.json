@@ -7,7 +7,7 @@
     "description": "飞牛 fnOS 原生应用集合。免费开源，跟随各应用上游更新。"
   },
   "apps": {
-    "hindsight": {
+    "Hindsight": {
       "display_name": "Hindsight 记忆库",
       "desc": "Agent 长期记忆系统，原生运行于飞牛 fnOS，不依赖 Docker。内置 PostgreSQL 与向量检索，支持 onnx 语义嵌入与 flashrank 重排，提供 REST/MCP 接口与 Web 控制台。支持飞牛应用备份与恢复。",
       "platform": [

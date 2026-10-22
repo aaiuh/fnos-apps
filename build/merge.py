@@ -200,7 +200,8 @@ def fetch_from_releases(repo: str, icon: str = "", limit: int = 6) -> dict | Non
             continue
         releases[ver] = {
             "changelog": (rel.get("body") or "").strip()[:4000],
-            "published_at": rel.get("published_at"),
+            "updated_at": (rel.get("published_at") or "")[:10],
+            "os_min_version": "1.1.0",
             "packages": {"x86": {"download_url": fpk["browser_download_url"]}},
         }
     if not releases:
@@ -209,10 +210,21 @@ def fetch_from_releases(repo: str, icon: str = "", limit: int = 6) -> dict | Non
     app = {
         "display_name": meta.get("display_name") or name,
         "desc": meta.get("desc") or "",
-        "author": meta.get("maintainer") or "",
-        "distributor": meta.get("distributor") or "",
-        "service_port": meta.get("service_port") or "",
+        # FnDepot 校验：platform 必须是字符串数组
+        "platform": [p.strip() for p in (meta.get("platform") or "x86").split(",") if p.strip()],
+        "categories": [],
         "icon_url": icon,
+        "preview_urls": [],
+        "readme_url": f"https://raw.githubusercontent.com/{repo}/main/README.md",
+        "bug_report_url": f"https://github.com/{repo}/issues",
+        "maintainer": meta.get("maintainer") or repo.split("/")[0],
+        "maintainer_url": f"https://github.com/{repo.split('/')[0]}",
+        "distributor": meta.get("distributor") or meta.get("maintainer") or repo.split("/")[0],
+        "distributor_url": f"https://github.com/{repo.split('/')[0]}",
+        "run_as": "package",
+        "install_type": "",
+        "is_docker": False,
+        "service_port": meta.get("service_port") or "",
         "releases": releases,
     }
     log(f"    合成 {name}，版本 {sorted(releases)}，元数据取自 {picked[0][1]['name']}")

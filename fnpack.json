@@ -154,14 +154,27 @@
     "wildwork": {
       "display_name": "Wild Work",
       "desc": "wild-work 账号池代理（自封装版）。提供 OpenAI 兼容 API（/v1）与内置 Web 控制台，默认端口 7863。多渠道聚合，支持自动签到。状态数据保存在应用数据目录，登录凭据保存在应用配置目录。",
-      "author": "rockswang",
-      "distributor": "Mickey",
-      "service_port": "7863",
+      "platform": [
+        "x86"
+      ],
+      "categories": [],
       "icon_url": "https://raw.githubusercontent.com/mickeyttsc/wild-work-fpk/main/template/ui/images/icon_256.png",
+      "preview_urls": [],
+      "readme_url": "https://raw.githubusercontent.com/mickeyttsc/wild-work-fpk/main/README.md",
+      "bug_report_url": "https://github.com/mickeyttsc/wild-work-fpk/issues",
+      "maintainer": "rockswang",
+      "maintainer_url": "https://github.com/mickeyttsc",
+      "distributor": "Mickey",
+      "distributor_url": "https://github.com/mickeyttsc",
+      "run_as": "package",
+      "install_type": "",
+      "is_docker": false,
+      "service_port": "7863",
       "releases": {
         "2.9.5-1": {
           "changelog": "自动构建于上游 v2.9.5 (rockswang/wild-work releases)。下载 wildwork-2.9.5-1.fpk 在飞牛 fnOS 应用中心手动安装。",
-          "published_at": "2026-10-21T17:44:35Z",
+          "updated_at": "2026-10-21",
+          "os_min_version": "1.1.0",
           "packages": {
             "x86": {
               "download_url": "https://github.com/mickeyttsc/wild-work-fpk/releases/download/v2.9.5/wildwork-2.9.5-1.fpk",
@@ -172,7 +185,8 @@
         },
         "2.9.4-1": {
           "changelog": "自动构建于上游 v2.9.4 (rockswang/wild-work releases)。下载 wildwork-2.9.4-1.fpk 在飞牛 fnOS 应用中心手动安装。",
-          "published_at": "2026-10-21T04:54:26Z",
+          "updated_at": "2026-10-21",
+          "os_min_version": "1.1.0",
           "packages": {
             "x86": {
               "download_url": "https://github.com/mickeyttsc/wild-work-fpk/releases/download/v2.9.4/wildwork-2.9.4-1.fpk",
@@ -183,7 +197,8 @@
         },
         "2.9.3-2": {
           "changelog": "## Wild Work 2.9.3-2（自封装版）\n\n上游 v2.9.3，本次只改封装层：**退役独立的「登录补投」页面**。\n\n### 为什么改\n上游 v2.9.3（R104）已经把「粘贴回调地址」做进**面板登录弹窗本身**，覆盖 TraeWork / 千问 / CodeArts / Gemini / LobsterAI 五个渠道：就地换取凭据，不依赖 fnOS 会话，还会校验你粘的地址是不是本次登录的（粘上一次的会被明确拦下）。封装层那页因此变成重复入口——两套补投 UI 并存时，用户不知道该信哪个。\n\n### 变化\n- 桌面图标只剩一个「Wild Work」，不再有「Wild Work 登录补投」\n- 面板里指向旧补投页的那行提示已移除\n- 需要补投时：登录弹窗里直接出现「粘贴回调地址」输入框\n\n### 升级\n应用中心手动安装，或在「FPK更新」里点一下即可。账号凭据、签到与冷却状态都不受影响（升级保数据，实测配置指纹一致）。\n\n### 遇到本机回调类渠道时\n浏览器若停在一条打不开的 `127.0.0.1:<端口>` 地址上，属正常（回调落在你自己的设备上）——把地址栏整条复制，粘回登录弹窗的输入框提交即可。ZCode / MiniMax / Qoder 走服务端轮询，不需要补投。",
-          "published_at": "2026-10-20T12:55:35Z",
+          "updated_at": "2026-10-20",
+          "os_min_version": "1.1.0",
           "packages": {
             "x86": {
               "download_url": "https://github.com/mickeyttsc/wild-work-fpk/releases/download/v2.9.3-2/wildwork-2.9.3-2.fpk",
@@ -194,7 +209,8 @@
         },
         "2.9.3-1": {
           "changelog": "自动构建于上游 v2.9.3 (rockswang/wild-work releases)。下载 wildwork-2.9.3-1.fpk 在飞牛 fnOS 应用中心手动安装。",
-          "published_at": "2026-10-19T17:01:49Z",
+          "updated_at": "2026-10-19",
+          "os_min_version": "1.1.0",
           "packages": {
             "x86": {
               "download_url": "https://github.com/mickeyttsc/wild-work-fpk/releases/download/v2.9.3/wildwork-2.9.3-1.fpk",
@@ -205,7 +221,8 @@
         },
         "2.9.2-1": {
           "changelog": "自动构建于上游 v2.9.2 (rockswang/wild-work releases)。下载 wildwork-2.9.2-1.fpk 在飞牛 fnOS 应用中心手动安装。",
-          "published_at": "2026-10-19T03:57:21Z",
+          "updated_at": "2026-10-19",
+          "os_min_version": "1.1.0",
           "packages": {
             "x86": {
               "download_url": "https://github.com/mickeyttsc/wild-work-fpk/releases/download/v2.9.2/wildwork-2.9.2-1.fpk",
@@ -216,7 +233,8 @@
         },
         "2.9.1-1": {
           "changelog": "自动构建于上游 v2.9.1 (rockswang/wild-work releases)。下载 wildwork-2.9.1-1.fpk 在飞牛 fnOS 应用中心手动安装。",
-          "published_at": "2026-10-18T10:17:19Z",
+          "updated_at": "2026-10-18",
+          "os_min_version": "1.1.0",
           "packages": {
             "x86": {
               "download_url": "https://github.com/mickeyttsc/wild-work-fpk/releases/download/v2.9.1/wildwork-2.9.1-1.fpk",
@@ -225,8 +243,7 @@
             }
           }
         }
-      },
-      "preview_urls": []
+      }
     }
   }
 }

@@ -157,7 +157,9 @@
       "platform": [
         "x86"
       ],
-      "categories": [],
+      "categories": [
+        "AI赋能"
+      ],
       "icon_url": "https://raw.githubusercontent.com/mickeyttsc/wild-work-fpk/main/template/ui/images/icon_256.png",
       "preview_urls": [],
       "readme_url": "https://raw.githubusercontent.com/mickeyttsc/wild-work-fpk/main/README.md",

@@ -156,7 +156,7 @@ def read_fpk_manifest(url: str) -> dict:
     return meta
 
 
-def fetch_from_releases(repo: str, icon: str = "", limit: int = 6) -> dict | None:
+def fetch_from_releases(repo: str, icon: str = "", categories: list[str] | None = None, limit: int = 6) -> dict | None:
     """成员只发 Release、没有 fnpack.json 时，直接读 .fpk 资产合成片段。"""
     try:
         rels = gh(f"/repos/{repo}/releases?per_page={limit}")
@@ -212,7 +212,8 @@ def fetch_from_releases(repo: str, icon: str = "", limit: int = 6) -> dict | Non
         "desc": meta.get("desc") or "",
         # FnDepot 校验：platform 必须是字符串数组
         "platform": [p.strip() for p in (meta.get("platform") or "x86").split(",") if p.strip()],
-        "categories": [],
+        # FnDepot 校验：categories 不能为空
+        "categories": categories or ["系统工具"],
         "icon_url": icon,
         "preview_urls": [],
         "readme_url": f"https://raw.githubusercontent.com/{repo}/main/README.md",
@@ -244,15 +245,16 @@ def main() -> int:
         parts = s.split()
         spec = parts[0]
         icon = parts[1] if len(parts) > 1 else ""
-        members.append((spec, icon))
+        cats = [c.strip() for c in parts[2].split(",") if c.strip()] if len(parts) > 2 else []
+        members.append((spec, icon, cats))
     log(f"成员仓库 {len(members)} 个：{', '.join(m[0] for m in members)}")
 
     merged: dict[str, dict] = {}
-    for spec, icon in members:
+    for spec, icon, cats in members:
         if spec.endswith("!release"):
             repo = spec[: -len("!release")]
             branch = "main"  # Release 模式没有 fnpack.json，图标走绝对地址
-            doc = fetch_from_releases(repo, icon)
+            doc = fetch_from_releases(repo, icon, cats)
             if not doc:
                 log(f"  ✗ {repo} Release 模式取不到可用版本，跳过")
                 continue

@@ -180,8 +180,8 @@
           "packages": {
             "x86": {
               "download_url": "https://github.com/mickeyttsc/wild-work-fpk/releases/download/v2.9.6/wildwork-2.9.6-1.fpk",
-              "sha256": "95cbdf237f45828d26f726c1e01d25ab078a32d2deb23c6e1f7b87819421ff77",
-              "size": 9216406
+              "sha256": "c0a8d58dbe8b83bdf40d8b2509706c564d7ba07dd9ecbd99445f41b505bc5faa",
+              "size": 9216401
             }
           }
         },

@@ -7,8 +7,11 @@
     否则解析方会按索引仓库去取，图标/说明全 404
   * 每个包的 download_url 做一次 HEAD 校验，取不到就丢弃该版本
   * sha256 以实测为准：与声明不符时用实测值并告警
-  * 成员可以只发 GitHub Release（不带 fnpack.json）：apps.txt 里写
+  * 成员可以只发 Release（不带 fnpack.json）：apps.txt 里写
     `owner/repo!release [icon_url]`，脚本会直接读 .fpk 资产合成条目
+  * 成员也可以在 Gitee 上：写 `gitee:owner/repo!release [icon_url]`。
+    Gitee 的列表接口不回 assets，必须逐个 tag 查详情；时间字段是
+    created_at 而不是 published_at。
 """
 from __future__ import annotations
 
@@ -21,7 +24,9 @@ import urllib.error
 import urllib.request
 
 API = "https://api.github.com"
+GITEE_API = "https://gitee.com/api/v5"
 TOKEN = os.environ.get("GITHUB_TOKEN") or os.environ.get("GH_TOKEN") or ""
+GITEE_TOKEN = os.environ.get("GITEE_TOKEN") or ""
 BRANCHES = ("main", "master")
 SOURCE_NAME = "aaiuh飞牛应用源"
 SOURCE_DESC = "飞牛 fnOS 原生应用集合。免费开源，跟随各应用上游更新。"
@@ -42,6 +47,17 @@ def gh(path: str) -> dict:
         req.add_header("Authorization", f"Bearer {TOKEN}")
     with urllib.request.urlopen(req, timeout=45) as r:
         return json.load(r)
+
+
+def gitee(path: str):
+    """Gitee API v5。匿名可用但限流低；有 GITEE_TOKEN 时带上。"""
+    req = urllib.request.Request(f"{GITEE_API}{path}")
+    req.add_header("User-Agent", "fnos-apps-index")
+    if GITEE_TOKEN:
+        req.add_header("Authorization", f"token {GITEE_TOKEN}")
+    with urllib.request.urlopen(req, timeout=45) as r:
+        # Gitee 的 changelog 里可能带裸控制字符，宽松解析
+        return json.loads(r.read().decode("utf-8", "replace"), strict=False)
 
 
 def fetch_fragment(repo: str) -> tuple[dict, str] | tuple[None, None]:
@@ -71,11 +87,13 @@ def fetch_fragment(repo: str) -> tuple[dict, str] | tuple[None, None]:
     return None, None
 
 
-def absolutize(url: str, repo: str, branch: str) -> str:
+def absolutize(url: str, repo: str, branch: str, host: str = "github") -> str:
     """把 ./xxx 这类相对地址改写成应用仓库的绝对 raw 地址。"""
     if not url or url.startswith(("http://", "https://")):
         return url
     rel = url.lstrip("./")
+    if host == "gitee":
+        return f"https://gitee.com/{repo}/raw/{branch}/{rel}"
     return f"https://raw.githubusercontent.com/{repo}/{branch}/{rel}"
 
 
@@ -156,10 +174,38 @@ def read_fpk_manifest(url: str) -> dict:
     return meta
 
 
-def fetch_from_releases(repo: str, icon: str = "", categories: list[str] | None = None, limit: int = 6) -> dict | None:
+def _assets_of(rel: dict, repo: str, host: str) -> list:
+    """Gitee 的 releases 列表不回 assets，得逐个 tag 查详情。"""
+    assets = rel.get("assets") or []
+    if assets or host != "gitee":
+        return assets
+    tag = rel.get("tag_name") or ""
+    if not tag:
+        return []
+    try:
+        detail = gitee(f"/repos/{repo}/releases/tags/{tag}")
+        return (detail or {}).get("assets") or []
+    except Exception as e:  # noqa: BLE001
+        log(f"    {repo} 取 {tag} 详情失败：{e}")
+        return []
+
+
+def fetch_from_releases(repo: str, icon: str = "", categories: list[str] | None = None,
+                        limit: int = 6, host: str = "github") -> dict | None:
     """成员只发 Release、没有 fnpack.json 时，直接读 .fpk 资产合成片段。"""
     try:
-        rels = gh(f"/repos/{repo}/releases?per_page={limit}")
+        if host == "gitee":
+            # Gitee 的 releases 列表按创建时间「升序」返回，per_page=limit 会拿到最老的几个。
+            # 必须全量取回再按时间降序截断，否则永远拿不到最新版。
+            rels = gitee("/repos/%s/releases?per_page=100" % repo)
+            if isinstance(rels, list):
+                rels = sorted(
+                    [r for r in rels if isinstance(r, dict)],
+                    key=lambda x: str(x.get("created_at") or ""),
+                    reverse=True,
+                )[:limit]
+        else:
+            rels = gh(f"/repos/{repo}/releases?per_page={limit}")
     except Exception as e:  # noqa: BLE001
         log(f"  {repo} 读取 Releases 失败：{e}")
         return None
@@ -169,7 +215,11 @@ def fetch_from_releases(repo: str, icon: str = "", categories: list[str] | None 
 
     picked = []
     for rel in rels:
-        fpk = next((a for a in (rel.get("assets") or []) if a["name"].endswith(".fpk")), None)
+        if not isinstance(rel, dict):
+            continue
+        assets = _assets_of(rel, repo, host)
+        fpk = next((a for a in assets if (a.get("name") or "").endswith(".fpk")
+                    and a.get("browser_download_url")), None)
         if fpk:
             picked.append((rel, fpk))
     if not picked:
@@ -198,30 +248,47 @@ def fetch_from_releases(repo: str, icon: str = "", categories: list[str] | None 
         ver = m.group(1) if m else (rel.get("tag_name") or "").lstrip("vV")
         if not ver:
             continue
+        # Gitee 没有 published_at，退回 created_at
+        ts = rel.get("published_at") or rel.get("created_at") or ""
         releases[ver] = {
             "changelog": (rel.get("body") or "").strip()[:4000],
-            "updated_at": (rel.get("published_at") or "")[:10],
-            "os_min_version": "1.1.0",
+            "updated_at": str(ts)[:10],
+            "os_min_version": meta.get("os_min_version") or "1.1.0",
             "packages": {"x86": {"download_url": fpk["browser_download_url"]}},
         }
     if not releases:
         return None
 
+    # platform=all 展开成两种架构：FnDepot 按架构匹配，[ "all" ] 匹配不上任何一边
+    plats = [p.strip() for p in (meta.get("platform") or "x86").split(",") if p.strip()]
+    if "all" in plats:
+        plats = ["x86", "arm"]
+
+    owner = repo.split("/")[0]
+    if host == "gitee":
+        readme_url = f"https://gitee.com/{repo}/raw/main/README.md"
+        owner_url = f"https://gitee.com/{owner}"
+        issues_url = f"https://gitee.com/{repo}/issues"
+    else:
+        readme_url = f"https://raw.githubusercontent.com/{repo}/main/README.md"
+        owner_url = f"https://github.com/{owner}"
+        issues_url = f"https://github.com/{repo}/issues"
+
     app = {
         "display_name": meta.get("display_name") or name,
         "desc": meta.get("desc") or "",
         # FnDepot 校验：platform 必须是字符串数组
-        "platform": [p.strip() for p in (meta.get("platform") or "x86").split(",") if p.strip()],
+        "platform": plats,
         # FnDepot 校验：categories 不能为空
         "categories": categories or ["系统工具"],
         "icon_url": icon,
         "preview_urls": [],
-        "readme_url": f"https://raw.githubusercontent.com/{repo}/main/README.md",
-        "bug_report_url": f"https://github.com/{repo}/issues",
-        "maintainer": meta.get("maintainer") or repo.split("/")[0],
-        "maintainer_url": f"https://github.com/{repo.split('/')[0]}",
-        "distributor": meta.get("distributor") or meta.get("maintainer") or repo.split("/")[0],
-        "distributor_url": f"https://github.com/{repo.split('/')[0]}",
+        "readme_url": readme_url,
+        "bug_report_url": issues_url,
+        "maintainer": meta.get("maintainer") or owner,
+        "maintainer_url": owner_url,
+        "distributor": meta.get("distributor") or meta.get("maintainer") or owner,
+        "distributor_url": owner_url,
         "run_as": "package",
         "install_type": "",
         "is_docker": False,
@@ -251,17 +318,25 @@ def main() -> int:
 
     merged: dict[str, dict] = {}
     for spec, icon, cats in members:
+        host = "github"
+        if spec.startswith("gitee:"):
+            host = "gitee"
+            spec = spec[len("gitee:"):]
+
         if spec.endswith("!release"):
             repo = spec[: -len("!release")]
             branch = "main"  # Release 模式没有 fnpack.json，图标走绝对地址
-            doc = fetch_from_releases(repo, icon, cats)
+            doc = fetch_from_releases(repo, icon, cats, host=host)
             if not doc:
                 log(f"  ✗ {repo} Release 模式取不到可用版本，跳过")
                 continue
             apps = doc.get("apps") or {}
-            log(f"  ✓ {repo}（Release 模式）含 {len(apps)} 个应用")
+            log(f"  ✓ {repo}（Release 模式，{host}）含 {len(apps)} 个应用")
         else:
             repo = spec
+            if host != "github":
+                log(f"  ✗ {repo} fnpack.json 模式目前只支持 GitHub，跳过")
+                continue
             doc, branch = fetch_fragment(repo)
             if not doc:
                 log(f"  ✗ {repo} 取不到 fnpack.json，跳过")
@@ -278,9 +353,9 @@ def main() -> int:
             # 相对地址改成指向该应用仓库
             for key in ("icon_url", "readme_url"):
                 if key in app:
-                    app[key] = absolutize(app[key], repo, branch)
+                    app[key] = absolutize(app[key], repo, branch, host)
             app["preview_urls"] = [
-                absolutize(u, repo, branch) for u in app.get("preview_urls") or []
+                absolutize(u, repo, branch, host) for u in app.get("preview_urls") or []
             ]
 
             kept = {}

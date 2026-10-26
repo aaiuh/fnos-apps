@@ -129,6 +129,10 @@ def read_fpk_manifest(url: str) -> dict:
     """下载一个 fpk（tar.gz），读出包内 manifest 的键值。仅 Release 模式用。"""
     import tarfile
 
+    if DRY:
+        # 本地演练不下载：返回空，让上层按资产名推断 appname
+        return {}
+
     attempts = [url]
     if url.startswith("https://github.com/"):
         attempts.append("https://gh-proxy.com/" + url)  # 直连不稳时的兜底
@@ -216,6 +220,10 @@ def fetch_from_releases(repo: str, icon: str = "", categories: list[str] | None 
     picked = []
     for rel in rels:
         if not isinstance(rel, dict):
+            continue
+        # 预发布/草稿不能进集合源：下游按版本号排序会把它当成最新正式版
+        if rel.get("prerelease") or rel.get("draft"):
+            log(f"    - {repo} {rel.get('tag_name')} 是预发布或草稿，跳过")
             continue
         assets = _assets_of(rel, repo, host)
         fpk = next((a for a in assets if (a.get("name") or "").endswith(".fpk")

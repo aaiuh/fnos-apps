@@ -8,6 +8,7 @@
 
 aaiuh/hindsight-fnos
 mickeyttsc/wild-work-fpk!release https://raw.githubusercontent.com/mickeyttsc/wild-work-fpk/main/template/ui/images/icon_256.png AI赋能
+gitee:javycoder/fnos_music_ext!release https://raw.githubusercontent.com/aaiuh/fnos-apps/main/icons/fnmusic-ext.png 影音娱乐
 
 # 手动刷新触发：2026-10-18T15:34
 

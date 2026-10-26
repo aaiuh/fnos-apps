@@ -31,25 +31,28 @@ jobs:
       - name: 合并各应用仓库的 fnpack.json
         run: python3 build/merge.py
 
-      - name: 自检：分发地址只允许 GitHub
+      - name: 自检：分发地址必须在白名单内
         run: |
           set -euo pipefail
-          ALLOW='^(github\.com|raw\.githubusercontent\.com|gh-proxy\.com|ghfast\.top|cdn\.jsdelivr\.net)$'
+          ALLOW='^(github\.com|raw\.githubusercontent\.com|gh-proxy\.com|ghfast\.top|cdn\.jsdelivr\.net|gitee\.com|foruda\.gitee\.com)$'
           HOSTS=$(grep -oE 'https?://[A-Za-z0-9._-]+' fnpack.json | sed -E 's|https?://||' | sort -u)
           BAD=$(printf '%s\n' "$HOSTS" | grep -vE "$ALLOW" || true)
           if [ -n "$BAD" ]; then
-            echo "::error::索引里出现非 GitHub 地址"
+            echo "::error::索引里出现白名单外的地址"
             printf '  %s\n' "$BAD"
             exit 1
           fi
           echo "自检通过"
+
+      - name: 同步 README 应用表格
+        run: python3 build/update_readme.py
 
       - name: 提交变更
         run: |
           set -euo pipefail
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add fnpack.json
+          git add fnpack.json README.md
           if git diff --cached --quiet; then
             echo "索引无变化"
           else

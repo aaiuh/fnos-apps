@@ -21,6 +21,10 @@ https://raw.githubusercontent.com/aaiuh/fnos-apps/main/fnpack.json
 | 应用 | 说明 | 独立仓库 |
 |---|---|---|
 | Hindsight 记忆库 | Agent 长期记忆系统，原生运行，支持飞牛备份 | [hindsight-fnos](https://github.com/aaiuh/hindsight-fnos) |
+| Wild Work | 账号池代理，提供 OpenAI 兼容 API 与内置控制台，默认端口 7863 | [wild-work-fpk](https://github.com/mickeyttsc/wild-work-fpk) |
+| fnMusic 音源扩展 | 飞牛音乐第三方音源扩展，musicdl / 网易云 / 洛雪在线搜索播放 | [fnos_music_ext](https://github.com/javycoder/fnos_music_ext) |
+
+以 `fnpack.json` 里的 `apps` 为准（由 CI 从各上游仓库合成）；上表可能滞后一步。
 
 ## 这是怎么工作的
 

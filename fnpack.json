@@ -155,8 +155,7 @@
       "display_name": "fnMusic 音源扩展",
       "desc": "飞牛音乐第三方音源扩展：零侵入接管官方音乐入口，提供 musicdl 聚合、网易云、洛雪自定义源在线搜索播放，内置管理页（音源切换/扫码登录/平台选择/边听边存）。",
       "platform": [
-        "x86",
-        "arm"
+        "x86"
       ],
       "categories": [
         "影音娱乐"
@@ -209,28 +208,80 @@
               "size": 27972035
             }
           }
-        },
-        "2.9.0": {
-          "changelog": "自 2.8.3 以来的全部变更收拢为本次正式版发布（涵盖 2.9.0a、2.9.0b 迭代预发布与期间的多轮 issue 修复；2.9.0 开发段与两个预发布版本不再单独列段）。\n\n### 新增\n\n- **网易云歌单常驻（issue #38）**：管理台「音乐源 → 网易账号歌单」卡片新增「网易云歌单常驻」开关。勾选并保存后，即使把音乐源切换到 musicdl/洛雪，网易账号自建歌单仍显示在音乐页、其曲目可正常播放，musicbox 进程保持常驻运行为其供数（生效前提是已扫码登录——未登录时保存会明确告警且不空跑进程，确认未登录后 5 分钟内不反复拉起）；取消勾选并保存后，若当前音源不是网易盒子则自动关闭其进程释放内存（cookie 保留在数据卷，切回不丢登录态）。配套：切源保留/回收 musicbox 进程、预览到期进程在常驻生效时转常驻保活、容器/原生重启后 entrypoint 按 cookie 启发自愈拉起 + WebUI 开机对账权威校验、健康检查只对常驻 musicbox 捕捉崩溃循环（FATAL/BACKOFF，WebUI 主动回收不算失败）、`/api/status` 对常驻 musicbox 照常探活并标注。搜索不聚合：搜索结果仍仅在网易盒子为当前音源时使用网易（含深分页与专辑搜索），每日/热门推荐仍随当前音源构建。\n\n- **公共推荐歌单（issue #55）**：管理页可浏览并勾选网易推荐/热门分类/精品/榜单歌单，以及洛雪内置歌单广场与榜单；已选歌单按固定顺序作为只读歌单注入音乐页，默认关闭、首次开启带出网易四大榜单。支持稳定身份、封面、曲目缓存与失败回退；网易公共歌单可匿名复用常驻开关，账号歌单仍要求扫码登录。musicdl 无统一推荐歌单发现接口，本功能不接入。\n\n- **关于页检查更新与新版本提示**：新增 `/api/update-check` 检查更新接口——优先请求 GitHub Releases，被墙/限流（403）/超时等失败自动回退 Gitee 发行版（双源皆败静默降级，绝不报错打扰用户）；结果缓存成功 6 小时、失败 10 分钟，进页面即查但不轮询，不打爆 GitHub 匿名限额。发现新版本时\"关于\"菜单入口（桌面侧栏 + 移动底栏）红点常亮，不因查看而清除；进入关于页后版本号旁显示 NEW 红色标记，点击弹出新版本详情（最新版本号、发布日期、changelog 纯文本清洗），提供「取消」与「升级」两个按钮——「升级」跳转 release 页面并跟随检查源。版本比较数值逐位补零（2.9 ≡ 2.9.0、2.10 > 2.9），仅检测正式版本号（纯数字点分），带字母尾巴的迭代预发布号（如 2.9.0a）不视为更新。\n\n- **moo 商店协议源索引（issue #36 / #47 商店收录要求）**：新增仓库根 `moo.json`（moo 协议，`schema_version: \"moo\"`）——按 Blue-Mink/moo 参考样例的结构，`apps.fnmusic-ext` 携带展示字段（图标/说明走 raw.githubusercontent 直链）与多版本 `releases` 字典（download_url 指向 GitHub Release 真实资产、sha256/size 取自资产 digest、changelog 取自发行说明，x86/arm 双架构指向同一 FPK——manifest platform=all）。配套 `tools/update_moo_index.py` 生成/更新脚本 + release 工作流新增 `update-moo-index` job 在发行后自动回填提交；只收录正式版本号（2.9.0a 等迭代预发布不改写索引，与应用内检查更新同口径），幂等可重跑。新增离线结构自校验测试（schema/必填字段/版本降序/顶层最新一致/sha256 格式）。\n\n- **曲库文件命名规则可自定义（issue #47 建议 2）**：新增 `FNMUSIC_LIBRARY_NAME_PATTERN` 模板（默认 `{artist} - {title}`，与历史行为完全一致），占位符 `{artist}/{title}/{source}`，例：`{title} [{source}]` → `晴天 [netease].flac`。无可用歌手（缺失/unknown/与歌名相同）时占位符连同相邻分隔符一并去除退化为仅歌名，模板字面量中的路径分隔符统一清洗绝不产生子目录，改后对新落盘歌曲生效。\n\n- **网易 VIP 曲目行级标记 `[VIP]`（issue #57）**：无 VIP 权益的账号点 VIP 歌只有 30-60 秒试听、播完即跳（\"新歌播到中途跳下一首\"的一部分成因）——现在 musicbox 详情行携带 fee（0=免费/1=VIP/4=购买专辑/8=非会员免费低音质），无 VIP 权益（profile.vipType=0，5 分钟缓存）时 fee==1 的曲目行附 `needs_vip` 标记（网易账号歌单、每日推荐、热门榜单全部覆盖，有 VIP 权益不打标），代理在歌名前展示 `[VIP] ` 前缀让用户点播前有预期。标记仅影响显示：曲库命名、客户端上报归一前由 `strip_source_tag` 剥离（升级为有界循环剥离，`[music box] [VIP] x` 一并剥净），播放/收藏/边听边存业务逻辑不受影响。\n\n### 音源\n\n- **musicdl 跟随上游升级到 2.14.1**：上游月度维护——fangpi/gequbao/xiageba/fivesong 四平台接口修复；LivePOO、LiziYY、ITingWa 随上游下线退役（编号 50/54/56 永久空缺），新增替代平台 Gequke、Leedodo、Heishan（编号 65–67 表末追加，可对照 `musicdl-service/PLATFORMS.md` 编号选用）。平台注册表仍为 57 个。\n\n### 优化\n\n- **点播出声提速与热门推荐每日轮换（issue #55）**：①取链失败路径预算收紧——lxmusic 单轮源脚本解析 12s→8s、直链探活 5s→3s、端点总预算 20s→15s，代理侧对应 22s→16s（网易独立取链预算与严格音质优先规则见 #56）；成功路径本就 1-3s 返回不受影响，坏链/慢源不再吃满预算才降档换源。②出流前的元数据快路径（0.75s）与取链解析并行发起，成功路径省去整段串行等待。③热门推荐每日有变化：网易榜单按日轮换（热歌/新歌/飙升，轮换榜拉空自动回退热歌主榜）、40 条候选按日确定性采样 20 首（同日同结果、跨日窗口平移）、`PLAYLIST_SIZE` 可经 `FNMUSIC_RECOMMEND_SIZE`（5-100，默认 20）配置——上游榜单不换血的日子里连续两天内容也不再逐字相同。\n\n### 修复\n\n- **网易云首播准备与共享取链（issue #56）**：当前歌曲 metadata/audio-info 提前取链，同曲同音质共享异步解析；调用者取消不取消共享工作，详情/歌词网络锁不阻塞取链；起流不等歌词或详情，成功缓存按 expi 留余量，音质改变取消旧任务并清除未消费的预热结果。musicbox 使用独立异步会话、显式音质及登录态代次，每档总预算 12 秒、代理共享任务 30 秒；严格优先音质，仅明确不可用才降档，暂时性错误不判死链。播放/转码/下载统一 Chrome UA——UA 属兼容性改动，尚不能断言是报告者根因；用户所述首播跳歌仍需 Web/App、原文件/HLS 的冷缓存实机验收，模拟测试通过不作为关闭 issue 的依据。\n\n- **常驻模式下专辑页打不开、在线曲目显示无歌词、升级当天推荐歌单空白（issue #57）**：①`_netease_album_detail_payload` 的可用性门禁对齐常驻口径 `_netease_runtime_usable()`，切走音源后点网易曲目专辑页照常出；专辑详情下发的曲目补进 guid→真实标签登记（与收藏/推荐/历史出口对齐），从专辑页点播的关键词型曲目解析时有 songInfo 兜底，不再重蹈 #49 型\"重启后未知曲目\"。②在线曲目 VO 的 `hasLyric` 不再只看快照字段（推荐歌单/收藏/播放历史条目都没有），默认展示歌词入口，客户端请求时由歌词端点按需向源站解析并落盘缓存。③版本变化失效当日推荐缓存改为把 `daily-/hot-<day>.json` 重命名为 `.fallback.json` 保留：新歌单建成前列表/详情回退旧 bundle 过渡，不再有升级当天\"推荐歌单页面不显示\"的空窗；切源失效（旧曲目可能不可播）仍为彻底删除。\n\n- **外网反向代理场景流式播放被反代层整段缓冲（issue #49）**：扩展下发的播放/HLS/封面地址本就全部是同源相对路径，但流式音频响应此前不带 `X-Accel-Buffering: no`——用户自建 nginx 反代默认 `proxy_buffering on` 会把音频整段缓冲完才向客户端出字节。公网访问通常是\"用户反代 → 飞牛 nginx → 扩展\"两层，而 nginx 会消费掉该内部控制头、不会传给用户外层反代：现在 HEAD、在线流、缓存/Range、正常 HLS 与无 ffmpeg 回退 HLS 全部统一携带禁缓冲头；新增在线/缓存/HLS 交付诊断（`stream_deli",
-          "updated_at": "2026-10-15",
-          "os_min_version": "1.2.0",
+        }
+      }
+    },
+    "octop-native": {
+      "display_name": "Octop",
+      "desc": "腾讯开源的多用户多智能体 AI 助手平台，支持 Web 控制台、CLI、IM 渠道与定时任务，数据全部本地存储。<br/><br/><strong>安装后使用：</strong><br/>请等到应用中心显示「运行中」再点「打开」，或访问 http://设备IP:8089，用安装向导里设置的用户名或邮箱登录。<br/>忘记密码时打开飞牛「文件管理」，进入应用共享里的 Octop 数据目录，查看 octop-login.txt（仅备份安装或应用「设置」改密；网页改密后不会自动更新）；也可在应用「设置」中改密。<br/><br/><strong>命令行管理：</strong><br/>支持官方 octop CLI（octop provider list / agent list / user list / skills / backup 等，详见 octop --help）。<br/><br/><strong>首次登录后：</strong><br/>请在控制台「设置 → 模型」配置 API Key，并按需配置 IM 渠道、远程桌面、浏览器等。<br/><br/>注意：本地版直接运行在飞牛主机上，安装前会自动关联安装「Python 3.12」开发工具。",
+      "platform": [
+        "x86",
+        "arm"
+      ],
+      "categories": [
+        "AI赋能"
+      ],
+      "icon_url": "https://raw.githubusercontent.com/aaiuh/fnos-apps/main/icons/octop.png",
+      "preview_urls": [],
+      "readme_url": "https://raw.githubusercontent.com/TencentCloud/Octop/main/README.md",
+      "bug_report_url": "https://github.com/TencentCloud/Octop/issues",
+      "maintainer": "TencentCloud",
+      "maintainer_url": "https://github.com/TencentCloud",
+      "distributor": "TencentCloud",
+      "distributor_url": "https://github.com/TencentCloud",
+      "run_as": "package",
+      "install_type": "",
+      "is_docker": false,
+      "service_port": "8089",
+      "releases": {
+        "1.0.3b1": {
+          "changelog": "### 新增\n- 建用户时可以同时创建一个默认专家。权限按页面 Tab 拆开，也可以按组折叠\n- 用户组可以限制技能包、知识库、连接器、模型、存储和专家谁能看见\n- 技能包可以共享，并用文件树编辑。创建专家、团队等资源时可以选头像\n- 表单和对话可以让 AI 润色。搜索增加 DeepSeek 与元宝，模型支持 OpenAI Responses API\n\n### 修复\n- 云端协同共享后可以直接对话。回复进行中不会被刷新冲掉，也不能删掉这场会话\n- 手机截图写到专家自己的工作区。只改定时任务文案时，间隔任务不再重新计时\n- 浏览器工作台恢复中文输入。主动关怀等对话安静后再发\n- 向导密码随数据目录迁移。Linux 桌面无边框窗口可以拖边缘调整大小\n\n### 变更\n- 云端协同默认打码对端地址和账号。共享来的资源在头像上做标记\n- 支持子路径部署。飞牛原生包标记为 x86\n\n### 安全\n- 密钥改为加密保存，旧明文仍能读出。插件上传和解压限制了体积\n\n\n## Downloads\n\n### Windows\n\n#### Desktop installer (Recommended)\n- [64-bit (Recommended)](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b1/Octop-desktop-windows-amd64-1.0.3b1.exe) | [ARM64](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b1/Octop-desktop-windows-arm64-1.0.3b1.exe)\n\n#### Portable\n- [64-bit](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b1/Octop-portable-windows-amd64-1.0.3b1.zip) | [ARM64](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b1/Octop-portable-windows-arm64-1.0.3b1.zip)\n\n### macOS\n\n#### Desktop installer (Recommended)\n- [Apple Silicon](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b1/Octop-desktop-darwin-arm64-1.0.3b1.dmg) | [Intel](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b1/Octop-desktop-darwin-amd64-1.0.3b1.dmg)\n\n#### Portable\n- [Apple Silicon](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b1/Octop-portable-darwin-arm64-1.0.3b1.zip) | [Intel](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b1/Octop-portable-darwin-amd64-1.0.3b1.zip)\n\n### Linux\n\n#### Desktop installer (Recommended)\n- [64-bit](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b1/Octop-desktop-linux-amd64-1.0.3b1.tar.gz) | [ARM64](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b1/Octop-desktop-linux-arm64-1.0.3b1.tar.gz)\n\n#### Portable\n- [64-bit](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b1/Octop-portable-linux-amd64-1.0.3b1.zip) | [ARM64](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b1/Octop-portable-linux-arm64-1.0.3b1.zip)\n\n### fnOS NAS\n- [Docker (recommended; x86 and ARM)](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b1/Octop-fnos-docker-1.0.3b1.fpk) | [Native x86_64](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b1/Octop-fnos-native-1.0.3b1.fpk) | [Native ARM64 (no Docker)](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b1/Octop-fnos-native-arm64-1.0.3b1.fpk)\n\n\n## What's Changed\n* chore: sync main into develop after 1.0.2 by @github-actions[bot] in https://github.com/TencentCloud/Octop/pull/2186\n* fix(infra): relocate wizard password file under OCTOP_HOME with legacy fallback (#2171) by @legend91019 in https://github.com/TencentCloud/Octop/pull/2174\n* fix(dashboard): keep the media provider modal usable when a tool switch is off by @Jay0130-a in https://github.com/TencentCloud/Octop/pull/2105\n* fix(portable): propagate bundled packages to Python subprocesses by @chqcjq in https://github.com/TencentCloud/Octop/pull/2044\n* fix(desktop): add frameless edge and corner resize handles for Linux by @jayfeng7 in https://github.com/TencentCloud/Octop/pull/1657\n* fix(plugins): bound uploads, downloads and ZIP extraction by @AbelTomato in https://github.com/TencentCloud/Octop/pull/1758\n* feat(skills): shared packages, file tree editor, and BOM-safe frontmatter by @jubaoliang in https://github.com/TencentCloud/Octop/pull/2226\n* feat(models): 支持选择 Responses API 与受控协议回退 by @Pandakingxbc in https://github.com/TencentCloud/Octop/pull/1984\n* feat(search): 支持 DeepSeek Search by @Pandakingxbc in https://github.com/TencentCloud/Octop/pull/2180\n* fix(api): localize JWT middleware auth errors via Accept-Language by @jubaoliang in https://github.com/TencentCloud/Octop/pull/2248\n* fix(chat): refuse to delete a conversation while a reply is in progress by @huangcheng in https://github.com/TencentCloud/Octop/pull/2222\n* fix(proactive): send care only after the chat has gone quiet by @Bosheng0422 i",
+          "updated_at": "2026-10-25",
+          "os_min_version": "1.1.0",
           "packages": {
             "x86": {
-              "download_url": "https://github.com/javycoder/fnos_music_ext/releases/download/v2.9.0/fnmusic-ext-2.9.0.fpk",
-              "sha256": "861748417de611ec723f1c5dbfa7ab10d6c150ef9843db191944909ce493bd25",
-              "size": 27257554
+              "download_url": "https://github.com/TencentCloud/Octop/releases/download/v1.0.3b1/Octop-fnos-native-1.0.3b1.fpk",
+              "sha256": "75cf1ad15832303845643a05177b0ef8e3b9a45af15fd3ddbf9f3d7220daae93",
+              "size": 209019211
+            },
+            "arm": {
+              "download_url": "https://github.com/TencentCloud/Octop/releases/download/v1.0.3b1/Octop-fnos-native-arm64-1.0.3b1.fpk",
+              "sha256": "d5c58e8330835203794e50c663bd41f4f12e164e22fd1585fa37f971b951b2ae",
+              "size": 207560652
             }
           }
         },
-        "2.8.3": {
-          "changelog": "### 修复\n\n- **热门推荐榜单曲目大量播放失败，搜索后同曲却可播（issue #49）**：洛雪榜单曲目能否解析直链取决于 lxmusic 侧的 songInfo 反查缓存（真实歌名/歌手），而它只在内存——推荐歌单按天落盘，服务重启（升级/容器重启/NAS 重启）后当日歌单仍在，songInfo 却全部丢失，点播只能按 track_id 合成「未知曲目/未知歌手」兜底；ID 型源脚本（按 hash/rid 取链）不受影响，**关键词型源脚本（按歌名歌手搜上游）必然解析失败**——正是「榜单很多歌播不了、搜索后能播、第二天又能播」的完整成因（跨天歌单重建会重拉榜单回填缓存，与缓存冷热完全吻合）。三层根治：① lxmusic 新增 songInfo 磁盘持久化存储（`<LX_DATA_DIR>/songinfo_store.json`，榜单/搜索写入脏标记 + 2s 合并落盘、启动加载、tmp+rename 原子写、损坏自愈、容量与内存缓存同限同淘汰），重启后反查缓存不丢；② 代理端所有批量下发在线曲目的出口（热门/每日推荐歌单、网易账号歌单、官方歌单在线附加条目、收藏、播放历史）把 guid→真实标签登记进内存 LRU，取流/转码解析洛雪曲目时随请求透传给 lxmusic 兜底合成（存量歌单、升级前收藏/历史同样覆盖），lxmusic 的 `/track/url`、`/track/info` 接受标签参数并把恢复出的 songInfo 写回持久层，`/track/info` 重启后从持久层重建映射条目不再返回「未知曲目」；③ 代理启动检测版本变化即失效当日推荐缓存（首次运行只落标记不失效），升级当天歌单即重建、榜单重拉进持久层，不再有「第二天才好」的空窗。\n\n- **洛雪有效直链「探活成功、播放 403」与重复强制取链（issue #54）**：探活与实际播放的 User-Agent 不一致——lxmusic 探活用 Chrome PC UA 验链通过，但 kw/wy/mg 平台解析结果返回的 headers 为空（仅 kg/tx 补 Referer），代理实际取流回退 httpx 默认 UA，UA 敏感 CDN（实测酷我）直接 403；403 又被当作直链失效，重试路径带 fresh=1 旁路 lxmusic 成功缓存强制重解析，而 fresh 请求不与成功缓存合并、每次真实出网，播放器每次重试都白烧一次解析额度，最终 stream_unresolved 跳歌。三处根治——① 探活 UA 直接进解析结果 headers 返回（探活与播放同一 UA），缓存到期探活续期同样回填 UA；② 代理出流/后台整轨下载/断点续传/转码统一构建洛雪媒体请求头：透传解析结果 Referer/UA 并兜底探活同款 UA，任何不带 UA 的解析结果不再裸奔 httpx 默认头；③ fresh 强制刷新加 60 秒同曲冷却——fresh 取到的直链仍打不开（状态异常/连接失败/空首字节）即标记，冷却窗内快速失败不再重复出网解析（非 fresh 钉链/成功缓存路径不受影响，网络抖动恢复后照常播出），解析额度消耗有界化。新增 UA 门禁 CDN 的 MockTransport 回归测试（探活通过后解析结果必须携带探活 UA）与冷却有界性测试。",
-          "updated_at": "2026-10-11",
-          "os_min_version": "1.2.0",
+        "1.0.2": {
+          "changelog": "### 新增\r\n\r\n- 两台 Octop 可以连起来用：通过云端协同使用对方的专家，能聊天，也能改对方工作区里的文件\r\n- 专家可以组队。主持人负责分派任务和收尾总结，成员的回复会回到聊天，也会同步到即时通讯\r\n- 新连接器：企查查、OpenAlex、语雀、Obsidian、Agent Mail，以及钉钉命令行（设备码登录后可查通讯录、日程和文档）\r\n- 可以用公司的 LDAP 账号登录。Telegram 机器人可以限定哪些用户能跟它说话\r\n- 记忆可以手改「用户档案」和「强记忆」。和已有记忆打架时先请你确认，不会悄悄覆盖；也可以备份和恢复\r\n- 技能和技能包可以导出成一个 ZIP，换一台机器再导入。技能包可以关掉别人的打包下载\r\n- 定时任务可以只跑一次，跑完自动停用，仍留在列表里。聊天进行中可以再补一句，不用等这一轮结束\r\n- 每个专家可以设定默认对话方式：问答、规划或动手。侧栏可以按自己的账号重新排列\r\n- 语音支持腾讯云边说边出字。当前模型不可用时，可以按健康状态自动换一个\r\n- 知识库旁边可以按文件夹浏览文档。新增业务流程、知识工作等专家模板。内置助手可以回答产品和用法问题\r\n- 别的程序可以通过 Agent MCP 网关调用这个 Agent。ONNX 模型可以不连 Hugging Face 直接加载\r\n- 新增钉钉 CLI 连接器：通过官方钉钉 Workspace CLI（`dws`）操作通讯录、聊天、日程、文档等；保存后在连接器设置里用设备码登录授权钉钉账号，默认使用钉钉官方应用，也可填写自建应用的 AppKey / AppSecret（#930）\r\n- 聊天侧栏可置顶专家，并按专家名或会话标题搜索\r\n- 新增业务流程专家模板，涵盖 SOP、操作手册、流程优化、风险评估、供应商评估和运营报告；中文界面默认使用中文，基于用户提供的材料工作，无需连接器。\r\n- 自建技能可以单个或批量导出为一个 ZIP；技能包也可以整包导出为同一个 ZIP 格式，再导入到其他专家或技能包（#260）。技能包可以关闭打包下载，关闭后其他用户不能导出 ZIP，创建者和管理员仍可下载\r\n- 记忆页新增「用户档案」Tab 手动编辑 USER.md，与「强记忆」复用编辑器和会话快照；Agent 文件工具只读。保存后核对 USER.md／MEMORY.md 与普通记忆：手动文档优先，明确冲突转候选审核并提示用户，重复内容避免重复召回。停止的 Agent 也可检查，语义检查不确定或不可用时明确提示，旧版本候选禁止采纳。\r\n- 记忆页新增「强记忆」Tab，用户可手动编辑 MEMORY.md，支持停止状态的 Agent。每个会话首次加载全文快照并持续复用，修改对新会话生效。用户说「记住」通过 memory_save 保存到 octop-memory，Agent 不再自动改写 MEMORY.md。\r\n- 聊天侧栏置顶专家；业务流程专家；技能与技能包导出 ZIP\r\n- 记忆页可手改用户档案与强记忆，冲突转入审核\r\n- 技能、工具与团队的决策模型；通道插件；模型健康切换\r\n- 对外 Agent MCP 网关；ONNX 模型可离线加载\r\n- 对话 mid-turn steering\r\n- 当前专家记忆备份、恢复与存储维护\r\n- Telegram 可限制允许的用户 ID\r\n- Obsidian CLI 连接器；内置连接器目录改为中英文 JSON\r\n- arXiv 论文检索；Telegram 可限制允许的用户 ID\r\n- 腾讯云实时语音；记忆提炼预算与超时可配置\r\n- 云端桥接命令行；会话列表显示进行中与待处理状态\r\n- 权限选择与自定义侧栏对齐，对话始终可用\r\n- Agent Mail 连接器（授权、邮件工具、新邮件任务）\r\n- LDAP 目录登录\r\n- 专家默认对话模式；输入栏「+」菜单；未开审批时隐藏批准入口\r\n- 飞牛 ARM 安装包与多架构镜像\r\n- 邮箱连接器读取含裸非 ASCII 字节邮件头（如未 MIME 编码的中文发件人/主题）时崩溃 `Object of type Header is not JSON serializable`：`search_emails`/`read_email` 改用 `email.policy.default` 解析并统一 `str()` 转换，同时自动解码 MIME 编码头为可读文本；正文中声明未知字符集（如 `unknown-8bit`）时回退 UTF-8 而非抛 `LookupError`。影响所有基于该通用 IMAP/SMTP 适配器的邮箱（QQ/网易/Gmail 等）。\r\n- 专家可配置默认对话模式（Ask / Plan / Craft）：新建 / 编辑专家及从专家创建时可选，新建对话与无模式粘性的线程（含 IM / CLI / cron 渠道）按该默认解析，缺省为 Craft；已有对话保持各自粘性的模式不变（Fixes #1310）。\r\n- 记忆提炼调用参数可配置：记忆设置页新增提炼输出预算、单次提炼/批量整理等待超时；API 另支持 `extract_extra_body` 传递思考开关等厂商参数。参数经 agent 配置透传到 harness 的记忆辅助调用，与提炼时机（空闲/间隔）相互独立，深度思考的本地模型不再必然撑爆默认 120 秒读取超时（Fixes #1360，需配套 octop-harness / octop-memory 的同名变更）。\r\n- Octop↔Octop 云端桥接，经隧道使用远程专家（聊天与工作区可写；工具/插件/渠道部分可写；技能包、全局 ACP、连接器、知识库仅本机）\r\n- 内置助手可回答产品与使用问题\r\n- 可配置 Ollama 本地模型下载目录\r\n- 账号可自定义侧边栏；角色改为存模板 id（账号侧栏与权限快照，不是运行时角色同步）\r\n- 侧栏可按账号自定义；角色模板 id 持久化\r\n- 角色模板、邀请快照与头像；登录页「记住登录状态」\r\n- 企查查同时支持一键 OAuth 与 API Key\r\n- 团队产物、工具轨迹与主持人收尾；管理员批量策略与令牌\r\n- Teams 主持人改写派工，成员回复同步 IM\r\n- 企查查、OpenAlex 连接器\r\n- 技能包新增「复制策略」（`copy_policy`，默认 `snapshot` 行为不变）：创建者/管理员可按包设为 `lock`（复制出的工作区副本带 origin/locked 水印，非创建者在工作区写接口被拒）或 `deny`（复制端点 403、前端按钮禁用）；复制成功与拒绝均落 audit。锁定副本在 Agent 工具层的写保护依赖 harness 侧配合，已在 issue 中单列（#770）\r\n- 登录验证码新增极验行为验 v4（#870）：设置页配置 captcha_id / captcha_key，登录弹窗完成验证，服务端按官方协议 HMAC-SHA256 签名后到 gcaptcha4 二次校验（form-urlencoded，仅 result=success 放行）\r\n- 对话支持默认折叠思考与工具过程（浏览器本地偏好）(#718)\r\n- 对话中可隐藏不常用的共享专家（浏览器本地偏好）(#589)\r\n- 腾讯云语音新增实时（流式）识别：开启后输入框麦克风为按住说话，边说边显示中间结果、松开即出全文；凭据仅保存在服务端，浏览器只收到开关状态；配置存于语音 provider 的 extra_json，无数据库迁移\r\n\r\n### 变更\r\n\r\n- 聊天侧栏分成专家、团队、云端三块；还没有团队或云端连接时，可以直接去创建\r\n- 个性化里的技能、子智能体、工具、插件、性格和记忆可以分别授权，不必一次全开\r\n- 输入栏不常用的入口收进「+」。没有开启审批时，不再出现批准按钮\r\n- 飞牛提供 ARM 安装包，安装后走建账号向导\r\n- 用户消息的复制、编辑按钮一直显示\r\n- 升级 octop-memory 1.0.2、octop-harness 1.0.4、octop-gateway 1.0.3\r\n- 升级 octop-harness 1.0.3 与 octop-gateway 1.0.2\r\n- 头像、技能卡片、个人设置抽屉与登录页外观\r\n- 升级 octop-harness 与 octop-memory；README 加入 Octop Pet\r\n- octop-harness 升到 1.0.1；飞牛安装改为建账号向导\r\n- 更新 README 路线图、锚点与产品名链接\r\n- README 路线图与产品链接更新\r\n- 运行时依赖切换为 octop-harness / octop-gateway / octop-memory / octop-browser 1.0.0\r\n- 升级 harness-agent 至 1.0.14；Dashboard 空状态与聊天输入交互微调\r\n- 连接器 OAuth 回调对重定向 URL 和错误消息安全编码，拒绝外站和控制字符绕过；弹窗仅向同源窗口发送授权通知，并保留回跳路径的查询参数与片段\r\n\r\n### 修复\r\n\r\n- 中文 Windows 上，搜索或执行命令碰到编码问题时，不再把整轮对话判失败，也不再把命令输出弄丢\r\n- 旧版 Word（.doc）在知识库里改为显示抽出的文字，在工作区、对话和技能里改为下载\r\n- 云端团队刷新页面后，正在生成的成员回复还在。对方拒绝登录时，不会把你自己的账号退出\r\n- 删掉会话会一并清掉它留下的数据。远程存储卡住时，不再挡住整个服务启动\r\n- 邮件标题里没有按规范编码的中文，可以正",
+          "updated_at": "2026-10-18",
+          "os_min_version": "1.1.0",
           "packages": {
             "x86": {
-              "download_url": "https://github.com/javycoder/fnos_music_ext/releases/download/v2.8.3/fnmusic-ext-2.8.3.fpk",
-              "sha256": "32f8758fb7952131ef226050a4f4f644333f07e54e0dbc43a7088565d6310a49",
-              "size": 27181026
+              "download_url": "https://github.com/TencentCloud/Octop/releases/download/v1.0.2/Octop-fnos-native-1.0.2.fpk",
+              "sha256": "9838e62d0a36a393286d5f060a38479d23d779cca82de73eedbaf2abad01735e",
+              "size": 210183042
+            },
+            "arm": {
+              "download_url": "https://github.com/TencentCloud/Octop/releases/download/v1.0.2/Octop-fnos-native-arm64-1.0.2.fpk",
+              "sha256": "3e35dd061a6fdc696e6d98a87336ed395a97783677e2779ccaa34f436dd1fc55",
+              "size": 208747656
+            }
+          }
+        },
+        "1.0.2b9": {
+          "changelog": "### 新增\n- 聊天侧栏置顶专家；业务流程专家；技能与技能包导出 ZIP\n- 记忆页可手改用户档案与强记忆，冲突转入审核\n- 技能、工具与团队的决策模型；通道插件；模型健康切换\n- 对外 Agent MCP 网关；ONNX 模型可离线加载\n\n### 修复\n- 无路径搜索不再打满主机内存；失败回合会正常结束\n- 云端专家结束态、未安装插件提示，以及对端模型与知识库显示\n- 用量显示专家名；定时任务会话有标题；文件描述符与 accept 日志\n- Docker 外部数据库重启、知识库运行时与安装后重启提示\n- Embedding 与 rerank 分开识别；飞牛 beta 可升级并保留浏览器驱动\n- 安装向导在已有用户后不再签发令牌\n\n### 变更\n- 用户消息的复制、编辑按钮一直显示\n- 升级 octop-memory 1.0.2、octop-harness 1.0.4、octop-gateway 1.0.3\n\n\n## Downloads\n\n### Windows\n\n#### Desktop installer (Recommended)\n- [64-bit (Recommended)](https://github.com/TencentCloud/Octop/releases/download/v1.0.2b9/Octop-desktop-windows-amd64-1.0.2b9.exe) | [ARM64](https://github.com/TencentCloud/Octop/releases/download/v1.0.2b9/Octop-desktop-windows-arm64-1.0.2b9.exe)\n\n#### Portable\n- [64-bit](https://github.com/TencentCloud/Octop/releases/download/v1.0.2b9/Octop-portable-windows-amd64-1.0.2b9.zip) | [ARM64](https://github.com/TencentCloud/Octop/releases/download/v1.0.2b9/Octop-portable-windows-arm64-1.0.2b9.zip)\n\n### macOS\n\n#### Desktop installer (Recommended)\n- [Apple Silicon](https://github.com/TencentCloud/Octop/releases/download/v1.0.2b9/Octop-desktop-darwin-arm64-1.0.2b9.dmg) | [Intel](https://github.com/TencentCloud/Octop/releases/download/v1.0.2b9/Octop-desktop-darwin-amd64-1.0.2b9.dmg)\n\n#### Portable\n- [Apple Silicon](https://github.com/TencentCloud/Octop/releases/download/v1.0.2b9/Octop-portable-darwin-arm64-1.0.2b9.zip) | [Intel](https://github.com/TencentCloud/Octop/releases/download/v1.0.2b9/Octop-portable-darwin-amd64-1.0.2b9.zip)\n\n### Linux\n\n#### Desktop installer (Recommended)\n- [64-bit](https://github.com/TencentCloud/Octop/releases/download/v1.0.2b9/Octop-desktop-linux-amd64-1.0.2b9.tar.gz) | [ARM64](https://github.com/TencentCloud/Octop/releases/download/v1.0.2b9/Octop-desktop-linux-arm64-1.0.2b9.tar.gz)\n\n#### Portable\n- [64-bit](https://github.com/TencentCloud/Octop/releases/download/v1.0.2b9/Octop-portable-linux-amd64-1.0.2b9.zip) | [ARM64](https://github.com/TencentCloud/Octop/releases/download/v1.0.2b9/Octop-portable-linux-arm64-1.0.2b9.zip)\n\n### fnOS NAS\n- [Docker (recommended; x86 and ARM)](https://github.com/TencentCloud/Octop/releases/download/v1.0.2b9/Octop-fnos-docker-1.0.2b9.fpk) | [Native x86_64](https://github.com/TencentCloud/Octop/releases/download/v1.0.2b9/Octop-fnos-native-1.0.2b9.fpk) | [Native ARM64 (no Docker)](https://github.com/TencentCloud/Octop/releases/download/v1.0.2b9/Octop-fnos-native-arm64-1.0.2b9.fpk)\n\n\n## What's Changed\n* chore: sync main into develop after 1.0.2b8 by @github-actions[bot] in https://github.com/TencentCloud/Octop/pull/2055\n* feat(experts): add knowledge-work expert templates converted from Claude plugins by @Jeffrey8864 in https://github.com/TencentCloud/Octop/pull/2021\n* fix: peer composer defaults, usage names, and cron titles by @jubaoliang in https://github.com/TencentCloud/Octop/pull/2066\n* fix(docker): stop re-running octop init on restart with PostgreSQL (#1866) by @fengyue-xve in https://github.com/TencentCloud/Octop/pull/1868\n* fix(providers): recognise embedding models by naming convention by @mediasambb in https://github.com/TencentCloud/Octop/pull/2049\n* fix(setup): stop issuing wizard tokens after the first user exists by @jubaoliang in https://github.com/TencentCloud/Octop/pull/2074\n* fix(dashboard): gate PWA update prompt by permission and stop re-prompting by @zsuroy in https://github.com/TencentCloud/Octop/pull/2080\n* fix(docker): bake local knowledge dependencies into the image by @ideshun in https://github.com/TencentCloud/Octop/pull/2082\n* fix(knowledge): tell the user a restart is what the install needs by @sclfcz in https://github.com/TencentCloud/Octop/pull/1493\n* docs: add Pull Request submission guidelines to CONTRIBUTING.md by @jubaoliang in https://github.com/TencentCloud/Octop/pull/2109\n* feat: add Agent MCP Gateway by @Pandakingxbc in https://github.com/TencentCloud/Octop/pull/2106\n* feat(agents): add health-aware model failover by @Pandakingxbc in https://github.com/TencentCloud/Octop/p",
+          "updated_at": "2026-10-17",
+          "os_min_version": "1.1.0",
+          "packages": {
+            "x86": {
+              "download_url": "https://github.com/TencentCloud/Octop/releases/download/v1.0.2b9/Octop-fnos-native-1.0.2b9.fpk",
+              "sha256": "f627434ae7dc15bc7b745ad1db950005030cc1113fb0f98d9ccf9bb1925ab7f8",
+              "size": 210093457
+            },
+            "arm": {
+              "download_url": "https://github.com/TencentCloud/Octop/releases/download/v1.0.2b9/Octop-fnos-native-arm64-1.0.2b9.fpk",
+              "sha256": "a9aa4049018d4fe5871e81bb03506869043087a83e4c0a73ed6d83b42c247412",
+              "size": 208679356
             }
           }
         }
@@ -291,42 +342,6 @@
               "download_url": "https://github.com/mickeyttsc/wild-work-fpk/releases/download/v2.9.4/wildwork-2.9.4-1.fpk",
               "sha256": "aa3dc705c36d4bd754bdeff96089cbb39f4920dd973cdcce3bcae975c2dc3e51",
               "size": 9179463
-            }
-          }
-        },
-        "2.9.3-2": {
-          "changelog": "## Wild Work 2.9.3-2（自封装版）\n\n上游 v2.9.3，本次只改封装层：**退役独立的「登录补投」页面**。\n\n### 为什么改\n上游 v2.9.3（R104）已经把「粘贴回调地址」做进**面板登录弹窗本身**，覆盖 TraeWork / 千问 / CodeArts / Gemini / LobsterAI 五个渠道：就地换取凭据，不依赖 fnOS 会话，还会校验你粘的地址是不是本次登录的（粘上一次的会被明确拦下）。封装层那页因此变成重复入口——两套补投 UI 并存时，用户不知道该信哪个。\n\n### 变化\n- 桌面图标只剩一个「Wild Work」，不再有「Wild Work 登录补投」\n- 面板里指向旧补投页的那行提示已移除\n- 需要补投时：登录弹窗里直接出现「粘贴回调地址」输入框\n\n### 升级\n应用中心手动安装，或在「FPK更新」里点一下即可。账号凭据、签到与冷却状态都不受影响（升级保数据，实测配置指纹一致）。\n\n### 遇到本机回调类渠道时\n浏览器若停在一条打不开的 `127.0.0.1:<端口>` 地址上，属正常（回调落在你自己的设备上）——把地址栏整条复制，粘回登录弹窗的输入框提交即可。ZCode / MiniMax / Qoder 走服务端轮询，不需要补投。",
-          "updated_at": "2026-10-20",
-          "os_min_version": "1.1.0",
-          "packages": {
-            "x86": {
-              "download_url": "https://github.com/mickeyttsc/wild-work-fpk/releases/download/v2.9.3-2/wildwork-2.9.3-2.fpk",
-              "sha256": "b530957b76ae4c34069e5909905741351295ef88f6eeed16db1d02715377805d",
-              "size": 9145923
-            }
-          }
-        },
-        "2.9.3-1": {
-          "changelog": "自动构建于上游 v2.9.3 (rockswang/wild-work releases)。下载 wildwork-2.9.3-1.fpk 在飞牛 fnOS 应用中心手动安装。",
-          "updated_at": "2026-10-19",
-          "os_min_version": "1.1.0",
-          "packages": {
-            "x86": {
-              "download_url": "https://github.com/mickeyttsc/wild-work-fpk/releases/download/v2.9.3/wildwork-2.9.3-1.fpk",
-              "sha256": "7856ba8a3393d3f926170cbcf34332b1bf04580482fb56a4446113e11f3e0821",
-              "size": 9151149
-            }
-          }
-        },
-        "2.9.2-1": {
-          "changelog": "自动构建于上游 v2.9.2 (rockswang/wild-work releases)。下载 wildwork-2.9.2-1.fpk 在飞牛 fnOS 应用中心手动安装。",
-          "updated_at": "2026-10-19",
-          "os_min_version": "1.1.0",
-          "packages": {
-            "x86": {
-              "download_url": "https://github.com/mickeyttsc/wild-work-fpk/releases/download/v2.9.2/wildwork-2.9.2-1.fpk",
-              "sha256": "ac310538e2a1f5266fa8c81bb3073d5f723f592e7b1affdf082bee935dd5e3ba",
-              "size": 8872955
             }
           }
         }

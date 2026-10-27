@@ -153,7 +153,7 @@
     },
     "dsh-fnos": {
       "display_name": "DeepSeek Harness",
-      "desc": "DeepSeek AI 开源的插件化智能体框架（命令行 dsh）。本包是飞牛 fnOS 原生封装：复用系统已装的 Node.js 24 运行时，安装时从 npm 拉取 dsh 本体，不打包 Node、不使用 Docker。<br/><br/><strong>安装后使用：</strong><br/>等应用中心显示「运行中」，浏览器打开 http://设备IP:3080 进入 DSH Web，首次使用在设置里填 DeepSeek API Key。<br/><br/><strong>说明：</strong><br/>1. 安装过程需要访问 npm 源，安装向导里可选国内镜像，装完约占用 900 MB 磁盘。<br/>2. 会话与配置保存在应用共享目录 dsh-fnos 下，升级与卸载都会保留。<br/>3. 由 GitHub Actions 跟随上游 npm 版本自动打包，升级走应用中心正常流程。",
+      "desc": "DeepSeek AI 开源的插件化智能体框架（命令行 dsh）。本包是飞牛 fnOS 原生封装：复用系统已装的 Node.js 24 运行时，安装时从 npm 拉取 dsh 本体，不打包 Node、不使用 Docker。<br/><br/><strong>安装后使用：</strong><br/>1. 等应用中心显示「运行中」；<br/>2. 打开应用「日志」，复制里面「首次访问链接（含启动 token）」那一行到浏览器打开（dsh 默认要求带启动 token 换 cookie，直接访问端口会返回 401）；<br/>3. 打开后在设置里填 DeepSeek API Key。浏览器会记住登录态，之后可直接访问 http://设备IP:端口。<br/><br/><strong>说明：</strong><br/>1. 安装过程需要访问 npm 源，安装向导里可选国内镜像，装完约占用 900 MB 磁盘。<br/>2. 会话与配置保存在应用共享目录 dsh-fnos 下，升级与卸载都会保留；本次启动的带 token 链接保存在该目录的 entry-url.txt。<br/>3. 由 GitHub Actions 跟随上游 npm 版本自动打包，升级走应用中心正常流程。",
       "platform": [
         "x86"
       ],
@@ -182,6 +182,42 @@
               "download_url": "https://github.com/aaiuh/dsh-fnos/releases/download/v0.2.1-2/dsh-fnos-0.2.1-2-x86.fpk",
               "sha256": "a9a2cece566aebf9cea9869b26fdd1f23ce910338b4bf5992684a6f4be9a87c9",
               "size": 19559
+            }
+          }
+        },
+        "0.2.1-3": {
+          "changelog": "跟随上游 dsh 0.2.1-rc.2。\n\n上游 dsh 0.2.1-rc.2。",
+          "updated_at": "2026-10-27",
+          "os_min_version": "1.1.3100",
+          "packages": {
+            "x86": {
+              "download_url": "https://github.com/aaiuh/dsh-fnos/releases/download/v0.2.1-3/dsh-fnos-0.2.1-3-x86.fpk",
+              "sha256": "d552075e69d0e6fff271891505759aaceb13662f8f94212e7d62d2a6092f508a",
+              "size": 21147
+            }
+          }
+        },
+        "0.2.1-4": {
+          "changelog": "跟随上游 dsh 0.2.1-rc.2。\n\n上游 dsh 0.2.1-rc.2。",
+          "updated_at": "2026-10-27",
+          "os_min_version": "1.1.3100",
+          "packages": {
+            "x86": {
+              "download_url": "https://github.com/aaiuh/dsh-fnos/releases/download/v0.2.1-4/dsh-fnos-0.2.1-4-x86.fpk",
+              "sha256": "11d997f89dfd27ee26caba1c8cf7b87f0c7002143c07f2ad45e4ebefe73436fc",
+              "size": 36344
+            }
+          }
+        },
+        "0.2.1-5": {
+          "changelog": "跟随上游 dsh 0.2.1-rc.2。\n\n上游 dsh 0.2.1-rc.2。",
+          "updated_at": "2026-10-27",
+          "os_min_version": "1.1.3100",
+          "packages": {
+            "x86": {
+              "download_url": "https://github.com/aaiuh/dsh-fnos/releases/download/v0.2.1-5/dsh-fnos-0.2.1-5-x86.fpk",
+              "sha256": "7b1d21ae50770300f65d2f1e17afa8353e2c3935b3d8d96298ca63f33ad04f17",
+              "size": 38695
             }
           }
         }

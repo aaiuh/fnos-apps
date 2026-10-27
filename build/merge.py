@@ -194,9 +194,39 @@ def _assets_of(rel: dict, repo: str, host: str) -> list:
         return []
 
 
+# 单个 release 里可能有多种 fpk（docker / native / arm64…），
+# 以及几百 MB 的大包。只保留最近几个版本，避免 CI 下载量失控。
+MAX_VERSIONS = 3
+
+
+def _pick_fpks(assets: list, prefix: str = "") -> dict[str, dict]:
+    """从 release 的资产里挑 .fpk，按架构分组返回 {"x86": asset, "arm": asset}。
+
+    同一架构出现多个时取第一个；prefix 用于排除 docker 版等无关资产。
+    """
+    out: dict[str, dict] = {}
+    for a in assets:
+        name = a.get("name") or ""
+        if not name.lower().endswith(".fpk") or not a.get("browser_download_url"):
+            continue
+        if prefix and not name.startswith(prefix):
+            continue
+        low = name.lower()
+        arch = "arm" if ("arm64" in low or "aarch64" in low) else "x86"
+        out.setdefault(arch, a)
+    return out
+
+
 def fetch_from_releases(repo: str, icon: str = "", categories: list[str] | None = None,
-                        limit: int = 6, host: str = "github") -> dict | None:
-    """成员只发 Release、没有 fnpack.json 时，直接读 .fpk 资产合成片段。"""
+                        limit: int = 6, host: str = "github",
+                        asset_prefix: str = "") -> dict | None:
+    """成员只发 Release、没有 fnpack.json 时，直接读 .fpk 资产合成片段。
+
+    asset_prefix 用来在「一个 Release 里放了多种 fpk」时挑出要的那种，
+    例如 Octop 同时发 docker / native / native-arm64，只取 native 就传
+    asset_prefix="Octop-fnos-native"。同一前缀下的 x86 与 arm64 会自动
+    分到 packages 的两个键里。
+    """
     try:
         if host == "gitee":
             # Gitee 的 releases 列表按创建时间「升序」返回，per_page=limit 会拿到最老的几个。
@@ -226,20 +256,22 @@ def fetch_from_releases(repo: str, icon: str = "", categories: list[str] | None 
             log(f"    - {repo} {rel.get('tag_name')} 是预发布或草稿，跳过")
             continue
         assets = _assets_of(rel, repo, host)
-        fpk = next((a for a in assets if (a.get("name") or "").endswith(".fpk")
-                    and a.get("browser_download_url")), None)
-        if fpk:
-            picked.append((rel, fpk))
+        fpks = _pick_fpks(assets, asset_prefix)
+        if fpks:
+            picked.append((rel, fpks))
     if not picked:
-        log(f"  {repo} 的 Release 里没有 .fpk 资产")
+        tip = f"以 {asset_prefix} 开头的" if asset_prefix else ""
+        log(f"  {repo} 的 Release 里没有{tip} .fpk 资产")
         return None
+    picked = picked[:MAX_VERSIONS]
 
-    meta = read_fpk_manifest(picked[0][1]["browser_download_url"])
+    first = picked[0][1].get("x86") or next(iter(picked[0][1].values()))
+    meta = read_fpk_manifest(first["browser_download_url"])
     if not meta.get("appname"):
         # 兜底：manifest 读不到时按资产名推断（wildwork-2.9.5-1.fpk → wildwork）
         import re
 
-        m = re.match(r"(.+?)-\d+\.\d+\.\d+(?:-\d+)?\.fpk$", picked[0][1]["name"])
+        m = re.match(r"(.+?)-(\d+\.\d+\.\d+(?:[a-zA-Z]+\d*)?(?:-\d+)?)\.fpk$", first["name"])
         if not m:
             log(f"  {repo} 最新包读不到 appname，资产名也无法推断，放弃")
             return None
@@ -248,11 +280,12 @@ def fetch_from_releases(repo: str, icon: str = "", categories: list[str] | None 
 
     name = meta["appname"]
     releases = {}
-    for rel, fpk in picked:
+    for rel, fpks in picked:
         # 资产名比 tag 精确：wildwork-2.9.5-1.fpk → 2.9.5-1
         import re
 
-        m = re.search(r"-(\d+\.\d+\.\d+(?:-\d+)?)\.fpk$", fpk["name"])
+        ref = fpks.get("x86") or next(iter(fpks.values()))
+        m = re.search(r"-(\d+\.\d+\.\d+(?:[a-zA-Z]+\d*)?(?:-\d+)?)\.fpk$", ref["name"])
         ver = m.group(1) if m else (rel.get("tag_name") or "").lstrip("vV")
         if not ver:
             continue
@@ -262,7 +295,10 @@ def fetch_from_releases(repo: str, icon: str = "", categories: list[str] | None 
             "changelog": (rel.get("body") or "").strip()[:4000],
             "updated_at": str(ts)[:10],
             "os_min_version": meta.get("os_min_version") or "1.1.0",
-            "packages": {"x86": {"download_url": fpk["browser_download_url"]}},
+            "packages": {
+                arch: {"download_url": a["browser_download_url"]}
+                for arch, a in fpks.items()
+            },
         }
     if not releases:
         return None
@@ -271,6 +307,16 @@ def fetch_from_releases(repo: str, icon: str = "", categories: list[str] | None 
     plats = [p.strip() for p in (meta.get("platform") or "x86").split(",") if p.strip()]
     if "all" in plats:
         plats = ["x86", "arm"]
+    # 只声明真的有包的架构，避免「写了 arm 却没有 arm 包」让安装端下不到
+    arch_seen: set[str] = set()
+    for _, fpks in picked:
+        arch_seen |= set(fpks)
+    plats = [p for p in plats if p in arch_seen] or sorted(arch_seen)
+    # 反过来也要兜住：manifest 常只写 platform=x86，但 Release 里实际有 arm64 包
+    # （Octop 就是这样）。以资产为准补上，否则 arm 设备匹配不到这个应用。
+    if "arm" in arch_seen and "arm" not in plats:
+        plats.append("arm")
+        log(f"    ! {name} manifest 未声明 arm，但发有 arm64 包，按实测补上")
 
     owner = repo.split("/")[0]
     if host == "gitee":
@@ -303,7 +349,7 @@ def fetch_from_releases(repo: str, icon: str = "", categories: list[str] | None 
         "service_port": meta.get("service_port") or "",
         "releases": releases,
     }
-    log(f"    合成 {name}，版本 {sorted(releases)}，元数据取自 {picked[0][1]['name']}")
+    log(f"    合成 {name}，版本 {sorted(releases)}，元数据取自 {first['name']}")
     return {"apps": {name: app}}
 
 
@@ -331,10 +377,15 @@ def main() -> int:
             host = "gitee"
             spec = spec[len("gitee:"):]
 
-        if spec.endswith("!release"):
-            repo = spec[: -len("!release")]
+        asset_prefix = ""
+        if spec.endswith("!release") or "!release:" in spec:
+            if "!release:" in spec:
+                repo, asset_prefix = spec.split("!release:", 1)
+            else:
+                repo = spec[: -len("!release")]
             branch = "main"  # Release 模式没有 fnpack.json，图标走绝对地址
-            doc = fetch_from_releases(repo, icon, cats, host=host)
+            doc = fetch_from_releases(repo, icon, cats, host=host,
+                                      asset_prefix=asset_prefix)
             if not doc:
                 log(f"  ✗ {repo} Release 模式取不到可用版本，跳过")
                 continue
@@ -368,30 +419,36 @@ def main() -> int:
 
             kept = {}
             for ver, rel in (app.get("releases") or {}).items():
-                pkg = (rel.get("packages") or {}).get("x86")
-                if not pkg or not pkg.get("download_url"):
-                    log(f"    - {name} {ver} 没有 x86 包，丢弃")
+                pkgs = rel.get("packages") or {}
+                if not pkgs:
+                    log(f"    - {name} {ver} 没有任何架构的包，丢弃")
                     continue
-                url = pkg["download_url"]
-                if not head_ok(url):
-                    log(f"    - {name} {ver} 下载地址不可达，丢弃")
+                new_pkgs = {}
+                for arch, pkg in pkgs.items():
+                    url = (pkg or {}).get("download_url")
+                    if not url:
+                        continue
+                    if not head_ok(url):
+                        log(f"    - {name} {ver} [{arch}] 下载地址不可达，丢弃该架构")
+                        continue
+                    try:
+                        actual_sha, actual_size = sha256_of(url)
+                    except Exception as e:  # noqa: BLE001
+                        log(f"    - {name} {ver} [{arch}] 下载失败（{e}），丢弃该架构")
+                        continue
+                    if pkg.get("sha256") and pkg["sha256"] != actual_sha:
+                        log(f"    ! {name} {ver} [{arch}] 声明 sha256 与实测不符，改用实测值")
+                    new_pkgs[arch] = {
+                        "download_url": url,
+                        "sha256": actual_sha,
+                        "size": actual_size,
+                    }
+                    log(f"    + {name} {ver} [{arch}] {actual_size} 字节 {actual_sha[:12]}…")
+                if not new_pkgs:
                     continue
-                try:
-                    actual_sha, actual_size = sha256_of(url)
-                except Exception as e:  # noqa: BLE001
-                    log(f"    - {name} {ver} 下载失败（{e}），丢弃")
-                    continue
-                if pkg.get("sha256") and pkg["sha256"] != actual_sha:
-                    log(f"    ! {name} {ver} 声明 sha256 与实测不符，改用实测值")
                 rel = dict(rel)
-                rel["packages"] = dict(rel["packages"])
-                rel["packages"]["x86"] = {
-                    "download_url": url,
-                    "sha256": actual_sha,
-                    "size": actual_size,
-                }
+                rel["packages"] = new_pkgs
                 kept[ver] = rel
-                log(f"    + {name} {ver} {actual_size} 字节 {actual_sha[:12]}…")
 
             if not kept:
                 log(f"    ! {name} 没有可用版本，跳过该应用")

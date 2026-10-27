@@ -17,13 +17,26 @@ NEXT_H2 = "## "
 
 
 def _verkey(v: str):
-    """版本号排序键：2.10.2 要排在 2.9.0 前面（字符串比较会反）。"""
+    """版本号排序键。
+
+    - 2.10.2 要排在 2.9.0 前面（字符串比较会反过来）
+    - 1.0.3b1 要排在 1.0.2 后面，但排在 1.0.3 前面（预发布低于同号正式版）
+    - 2.9.6-1 要排在 2.9.6 后面（fnOS 的 -N 是修订号，不是预发布）
+    """
     import re
 
-    out = []
-    for part in re.split(r"[.\-+]", v):
-        out.append(int(part) if part.isdigit() else 0)
-    return out
+    v = (v or "").strip().lstrip("vV")
+    m = re.match(r"^(\d+(?:\.\d+)*)(.*)$", v)
+    if not m:
+        return ((0,), 0, (0, ""))
+    nums = tuple(int(x) for x in m.group(1).split("."))
+    tail = m.group(2) or ""
+    if not tail:
+        return (nums, 0, (0, ""))
+    rev = re.fullmatch(r"-(\d+)", tail)
+    if rev:
+        return (nums, 1, (int(rev.group(1)), ""))
+    return (nums, -1, (0, tail))
 
 
 def _latest(releases: dict) -> str:

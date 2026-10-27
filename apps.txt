@@ -15,6 +15,9 @@ javycoder/fnos_music_ext!release https://raw.githubusercontent.com/aaiuh/fnos-ap
 # 三种 fpk，用 !release:Octop-fnos-native 只取原生版（x86 与 arm64 自动分到
 # packages 的两个键；docker 版是 350 KB 的壳，不要）。
 TencentCloud/Octop!release:Octop-fnos-native https://raw.githubusercontent.com/aaiuh/fnos-apps/main/icons/octop.png AI赋能
+# aaiuh/dsh-fnos：DeepSeek Harness 的飞牛原生包，带 fnpack.json，仓库内
+# CI 每 6 小时跟随 npm 上 @deepseek-ai/dsh 的版本自动重打。
+aaiuh/dsh-fnos
 
 # 手动刷新触发：2026-10-18T15:34
 

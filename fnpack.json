@@ -220,6 +220,18 @@
               "size": 38695
             }
           }
+        },
+        "0.2.1-6": {
+          "changelog": "跟随上游 dsh 0.2.1-rc.5。\n\n上游 dsh 0.2.1-rc.5。",
+          "updated_at": "2026-10-29",
+          "os_min_version": "1.1.3100",
+          "packages": {
+            "x86": {
+              "download_url": "https://github.com/aaiuh/dsh-fnos/releases/download/v0.2.1-6/dsh-fnos-0.2.1-6-x86.fpk",
+              "sha256": "fd2965ed324f7922af48fe71a8fb88597a17a246906a673d7ad8638e0574f4e0",
+              "size": 38683
+            }
+          }
         }
       }
     },

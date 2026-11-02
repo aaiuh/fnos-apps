@@ -325,13 +325,13 @@
           "packages": {
             "x86": {
               "download_url": "https://github.com/TencentCloud/Octop/releases/download/v1.0.3b2/Octop-fnos-native-1.0.3b2.fpk",
-              "sha256": "1e6105d182168378fe5d48d9b4b28f8d4711c613941f812a0a0180903110655e",
-              "size": 209996556
+              "sha256": "59f297a21a4ccee41c7b10fad4acee857fd035baf94e3a31f120667a21c118f9",
+              "size": 209991306
             },
             "arm": {
               "download_url": "https://github.com/TencentCloud/Octop/releases/download/v1.0.3b2/Octop-fnos-native-arm64-1.0.3b2.fpk",
-              "sha256": "ce99ef9577804ad35e297be1fdf9ec843cd407c2c8abbe9ed92d480202b62985",
-              "size": 208526916
+              "sha256": "9339af41f74bfbf87bed74f7818a4be315ec988ff99888ccedea6b132bc81a36",
+              "size": 208520068
             }
           }
         },
@@ -393,6 +393,18 @@
       "is_docker": false,
       "service_port": "7863",
       "releases": {
+        "2.11.2-1": {
+          "changelog": "自动构建于上游 v2.11.2 (rockswang/wild-work releases)。下载 wildwork-2.11.2-1.fpk 在飞牛 fnOS 应用中心手动安装。",
+          "updated_at": "2026-11-02",
+          "os_min_version": "1.1.0",
+          "packages": {
+            "x86": {
+              "download_url": "https://github.com/mickeyttsc/wild-work-fpk/releases/download/v2.11.2/wildwork-2.11.2-1.fpk",
+              "sha256": "5b0600eb01e6497e01062fe299f7cc599c7b0f5afaa16dade983fcbdba876245",
+              "size": 9366924
+            }
+          }
+        },
         "2.11.1-1": {
           "changelog": "自动构建于上游 v2.11.1 (rockswang/wild-work releases)。下载 wildwork-2.11.1-1.fpk 在飞牛 fnOS 应用中心手动安装。",
           "updated_at": "2026-10-30",
@@ -414,18 +426,6 @@
               "download_url": "https://github.com/mickeyttsc/wild-work-fpk/releases/download/v2.11.0/wildwork-2.11.0-1.fpk",
               "sha256": "08697268f4087af6a86f726307af02cc2c6606ed321eec19c4a8b81c0a5161b3",
               "size": 9338559
-            }
-          }
-        },
-        "2.10.0-1": {
-          "changelog": "自动构建于上游 v2.10.0 (rockswang/wild-work releases)。下载 wildwork-2.10.0-1.fpk 在飞牛 fnOS 应用中心手动安装。",
-          "updated_at": "2026-10-28",
-          "os_min_version": "1.1.0",
-          "packages": {
-            "x86": {
-              "download_url": "https://github.com/mickeyttsc/wild-work-fpk/releases/download/v2.10.0/wildwork-2.10.0-1.fpk",
-              "sha256": "195778b4ba77e96bd6a800fb3f0770db2962e5b52792c47333d7b0d1c422a175",
-              "size": 9252810
             }
           }
         }

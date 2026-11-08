@@ -124,6 +124,18 @@
               "size": 540165139
             }
           }
+        },
+        "0.8.19-13": {
+          "changelog": "跟随官方 runtime（Agent 0.23.0，控制台 0.8.19）。内嵌官方 Agent 运行时，空白机器全新安装即可用；控制台可在 Studio 内直接更新；支持飞牛应用数据备份与还原。",
+          "updated_at": "2026-11-08",
+          "os_min_version": "1.1.0",
+          "packages": {
+            "x86": {
+              "download_url": "https://github.com/aaiuh/hermes-studio-fnos/releases/download/v0.8.19-13/Hermes.fpk",
+              "sha256": "540be2faf3fcef5bba766ca5eb598fc640714457cf36ad29ffd8c8ab19fd2ff3",
+              "size": 540165140
+            }
+          }
         }
       }
     },
@@ -149,18 +161,6 @@
       "is_docker": false,
       "service_port": "8888",
       "releases": {
-        "1.0.0-13": {
-          "changelog": "跟随上游 Hindsight 1.0.0-13。原生运行，不依赖 Docker；内置 PostgreSQL 与向量检索，onnx 语义嵌入 + flashrank 重排；含官方管理控制台（需系统已装 Node.js 20 以上）；支持飞牛应用备份与恢复。",
-          "updated_at": "2026-10-18",
-          "os_min_version": "1.1.0",
-          "packages": {
-            "x86": {
-              "download_url": "https://github.com/aaiuh/hindsight-fnos/releases/download/v1.0.0-13/Hindsight-1.0.0-13-x86.fpk",
-              "sha256": "26094c5a179850864cfd05a9e1faf54c81453af63cc137b718ce701aec928cec",
-              "size": 75211
-            }
-          }
-        },
         "1.0.0-14": {
           "changelog": "跟随上游 Hindsight 1.0.0-14。原生运行，不依赖 Docker；内置 PostgreSQL 与向量检索，onnx 语义嵌入 + flashrank 重排；含官方管理控制台（需系统已装 Node.js 20 以上）；支持飞牛应用备份与恢复。",
           "updated_at": "2026-10-18",
@@ -266,6 +266,18 @@
               "download_url": "https://github.com/aaiuh/hindsight-fnos/releases/download/v1.1.0/Hindsight-1.1.0-x86.fpk",
               "sha256": "2d8471031600c467041c3635bb43c8ece0d26afb3c75f3314084233f3cb67519",
               "size": 71448
+            }
+          }
+        },
+        "1.2.0": {
+          "changelog": "跟随上游 Hindsight 1.2.0。原生运行，不依赖 Docker；内置 PostgreSQL 与向量检索，onnx 语义嵌入 + flashrank 重排；含官方管理控制台（需系统已装 Node.js 20 以上）；支持飞牛应用备份与恢复。",
+          "updated_at": "2026-11-08",
+          "os_min_version": "1.1.0",
+          "packages": {
+            "x86": {
+              "download_url": "https://github.com/aaiuh/hindsight-fnos/releases/download/v1.2.0/Hindsight-1.2.0-x86.fpk",
+              "sha256": "114190555df23d9a559c7ca8f428e57c6b4731d454d61ef5a43b6ceecf51b48c",
+              "size": 71365
             }
           }
         }

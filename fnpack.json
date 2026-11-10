@@ -9,195 +9,33 @@
   "apps": {
     "Hermes": {
       "display_name": "Hermes Studio",
-      "desc": "Hermes Agent 的图形控制台与运行时，原生运行于飞牛 fnOS，不依赖 Docker。内嵌官方 Agent 运行时（全新安装即可用），控制台可在 Studio 内直接更新，支持飞牛应用备份与恢复。依赖系统应用 Node.js 24（不随包携带）。",
+      "desc": "Hermes Agent 的飞牛 fnOS 原生封装，整包自带 Agent 运行时与 Node.js。",
       "platform": [
         "x86"
       ],
       "categories": [
         "AI赋能"
       ],
-      "icon_url": "https://raw.githubusercontent.com/aaiuh/hermes-studio-fnos/main/ICON_256.PNG",
-      "preview_urls": [],
-      "readme_url": "https://raw.githubusercontent.com/aaiuh/hermes-studio-fnos/main/README.md",
-      "bug_report_url": "https://github.com/aaiuh/hermes-studio-fnos/issues",
+      "service_port": 8648,
+      "run_as": "package",
+      "is_docker": false,
       "maintainer": "aaiuh",
-      "maintainer_url": "https://github.com/aaiuh",
       "distributor": "aaiuh",
       "distributor_url": "https://github.com/aaiuh/hermes-studio-fnos",
-      "run_as": "package",
-      "install_type": "",
-      "is_docker": false,
-      "service_port": "8648",
       "releases": {
-        "0.8.17-5": {
-          "changelog": "跟随官方 runtime（Agent 0.23.0，控制台 0.8.17）。内嵌官方 Agent 运行时，空白机器全新安装即可用；控制台可在 Studio 内直接更新；支持飞牛应用数据备份与还原。",
-          "updated_at": "2026-11-06",
-          "os_min_version": "1.1.0",
-          "packages": {
-            "x86": {
-              "download_url": "https://github.com/aaiuh/hermes-studio-fnos/releases/download/v0.8.17-5/Hermes.fpk",
-              "sha256": "1065ec47e68b34c8d51396dfaa7d74724bf1fbf96844d80593d3550ba1a702c4",
-              "size": 540165060
-            }
-          }
-        },
-        "0.8.17-6": {
-          "changelog": "跟随官方 runtime（Agent 0.23.0，控制台 0.8.17）。内嵌官方 Agent 运行时，空白机器全新安装即可用；控制台可在 Studio 内直接更新；支持飞牛应用数据备份与还原。",
-          "updated_at": "2026-11-06",
-          "os_min_version": "1.1.0",
-          "packages": {
-            "x86": {
-              "download_url": "https://github.com/aaiuh/hermes-studio-fnos/releases/download/v0.8.17-6/Hermes.fpk",
-              "sha256": "76f26cc12bc7cdca0ba766ebcab9be21b8d419e54e86fc164c13acc6261e7c95",
-              "size": 540165072
-            }
-          }
-        },
-        "0.8.17-7": {
-          "changelog": "跟随官方 runtime（Agent 0.23.0，控制台 0.8.17）。内嵌官方 Agent 运行时，空白机器全新安装即可用；控制台可在 Studio 内直接更新；支持飞牛应用数据备份与还原。",
-          "updated_at": "2026-11-06",
-          "os_min_version": "1.1.0",
-          "packages": {
-            "x86": {
-              "download_url": "https://github.com/aaiuh/hermes-studio-fnos/releases/download/v0.8.17-7/Hermes.fpk",
-              "sha256": "c3a612a209e0feee207a0f0e7b78afafdc2d8b77045c95d9c9736754e094ef51",
-              "size": 540165150
-            }
-          }
-        },
-        "0.8.17-8": {
-          "changelog": "跟随官方 runtime（Agent 0.23.0，控制台 0.8.17）。内嵌官方 Agent 运行时，空白机器全新安装即可用；控制台可在 Studio 内直接更新；支持飞牛应用数据备份与还原。",
-          "updated_at": "2026-11-06",
-          "os_min_version": "1.1.0",
-          "packages": {
-            "x86": {
-              "download_url": "https://github.com/aaiuh/hermes-studio-fnos/releases/download/v0.8.17-8/Hermes.fpk",
-              "sha256": "b394e11dd3f700a171281ed97647b63777a51bffad8ad14da470198bf5547062",
-              "size": 540165147
-            }
-          }
-        },
-        "0.8.19-9": {
-          "changelog": "跟随官方 runtime（Agent 0.23.0，控制台 0.8.19）。内嵌官方 Agent 运行时，空白机器全新安装即可用；控制台可在 Studio 内直接更新；支持飞牛应用数据备份与还原。",
-          "updated_at": "2026-11-07",
-          "os_min_version": "1.1.0",
-          "packages": {
-            "x86": {
-              "download_url": "https://github.com/aaiuh/hermes-studio-fnos/releases/download/v0.8.19-9/Hermes.fpk",
-              "sha256": "ed91be3e09464ad641655625a56284b7c9aa8f77ca33a41f5c5a80dd3e9ed819",
-              "size": 540165078
-            }
-          }
-        },
-        "0.8.19-10": {
-          "changelog": "跟随官方 runtime（Agent 0.23.0，控制台 0.8.19）。内嵌官方 Agent 运行时，空白机器全新安装即可用；控制台可在 Studio 内直接更新；支持飞牛应用数据备份与还原。",
-          "updated_at": "2026-11-07",
-          "os_min_version": "1.1.0",
-          "packages": {
-            "x86": {
-              "download_url": "https://github.com/aaiuh/hermes-studio-fnos/releases/download/v0.8.19-10/Hermes.fpk",
-              "sha256": "e64da8990fb95dd1442a1e10e760dad12a759f32647a3ad7c7aed5d94c5e90af",
-              "size": 540165135
-            }
-          }
-        },
-        "0.8.19-11": {
-          "changelog": "跟随官方 runtime（Agent 0.23.0，控制台 0.8.19）。内嵌官方 Agent 运行时，空白机器全新安装即可用；控制台可在 Studio 内直接更新；支持飞牛应用数据备份与还原。",
-          "updated_at": "2026-11-07",
-          "os_min_version": "1.1.0",
-          "packages": {
-            "x86": {
-              "download_url": "https://github.com/aaiuh/hermes-studio-fnos/releases/download/v0.8.19-11/Hermes.fpk",
-              "sha256": "cd952f117a71123f625678cd6205fae3f50c080a65f19e2a380d43cbf40ca1db",
-              "size": 540165093
-            }
-          }
-        },
-        "0.8.19-12": {
-          "changelog": "跟随官方 runtime（Agent 0.23.0，控制台 0.8.19）。内嵌官方 Agent 运行时，空白机器全新安装即可用；控制台可在 Studio 内直接更新；支持飞牛应用数据备份与还原。",
-          "updated_at": "2026-11-08",
-          "os_min_version": "1.1.0",
-          "packages": {
-            "x86": {
-              "download_url": "https://github.com/aaiuh/hermes-studio-fnos/releases/download/v0.8.19-12/Hermes.fpk",
-              "sha256": "bf4c06054f626392010b95746ae0bde46c31415986e1d0d5269e03577ec4e444",
-              "size": 540165139
-            }
-          }
-        },
-        "0.8.19-13": {
-          "changelog": "跟随官方 runtime（Agent 0.23.0，控制台 0.8.19）。内嵌官方 Agent 运行时，空白机器全新安装即可用；控制台可在 Studio 内直接更新；支持飞牛应用数据备份与还原。",
-          "updated_at": "2026-11-08",
-          "os_min_version": "1.1.0",
-          "packages": {
-            "x86": {
-              "download_url": "https://github.com/aaiuh/hermes-studio-fnos/releases/download/v0.8.19-13/Hermes.fpk",
-              "sha256": "540be2faf3fcef5bba766ca5eb598fc640714457cf36ad29ffd8c8ab19fd2ff3",
-              "size": 540165140
-            }
-          }
-        },
-        "0.8.19-14": {
-          "changelog": "跟随官方 runtime（Agent 0.23.0，控制台 0.8.19）。内嵌官方 Agent 运行时，空白机器全新安装即可用；控制台可在 Studio 内直接更新；支持飞牛应用数据备份与还原。",
-          "updated_at": "2026-11-08",
-          "os_min_version": "1.1.0",
-          "packages": {
-            "x86": {
-              "download_url": "https://github.com/aaiuh/hermes-studio-fnos/releases/download/v0.8.19-14/Hermes.fpk",
-              "sha256": "681a0748c3ecfab9ff32e44cebbab894fcc46783e0b5d8a14ae1735bf26ebdab",
-              "size": 540165131
-            }
-          }
-        },
-        "0.8.20-15": {
-          "changelog": "跟随官方 runtime（Agent 0.23.0，控制台 0.8.20）。内嵌官方 Agent 运行时，空白机器全新安装即可用；控制台可在 Studio 内直接更新；支持飞牛应用数据备份与还原。",
-          "updated_at": "2026-11-09",
-          "os_min_version": "1.1.0",
-          "packages": {
-            "x86": {
-              "download_url": "https://github.com/aaiuh/hermes-studio-fnos/releases/download/v0.8.20-15/Hermes.fpk",
-              "sha256": "8d13ce5630cb18f1dd81ac5d957b17c680d3561aeb80116eeed9aa2ed3185b00",
-              "size": 540165081
-            }
-          }
-        },
-        "0.8.20-16": {
-          "changelog": "跟随官方 runtime（Agent 0.23.0，控制台 0.8.20）。内嵌官方 Agent 运行时，空白机器全新安装即可用；控制台可在 Studio 内直接更新；支持飞牛应用数据备份与还原。",
-          "updated_at": "2026-11-09",
-          "os_min_version": "1.1.0",
-          "packages": {
-            "x86": {
-              "download_url": "https://github.com/aaiuh/hermes-studio-fnos/releases/download/v0.8.20-16/Hermes.fpk",
-              "sha256": "2d19c7009c30c2daf97037a89007365ffaa67b2cd46013ca1b34d0872f326820",
-              "size": 540165071
-            }
-          }
-        },
-        "0.8.20-17": {
-          "changelog": "跟随官方 runtime（Agent 0.23.0，控制台 0.8.20）。内嵌官方 Agent 运行时，空白机器全新安装即可用；控制台可在 Studio 内直接更新；支持飞牛应用数据备份与还原。",
+        "0.8.20-19": {
+          "changelog": "整包封装（Agent 0.23.0 / 控制台 0.8.20）：安装与升级只做解压，不联网、不跑 npm",
           "updated_at": "2026-11-10",
-          "os_min_version": "1.1.0",
           "packages": {
             "x86": {
-              "download_url": "https://github.com/aaiuh/hermes-studio-fnos/releases/download/v0.8.20-17/Hermes.fpk",
-              "sha256": "c71d45ce0cd940ac78d118ee53b794d08cc9a49e1e4067c857c2f28beed73a30",
-              "size": 540165115
-            }
-          }
-        },
-        "0.8.20-18": {
-          "changelog": "跟随官方 runtime（Agent 0.23.0，控制台 0.8.20）。内嵌官方 Agent 运行时，空白机器全新安装即可用；控制台可在 Studio 内直接更新；支持飞牛应用数据备份与还原。",
-          "updated_at": "2026-11-10",
-          "os_min_version": "1.1.0",
-          "packages": {
-            "x86": {
-              "download_url": "https://github.com/aaiuh/hermes-studio-fnos/releases/download/v0.8.20-18/Hermes.fpk",
-              "sha256": "efd3334ce664f16f0f8b8fcd7320591ac62e2f76acc184d8d4f2394ba17ba846",
-              "size": 540166739
+              "download_url": "https://github.com/aaiuh/hermes-studio-fnos/releases/download/v0.8.20-19/Hermes.fpk",
+              "sha256": "72e757dcfa3ebeac565a893cc87df2dd0187605526a4247c534dff5b6e026fe4",
+              "size": 560972596
             }
           }
         }
-      }
+      },
+      "preview_urls": []
     },
     "Hindsight": {
       "display_name": "Hindsight 记忆库",

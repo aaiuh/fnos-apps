@@ -1,1 +1,483 @@
-{"schema_version":"2","source_info":{"name":"aaiuh飞牛应用源","author":"aaiuh","homepage":"https://github.com/aaiuh/fnos-apps","description":"飞牛 fnOS 原生应用集合。免费开源，跟随各应用上游更新。"},"apps":{"Hindsight":{"display_name":"Hindsight 记忆库","desc":"Agent 长期记忆系统，原生运行于飞牛 fnOS，不依赖 Docker。内置 PostgreSQL 与向量检索，支持 onnx 语义嵌入与 flashrank 重排，提供 REST/MCP 接口与 Web 控制台。支持飞牛应用备份与恢复。管理界面需要系统已安装 Node.js 20 以上（不随包携带）。","platform":["x86"],"categories":["AI赋能"],"icon_url":"https://raw.githubusercontent.com/aaiuh/hindsight-fnos/main/Hindsight/ICON.PNG","preview_urls":[],"readme_url":"https://raw.githubusercontent.com/aaiuh/hindsight-fnos/main/Hindsight/README.md","bug_report_url":"https://github.com/aaiuh/hindsight-fnos/issues","maintainer":"aaiuh","maintainer_url":"https://github.com/aaiuh","distributor":"aaiuh","distributor_url":"https://github.com/aaiuh","run_as":"package","install_type":"","is_docker":false,"service_port":"8888","releases":{"1.0.0-14":{"changelog":"跟随上游 Hindsight 1.0.0-14。原生运行，不依赖 Docker；内置 PostgreSQL 与向量检索，onnx 语义嵌入 + flashrank 重排；含官方管理控制台（需系统已装 Node.js 20 以上）；支持飞牛应用备份与恢复。","updated_at":"2026-10-18","os_min_version":"1.1.0","packages":{"x86":{"download_url":"https://github.com/aaiuh/hindsight-fnos/releases/download/v1.0.0-14/Hindsight-1.0.0-14-x86.fpk","sha256":"4ddd8f60863ee634bf03caee0383bf4275bfe63bf63905109a46093dd99314fe","size":69982}}},"1.0.0-15":{"changelog":"跟随上游 Hindsight 1.0.0-15。原生运行，不依赖 Docker；内置 PostgreSQL 与向量检索，onnx 语义嵌入 + flashrank 重排；含官方管理控制台（需系统已装 Node.js 20 以上）；支持飞牛应用备份与恢复。","updated_at":"2026-10-18","os_min_version":"1.1.0","packages":{"x86":{"download_url":"https://github.com/aaiuh/hindsight-fnos/releases/download/v1.0.0-15/Hindsight-1.0.0-15-x86.fpk","sha256":"7612995c27ba9b018f2502769118dac4be156e4c6fc636a12962c8fe01dd5112","size":68067}}},"1.0.0-16":{"changelog":"跟随上游 Hindsight 1.0.0-16。原生运行，不依赖 Docker；内置 PostgreSQL 与向量检索，onnx 语义嵌入 + flashrank 重排；含官方管理控制台（需系统已装 Node.js 20 以上）；支持飞牛应用备份与恢复。","updated_at":"2026-10-18","os_min_version":"1.1.0","packages":{"x86":{"download_url":"https://github.com/aaiuh/hindsight-fnos/releases/download/v1.0.0-16/Hindsight-1.0.0-16-x86.fpk","sha256":"2b6a3b324a5fc9d630fba6a399943270fe0a73a6b8de4f11d0322987f7a392f6","size":68200}}},"1.0.0-17":{"changelog":"新增「资源占用」设置：安装向导或应用设置里可指定本应用最多用几个 CPU 核心，留空则按本机实际核数自动折半（至少留 1 核给系统）。限制通过 cgroup CPU 配额实现，写入与检索时不再占满整机；设为 0 或填到不小于本机核数即为不限制。另：运行时版本与包版本解耦，今后只改脚本时升级不必重下 620 MB 运行时。","updated_at":"2026-10-20","os_min_version":"1.1.0","packages":{"x86":{"download_url":"https://github.com/aaiuh/hindsight-fnos/releases/download/v1.0.0-17/Hindsight-1.0.0-17-x86.fpk","sha256":"375e7309fd3c4abd0a1dddcb06dd61c03bf85de5c1d84b1db4e6569f93ea1b94","size":71172}}},"1.0.0-19":{"changelog":"安装与升级大幅提速：升级时先暂存再复用现有运行时，只改脚本的版本不会重下 630 MB；下载运行时前自动测速、挑最快的镜像。修复「资源占用」里设置的 CPU 核数被误判成不限制的问题。","updated_at":"2026-10-20","os_min_version":"1.1.0","packages":{"x86":{"download_url":"https://github.com/aaiuh/hindsight-fnos/releases/download/v1.0.0-19/Hindsight-1.0.0-19-x86.fpk","sha256":"f2fcdf8aa2e444f23ea7c8f3eba89992482340c1f1a4253efff5ce98d26d91dc","size":72995}}},"1.0.0-20":{"changelog":"应用设置里的「资源占用」现在真的能改了：提交的核数会写入运行配置，重启后生效（之前这个回调是空壳，改了不生效）。安装与升级继续复用运行时，不再重下 630 MB；下载前自动测速挑最快镜像。","updated_at":"2026-10-20","os_min_version":"1.1.0","packages":{"x86":{"download_url":"https://github.com/aaiuh/hindsight-fnos/releases/download/v1.0.0-20/Hindsight-1.0.0-20-x86.fpk","sha256":"d21a7ead2eb1e15f0030416c93e891090c5d8c7d64fb50be33a53bbd6eb8583b","size":73833}}},"1.0.0-21":{"changelog":"升级现在会复用现有运行时，不再重下 660 MB —— 之前暂存了却没被移回，因为 FnDepot 的升级流程不调用 upgrade_callback。修复后整个升级一两分钟完成。另外应用设置里的「资源占用」可以真正改 CPU 核数，重启生效。","updated_at":"2026-10-20","os_min_version":"1.1.0","packages":{"x86":{"download_url":"https://github.com/aaiuh/hindsight-fnos/releases/download/v1.0.0-21/Hindsight-1.0.0-21-x86.fpk","sha256":"6b6629383b2d05ed3be8facaa9d6b082608812f8485ddac63e4e9850e6de77ad","size":73783}}},"1.0.0-22":{"changelog":"跟随上游 Hindsight 1.0.0-22。原生运行，不依赖 Docker；内置 PostgreSQL 与向量检索，onnx 语义嵌入 + flashrank 重排；含官方管理控制台（需系统已装 Node.js 20 以上）；支持飞牛应用备份与恢复。","updated_at":"2026-10-22","os_min_version":"1.1.0","packages":{"x86":{"download_url":"https://github.com/aaiuh/hindsight-fnos/releases/download/v1.0.0-22/Hindsight-1.0.0-22-x86.fpk","sha256":"ecaa93b2d276183f7b22a8830d49463dab3b44d0da8c9c71e5aa22ce191f10f6","size":71086}}},"1.1.0":{"changelog":"跟随上游 Hindsight 1.1.0。原生运行，不依赖 Docker；内置 PostgreSQL 与向量检索，onnx 语义嵌入 + flashrank 重排；含官方管理控制台（需系统已装 Node.js 20 以上）；支持飞牛应用备份与恢复。","updated_at":"2026-10-25","os_min_version":"1.1.0","packages":{"x86":{"download_url":"https://github.com/aaiuh/hindsight-fnos/releases/download/v1.1.0/Hindsight-1.1.0-x86.fpk","sha256":"2d8471031600c467041c3635bb43c8ece0d26afb3c75f3314084233f3cb67519","size":71448}}},"1.2.0":{"changelog":"跟随上游 Hindsight 1.2.0。原生运行，不依赖 Docker；内置 PostgreSQL 与向量检索，onnx 语义嵌入 + flashrank 重排；含官方管理控制台（需系统已装 Node.js 20 以上）；支持飞牛应用备份与恢复。","updated_at":"2026-11-08","os_min_version":"1.1.0","packages":{"x86":{"download_url":"https://github.com/aaiuh/hindsight-fnos/releases/download/v1.2.0/Hindsight-1.2.0-x86.fpk","sha256":"114190555df23d9a559c7ca8f428e57c6b4731d454d61ef5a43b6ceecf51b48c","size":71365}}}}},"dsh-fnos":{"display_name":"DeepSeek Harness","desc":"DeepSeek AI 开源的插件化智能体框架（命令行 dsh）。本包是飞牛 fnOS 原生封装：复用系统已装的 Node.js 24 运行时，安装时从 npm 拉取 dsh 本体，不打包 Node、不使用 Docker。<br/><br/><strong>安装后使用：</strong><br/>1. 等应用中心显示「运行中」；<br/>2. 打开应用「日志」，复制里面「首次访问链接（含启动 token）」那一行到浏览器打开（dsh 默认要求带启动 token 换 cookie，直接访问端口会返回 401）；<br/>3. 打开后在设置里填 DeepSeek API Key。浏览器会记住登录态，之后可直接访问 http://设备IP:端口。<br/><br/><strong>说明：</strong><br/>1. 安装过程需要访问 npm 源，安装向导里可选国内镜像，装完约占用 900 MB 磁盘。<br/>2. 会话与配置保存在应用共享目录 dsh-fnos 下，升级与卸载都会保留；本次启动的带 token 链接保存在该目录的 entry-url.txt。<br/>3. 由 GitHub Actions 跟随上游 npm 版本自动打包，升级走应用中心正常流程。","platform":["x86"],"categories":["AI赋能"],"icon_url":"https://raw.githubusercontent.com/aaiuh/dsh-fnos/main/ICON_256.PNG","preview_urls":[],"readme_url":"https://raw.githubusercontent.com/aaiuh/dsh-fnos/main/README.md","bug_report_url":"https://github.com/aaiuh/dsh-fnos/issues","maintainer":"DeepSeek AI","maintainer_url":"https://github.com/deepseek-ai/deepseek-harness","distributor":"aaiuh","distributor_url":"https://github.com/aaiuh/dsh-fnos","run_as":"package","install_type":"","is_docker":false,"service_port":"3080","releases":{"0.2.1-2":{"changelog":"跟随上游 dsh 0.2.1-rc.2。\n\n上游 dsh 0.2.1-rc.2。","updated_at":"2026-10-27","os_min_version":"1.1.3100","packages":{"x86":{"download_url":"https://github.com/aaiuh/dsh-fnos/releases/download/v0.2.1-2/dsh-fnos-0.2.1-2-x86.fpk","sha256":"a9a2cece566aebf9cea9869b26fdd1f23ce910338b4bf5992684a6f4be9a87c9","size":19559}}},"0.2.1-3":{"changelog":"跟随上游 dsh 0.2.1-rc.2。\n\n上游 dsh 0.2.1-rc.2。","updated_at":"2026-10-27","os_min_version":"1.1.3100","packages":{"x86":{"download_url":"https://github.com/aaiuh/dsh-fnos/releases/download/v0.2.1-3/dsh-fnos-0.2.1-3-x86.fpk","sha256":"d552075e69d0e6fff271891505759aaceb13662f8f94212e7d62d2a6092f508a","size":21147}}},"0.2.1-4":{"changelog":"跟随上游 dsh 0.2.1-rc.2。\n\n上游 dsh 0.2.1-rc.2。","updated_at":"2026-10-27","os_min_version":"1.1.3100","packages":{"x86":{"download_url":"https://github.com/aaiuh/dsh-fnos/releases/download/v0.2.1-4/dsh-fnos-0.2.1-4-x86.fpk","sha256":"11d997f89dfd27ee26caba1c8cf7b87f0c7002143c07f2ad45e4ebefe73436fc","size":36344}}},"0.2.1-5":{"changelog":"跟随上游 dsh 0.2.1-rc.2。\n\n上游 dsh 0.2.1-rc.2。","updated_at":"2026-10-27","os_min_version":"1.1.3100","packages":{"x86":{"download_url":"https://github.com/aaiuh/dsh-fnos/releases/download/v0.2.1-5/dsh-fnos-0.2.1-5-x86.fpk","sha256":"7b1d21ae50770300f65d2f1e17afa8353e2c3935b3d8d96298ca63f33ad04f17","size":38695}}},"0.2.1-6":{"changelog":"跟随上游 dsh 0.2.1-rc.5。\n\n上游 dsh 0.2.1-rc.5。","updated_at":"2026-10-29","os_min_version":"1.1.3100","packages":{"x86":{"download_url":"https://github.com/aaiuh/dsh-fnos/releases/download/v0.2.1-6/dsh-fnos-0.2.1-6-x86.fpk","sha256":"fd2965ed324f7922af48fe71a8fb88597a17a246906a673d7ad8638e0574f4e0","size":38683}}},"0.2.2-1":{"changelog":"跟随上游 dsh 0.2.2-rc.1。\n\n上游 dsh 0.2.2-rc.1。","updated_at":"2026-11-05","os_min_version":"1.1.3100","packages":{"x86":{"download_url":"https://github.com/aaiuh/dsh-fnos/releases/download/v0.2.2-1/dsh-fnos-0.2.2-1-x86.fpk","sha256":"fd901382ffcf77b5cd8f85c6f6ab9c2175aad1818619e090cc0b033770f71106","size":38683}}}}},"fnmusic-ext":{"display_name":"fnMusic 音源扩展","desc":"飞牛音乐第三方音源扩展：零侵入接管官方音乐入口，提供 musicdl 聚合、网易云、洛雪自定义源在线搜索播放，内置管理页（音源切换/扫码登录/平台选择/边听边存）。","platform":["x86"],"categories":["影音娱乐"],"icon_url":"https://raw.githubusercontent.com/aaiuh/fnos-apps/main/icons/fnmusic-ext.png","preview_urls":[],"readme_url":"https://raw.githubusercontent.com/javycoder/fnos_music_ext/main/README.md","bug_report_url":"https://github.com/javycoder/fnos_music_ext/issues","maintainer":"javycoder","maintainer_url":"https://github.com/javycoder","distributor":"javycoder","distributor_url":"https://github.com/javycoder","run_as":"package","install_type":"","is_docker":false,"service_port":"","releases":{"2.12.4-0":{"changelog":"自正式版 `v2.12.3` 以来的变更。FPK 安装版本 `2.12.4-0`，tag / WebUI 显示 `v2.12.4`，发布通道 `stable`。适配飞牛音乐 `1.0.10` 与 `1.1.19`。\n\n### 新增\n- 日志导出改为标准 ZIP：文件名使用 `fnmusic-logs-时间-随机标识.zip`，响应类型为 `application/zip`，继续包含近 3 天日志、环境快照并逐行脱敏。\n- 管理页提供「下载到本机」「保存或分享 ZIP」「保存到 NAS」三种入口。电脑保留浏览器下载；手机先打包再调用系统保存/分享；飞牛 App / 飞牛桌面内可调用官方目录选择器，选中的 NAS 目录由宿主网关以当前管理员对应的飞牛用户身份直接写入。\n- 保存到 NAS 后显示完整路径，并提供复制路径与打开所在文件夹；取消目录选择或分享不会生成残留导出文件。\n\n### 修复\n- NAS 保存接口仅由宿主网关处理，要求管理员身份与有效飞牛用户标识；目标目录必须是存储卷内已存在的真实目录，拒绝路径穿越和符号链接。服务端生成文件名并排他创建，不覆盖已有文件；写入完成后校验 ZIP，失败或中断时清理未完成文件。\n- Docker 部署导出日志时补充宿主侧 `proxy.log`、安装日志与环境快照，并用 `log_collection.json` 标明缺失、无权读取或收集不完整，便于区分容器服务与宿主接管问题（#126）。\n- 搜索链路增加同请求 ID 诊断，串联请求接收、各音源结果、取消、上游拒绝与最终合并分页，不记录关键词、Token、Cookie 或完整第三方错误正文。\n- 日志导出通过私有维护通道生成 `proxy_diagnostics.json`，核对官方 Socket 是否由当前代理接管、官方上游是否可达；诊断探测不调用在线音源搜索，也不使用用户登录态。\n- 打包、维护清理、卸载说明与忽略规则识别新 ZIP 导出文件，同时兼容历史 `.logzip`；不把任意 ZIP 视为可清理导出，也不清理用户自选 NAS 目录中的导出成果。\n\n### 安装与维护\n- 官方目录选择器要求 fnOS `1.2.0401` 及以上、飞牛 App `1.34.0` 及以上；独立浏览器或直连 WebUI 仅保留本机下载，并明确提示需从飞牛入口使用 NAS 保存。\n- 发布前重新只读核对官方音乐 `/var/apps/trim.music/manifest`，当前基线仍为 `1.1.19`；同时保留既有 `1.0.10` 适配记录。","updated_at":"2026-11-09","os_min_version":"1.2.0","packages":{"x86":{"download_url":"https://github.com/javycoder/fnos_music_ext/releases/download/v2.12.4/fnmusic-ext-2.12.4-0.fpk","sha256":"87ae7e5bce671217ca2c1f038f1904a629b0c826a4e4836a0af7a00bc1166d48","size":29714378}}},"2.12.3-0":{"changelog":"FPK 安装版本 `2.12.3-0`，tag / WebUI 显示 `v2.12.3`，发布通道 `stable`。适配飞牛音乐 `1.0.10` 与 `1.1.19`。\n\n### 优化与修复\n- 洛雪配置保存与完整音源测试分开。保存仅快速确认目标脚本启停和初始化，不再串行等待搜索、解析与探活；完整测试仍可独立执行。初始化成功不代表已验证播放。\n- 配置保存采用统一 55 秒后端预算，页面从点击开始最多等待一分钟，目录检查、服务准备、源操作与排序共享时限。正常且未变化的源不重复激活或下载。\n- 优先执行取消激活，坏新源不再阻断已确认的取消操作。部分失败时保留已确认修改，并分别提示失败、未执行和结果待核实；未确认项保留原激活配置。\n- 写请求超时后仅回读目标实际状态，不自动重复操作。管理操作在服务端同样受预算约束，避免旧启动恢复任务在手动保存接管后重放旧配置。\n- 脚本排序并入一次保存，页面收到结果后及时结束等待，概览刷新不再延长保存过程。并发保存与排序快速提示忙碌，防止旧请求覆盖新设置。","updated_at":"2026-11-07","os_min_version":"1.2.0","packages":{"x86":{"download_url":"https://github.com/javycoder/fnos_music_ext/releases/download/v2.12.3/fnmusic-ext-2.12.3-0.fpk","sha256":"f8a67b6595a14e8eafee9d427ccb10f4050743ee7a780f5fb8bd41717c5d27b4","size":29704919}}},"2.12.2-0":{"changelog":"本次正式版汇总自 `v2.12.0` 以来的变更。FPK 安装版本 `2.12.2-0`，tag / WebUI 显示 `v2.12.2`，发布通道 `stable`。适配飞牛音乐 `1.0.10` 与 `1.1.19`。\r\n\r\n### 修复\r\n- 兼容飞牛音乐 1.1.19：未传 page 与 size 的搜索采用 100 条窗口，显式分页保持原样；官方 Web 界面不会自动请求第二页，本地结果可能占满窗口。\r\n- 在线歌曲不再伪装为官方文件夹中的物理文件；在线删除仅清理当前用户的在线收藏和播放历史，混合请求保留官方本地删除语义，并明确报告部分失败。\r\n- 本地曲库匹配与推荐排除已删除的曲目及音频文件；自动探测的共享曲库目录在官方设置变更后及时失效并限制并发重试。\r\n- 混合删除在操作官方曲库前完整校验在线收藏与历史条目，损坏的 GUID 会中止请求，避免官方部分已删除后再报错。\r\n- 洛雪解析预算优先分配给当前音质档，后续降档不预先分走首档时间；跨平台候选单次超时后，只要总预算允许就继续尝试其他候选。超时冷却仅影响同一歌曲候选，未完成解析不写入曲目失败缓存。\r\n- 网易搜索与详情按下载档位选择格式和文件大小；账号权益或目标档位不允许选择时保持未知，不再用 SQ/HR 标记恢复成 FLAC。异常大小和码率字段不再中断网易或洛雪的元数据处理。\r\n- MusicDL 搜索按站点限制并发并汇总各站结果，不再因已有少量结果提前停止其他站点；排队或总预算耗尽不误记为站点故障。\r\n- 应用中心升级与保留数据卸载时，备份歌单、推荐缓存、下载缓存、用量账本和绑定索引等仓库内用户状态，避免替换应用目录时丢失。\r\n- 系统启动后首次保存歌曲不再错误进入扫描冷却等待，后续扫描继续遵守合并窗口和冷却规则。\r\n- 自动绑定查询官方曲库时，降权运行使用覆盖完整查询过程的 root 只读租约，并优先按本次落盘文件反查官方曲目（#117）。歌单条目的自动绑定与重试必须先确认显式保存意图；当前官方协议无法可靠区分用户歌单与自动播放列表，因此不会因为加入或重新加入歌单而触发后台下载或绑定（见 #120）。\r\n- 网易七档音质元数据映射与取链 helper 分开，避免同名函数冲突影响搜索和播放。\r\n\r\n### 界面与维护\r\n- 音源验证工具生成有效的隔离配置，限制监听地址，并支持有界音频前缀解码。","updated_at":"2026-11-07","os_min_version":"1.2.0","packages":{"x86":{"download_url":"https://github.com/javycoder/fnos_music_ext/releases/download/v2.12.2/fnmusic-ext-2.12.2-0.fpk","sha256":"dbedebe9ec3c0e560d97af9f22e1d143c6567abeb614def17adcc57c310f2ed2","size":29701723}}}}},"octop-native":{"display_name":"Octop","desc":"腾讯开源的多用户多智能体 AI 助手平台，支持 Web 控制台、CLI、IM 渠道与定时任务，数据全部本地存储。<br/><br/><strong>安装后使用：</strong><br/>请等到应用中心显示「运行中」再点「打开」，或访问 http://设备IP:8089，用安装向导里设置的用户名或邮箱登录。<br/>忘记密码时打开飞牛「文件管理」，进入应用共享里的 Octop 数据目录，查看 octop-login.txt（仅备份安装或应用「设置」改密；网页改密后不会自动更新）；也可在应用「设置」中改密。<br/><br/><strong>命令行管理：</strong><br/>支持官方 octop CLI（octop provider list / agent list / user list / skills / backup 等，详见 octop --help）。<br/><br/><strong>首次登录后：</strong><br/>请在控制台「设置 → 模型」配置 API Key，并按需配置 IM 渠道、远程桌面、浏览器等。<br/><br/>注意：本地版直接运行在飞牛主机上，安装前会自动关联安装「Python 3.12」开发工具。","platform":["x86","arm"],"categories":["AI赋能"],"icon_url":"https://raw.githubusercontent.com/aaiuh/fnos-apps/main/icons/octop.png","preview_urls":[],"readme_url":"https://raw.githubusercontent.com/TencentCloud/Octop/main/README.md","bug_report_url":"https://github.com/TencentCloud/Octop/issues","maintainer":"TencentCloud","maintainer_url":"https://github.com/TencentCloud","distributor":"TencentCloud","distributor_url":"https://github.com/TencentCloud","run_as":"package","install_type":"","is_docker":false,"service_port":"8089","releases":{"1.0.3b4":{"changelog":"### 新增\n- 工作台增加云主机页：授权后查看腾讯云 CVM，并由常驻运维专家巡检和变更\n- 后台标签页的定时提醒改为系统通知\n- 启动时同步新的预置模型，腾讯云通道支持 HY4\n\n### 修复\n- 共享专家能用查看者的自定义 MCP 名称\n- 编辑团队会保存示例头像\n- Docker 精简镜像在编译器已移除后仍能发布\n\n### 变更\n- 多实例部署时，腾讯云授权改存在控制面；单机仍用本地文件\n- 云服务器页移到工作台末尾，并注明目前只支持腾讯云 CVM\n- 默认 Docker 标签改为精简版，完整版使用 `:<version>-full` 和 `:full`\n- 连接器可按类别筛选，大额 token 用量会缩写\n- 升级 octop-harness 至 1.0.8\n\n\n## Downloads\n\n### Windows\n\n#### Desktop installer (Recommended)\n- [64-bit (Recommended)](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b4/Octop-desktop-windows-amd64-1.0.3b4.exe) | [ARM64](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b4/Octop-desktop-windows-arm64-1.0.3b4.exe)\n\n#### Portable\n- [64-bit](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b4/Octop-portable-windows-amd64-1.0.3b4.zip) | [ARM64](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b4/Octop-portable-windows-arm64-1.0.3b4.zip)\n\n### macOS\n\n#### Desktop installer (Recommended)\n- [Apple Silicon](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b4/Octop-desktop-darwin-arm64-1.0.3b4.dmg) | [Intel](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b4/Octop-desktop-darwin-amd64-1.0.3b4.dmg)\n\n#### Portable\n- [Apple Silicon](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b4/Octop-portable-darwin-arm64-1.0.3b4.zip) | [Intel](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b4/Octop-portable-darwin-amd64-1.0.3b4.zip)\n\n### Linux\n\n#### Desktop installer (Recommended)\n- [64-bit](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b4/Octop-desktop-linux-amd64-1.0.3b4.tar.gz) | [ARM64](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b4/Octop-desktop-linux-arm64-1.0.3b4.tar.gz)\n\n#### Portable\n- [64-bit](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b4/Octop-portable-linux-amd64-1.0.3b4.zip) | [ARM64](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b4/Octop-portable-linux-arm64-1.0.3b4.zip)\n\n### Docker image\n\n- Lite: `ghcr.io/tencentcloud/octop:1.0.3b4` (`:latest`)\n- Full: `ghcr.io/tencentcloud/octop:1.0.3b4-full` (`:full`)\n\n### fnOS NAS\n- [Docker lite (x86 and ARM)](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b4/Octop-fnos-docker-lite-1.0.3b4.fpk) | [Docker full (desktop, OCR, local models; x86 and ARM)](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b4/Octop-fnos-docker-1.0.3b4.fpk) | [Native x86_64](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b4/Octop-fnos-native-amd64-1.0.3b4.fpk) | [Native ARM64 (no Docker)](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b4/Octop-fnos-native-arm64-1.0.3b4.fpk)\n\n## What's Changed\n* chore: sync main into develop after 1.0.3b3 by @github-actions[bot] in https://github.com/TencentCloud/Octop/pull/2822\n* fix: persist team sample avatars when editing a team by @jubaoliang in https://github.com/TencentCloud/Octop/pull/2844\n* fix: let Docker publish finish when the compiler is already removed by @jubaoliang in https://github.com/TencentCloud/Octop/pull/2842\n* feat(providers): sync new preset models on startup and support HY4 by @Bosheng0422 in https://github.com/TencentCloud/Octop/pull/2830\n* fix: map shared custom MCP names onto the expert harness by @jubaoliang in https://github.com/TencentCloud/Octop/pull/2848\n* Feat/cloud hosts console by @seed30 in https://github.com/TencentCloud/Octop/pull/2778\n* fix(cloud): keep the cloud tab last and note Tencent-only support by @jubaoliang in https://github.com/TencentCloud/Octop/pull/2850\n* feat(dashboard): show cron reminders as system notifications in background tabs by @jubaoliang in https://github.com/TencentCloud/Octop/pull/2851\n* fix(cloud): share Tencent Cloud logins through PostgreSQL by @jubaoliang in https://github.com/TencentCloud/Octop/pull/2854\n* chore: release 1.0.3b4 by @jubaoliang in https://github.com/TencentCloud/Octop/pull/2855\n\n\n**Full Changelog**: https://github.com/TencentCloud/Octop/compare/v1.0.3b3...v1.0.3b4","updated_at":"2026-11-06","os_min_version":"1.1.0","packages":{"x86":{"download_url":"https://github.com/TencentCloud/Octop/releases/download/v1.0.3b4/Octop-fnos-native-amd64-1.0.3b4.fpk","sha256":"85a2761c0e53ea4f99e39d42d0544febb8e4363ff324df1a6b67131bc7e168fa","size":237962406},"arm":{"download_url":"https://github.com/TencentCloud/Octop/releases/download/v1.0.3b4/Octop-fnos-native-arm64-1.0.3b4.fpk","sha256":"4360c8d1c5a0e370c0f15ffb6655693472fa35c7e09170564042bf6619079d2a","size":236683607}}},"1.0.3b3":{"changelog":"### 新增\n- PostgreSQL 可存放技能包和知识库。多实例共用定时任务、频道、头像、插件和已发布专家\n- Docker 与飞牛增加精简版。存储后端增加火山引擎 TOS\n- 可预建 LDAP 账号，聊天列表可隐藏任意专家\n\n### 修复\n- 专家工作区落到允许的存储根下。共享连接器只有创建者能改\n- 聊天历史不再错序，未答完的提问不会被别的会话接走\n- 超长图片先缩小再发送。失效的默认模型会自动换掉\n- 升级记忆库：长会话分批提炼，重启后不重跑\n- 安装清理不再删掉运行环境。PostgreSQL 上的知识库检索和关怀去重恢复正常\n\n### 变更\n- 升级 octop-harness 至 1.0.7\n- 内置专家并入专家市场，安装包不再自带市场目录\n\n\n## Downloads\n\n### Windows\n\n#### Desktop installer (Recommended)\n- [64-bit (Recommended)](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b3/Octop-desktop-windows-amd64-1.0.3b3.exe) | [ARM64](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b3/Octop-desktop-windows-arm64-1.0.3b3.exe)\n\n#### Portable\n- [64-bit](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b3/Octop-portable-windows-amd64-1.0.3b3.zip) | [ARM64](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b3/Octop-portable-windows-arm64-1.0.3b3.zip)\n\n### macOS\n\n#### Desktop installer (Recommended)\n- [Apple Silicon](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b3/Octop-desktop-darwin-arm64-1.0.3b3.dmg) | [Intel](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b3/Octop-desktop-darwin-amd64-1.0.3b3.dmg)\n\n#### Portable\n- [Apple Silicon](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b3/Octop-portable-darwin-arm64-1.0.3b3.zip) | [Intel](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b3/Octop-portable-darwin-amd64-1.0.3b3.zip)\n\n### Linux\n\n#### Desktop installer (Recommended)\n- [64-bit](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b3/Octop-desktop-linux-amd64-1.0.3b3.tar.gz) | [ARM64](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b3/Octop-desktop-linux-arm64-1.0.3b3.tar.gz)\n\n#### Portable\n- [64-bit](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b3/Octop-portable-linux-amd64-1.0.3b3.zip) | [ARM64](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b3/Octop-portable-linux-arm64-1.0.3b3.zip)\n\n### Docker image\n\n- Lite: `ghcr.io/tencentcloud/octop:1.0.3b3` (`:latest`)\n- Full: `ghcr.io/tencentcloud/octop:1.0.3b3-full` (`:full`)\n\n### fnOS NAS\n- [Docker lite (x86 and ARM)](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b3/Octop-fnos-docker-lite-1.0.3b3.fpk) | [Docker full (desktop, OCR, local models; x86 and ARM)](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b3/Octop-fnos-docker-1.0.3b3.fpk) | [Native x86_64](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b3/Octop-fnos-native-amd64-1.0.3b3.fpk) | [Native ARM64 (no Docker)](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b3/Octop-fnos-native-arm64-1.0.3b3.fpk)\n\n## What's Changed\n* chore: sync main into develop after 1.0.3b2 by @github-actions[bot] in https://github.com/TencentCloud/Octop/pull/2735\n* fix(db): adapt executemany on the PostgreSQL connection proxy by @wxhking in https://github.com/TencentCloud/Octop/pull/2736\n* fix(docker): publish a lite image beside the full one by @jubaoliang in https://github.com/TencentCloud/Octop/pull/2746\n* fix(agents): refresh AUTO agents with stale provider fallback refs by @jayfeng7 in https://github.com/TencentCloud/Octop/pull/2394\n* fix(knowledge): preserve remote embedding order by @AbelTomato in https://github.com/TencentCloud/Octop/pull/1454\n* fix(dashboard): restyle the local-shell badge and align account security by @jubaoliang in https://github.com/TencentCloud/Octop/pull/2745\n* test: match the Docker publish warning after lite image tags by @liukewia in https://github.com/TencentCloud/Octop/pull/2755\n* feat: keep skill packages and knowledge on the control-plane database by @jubaoliang in https://github.com/TencentCloud/Octop/pull/2757\n* fix(db): stop fsyncing every SQLite write on Windows by @liukewia in https://github.com/TencentCloud/Octop/pull/2716\n* fix(fnos): name the x86 native package amd64 and stamp store versions at pack time by @liukewia in https://github.com/TencentCloud/Octop/pull/2751\n* fix(dashboard): serve Monaco from","updated_at":"2026-11-04","os_min_version":"1.1.0","packages":{"x86":{"download_url":"https://github.com/TencentCloud/Octop/releases/download/v1.0.3b3/Octop-fnos-native-amd64-1.0.3b3.fpk","sha256":"b88a15c24713ea814a86d06af87caf33d9a2d1e6dc826af6e26d0565297ccddc","size":219014390},"arm":{"download_url":"https://github.com/TencentCloud/Octop/releases/download/v1.0.3b3/Octop-fnos-native-arm64-1.0.3b3.fpk","sha256":"f6d2ea214b384cb875a9e071ecc851b3b7ed386484dcbbf15e2e40d06cad3bc6","size":217763564}}},"1.0.3b2":{"changelog":"### 新增\n- 账号支持 TOTP 与 Passkey：二次验证、无密码登录和恢复码\n- 新增 ragflow 知识库连接器\n\n### 修复\n- 记住登录会自动续期，改密码会退出其他设备。缺 MFA 表的旧库会自动补齐\n- 极简模式里，专家会话超过 10 条可以继续展开。长代码在气泡里换行，已结束的一轮不会在历史加载后再出现一次\n- 停用的会话模型回到 Auto。钉钉和微信切换时，草稿与二维码不再串台，登录回调会保留转发端口\n- 更早回合生成的文件不会再次发出。对话轨迹记下模型实际收到的系统提示\n\n### 变更\n- 通行密钥登录默认关闭，要在应用设置里打开。修改密码放在「账户安全」里\n- 虚拟桌面和系统浏览器默认不启动。未选 MBTI 时显示「未设置」\n- 升级 octop-harness 1.0.6\n\n\n## Downloads\n\n### Windows\n\n#### Desktop installer (Recommended)\n- [64-bit (Recommended)](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b2/Octop-desktop-windows-amd64-1.0.3b2.exe) | [ARM64](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b2/Octop-desktop-windows-arm64-1.0.3b2.exe)\n\n#### Portable\n- [64-bit](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b2/Octop-portable-windows-amd64-1.0.3b2.zip) | [ARM64](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b2/Octop-portable-windows-arm64-1.0.3b2.zip)\n\n### macOS\n\n#### Desktop installer (Recommended)\n- [Apple Silicon](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b2/Octop-desktop-darwin-arm64-1.0.3b2.dmg) | [Intel](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b2/Octop-desktop-darwin-amd64-1.0.3b2.dmg)\n\n#### Portable\n- [Apple Silicon](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b2/Octop-portable-darwin-arm64-1.0.3b2.zip) | [Intel](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b2/Octop-portable-darwin-amd64-1.0.3b2.zip)\n\n### Linux\n\n#### Desktop installer (Recommended)\n- [64-bit](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b2/Octop-desktop-linux-amd64-1.0.3b2.tar.gz) | [ARM64](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b2/Octop-desktop-linux-arm64-1.0.3b2.tar.gz)\n\n#### Portable\n- [64-bit](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b2/Octop-portable-linux-amd64-1.0.3b2.zip) | [ARM64](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b2/Octop-portable-linux-arm64-1.0.3b2.zip)\n\n### fnOS NAS\n- [Docker (recommended; x86 and ARM)](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b2/Octop-fnos-docker-1.0.3b2.fpk) | [Native x86_64](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b2/Octop-fnos-native-1.0.3b2.fpk) | [Native ARM64 (no Docker)](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b2/Octop-fnos-native-arm64-1.0.3b2.fpk)\n\n\n## What's Changed\n* chore: sync main into develop after 1.0.3b1 by @github-actions[bot] in https://github.com/TencentCloud/Octop/pull/2402\n* feat(connectors): add ragflow knowledge connector (#2308) by @Pandakingxbc in https://github.com/TencentCloud/Octop/pull/2403\n* fix(channels): prevent repeated requests when switching channel types (#2314) by @Pandakingxbc in https://github.com/TencentCloud/Octop/pull/2390\n* fix(chat): reset disabled conversation models to Auto (#2316) by @Pandakingxbc in https://github.com/TencentCloud/Octop/pull/2407\n* feat: opt in bundled desktop and harden chat turns by @jubaoliang in https://github.com/TencentCloud/Octop/pull/2446\n* fix(chat): don't append a finished turn again after history loads by @Bosheng0422 in https://github.com/TencentCloud/Octop/pull/2441\n* fix: preserve forwarded ports in OAuth callback URLs by @Bosheng0422 in https://github.com/TencentCloud/Octop/pull/2460\n* docs: document which runtime library owns a change by @liukewia in https://github.com/TencentCloud/Octop/pull/2463\n* fix(chat): wrap long inline code inside message bubbles by @liukewia in https://github.com/TencentCloud/Octop/pull/2411\n* feat: record the model system prompt and harden chat, connectors, and images by @jubaoliang in https://github.com/TencentCloud/Octop/pull/2700\n* feat(auth): TOTP/passkey MFA and passwordless passkey login by @huangcheng in https://github.com/TencentCloud/Octop/pull/2350\n* feat: renew remembered sessions and simplify sharing and chat nav by @jubaoliang in https://github.com/TencentCloud/Octop/pull/2724\n* feat: gate passkey sign-in and fold passwo","updated_at":"2026-11-02","os_min_version":"1.1.0","packages":{"x86":{"download_url":"https://github.com/TencentCloud/Octop/releases/download/v1.0.3b2/Octop-fnos-native-1.0.3b2.fpk","sha256":"59f297a21a4ccee41c7b10fad4acee857fd035baf94e3a31f120667a21c118f9","size":209991306},"arm":{"download_url":"https://github.com/TencentCloud/Octop/releases/download/v1.0.3b2/Octop-fnos-native-arm64-1.0.3b2.fpk","sha256":"9339af41f74bfbf87bed74f7818a4be315ec988ff99888ccedea6b132bc81a36","size":208520068}}}}},"wildwork":{"display_name":"Wild Work","desc":"wild-work 账号池代理（自封装版）。提供 OpenAI 兼容 API（/v1）与内置 Web 控制台，默认端口 7863。多渠道聚合，支持自动签到。状态数据保存在应用数据目录，登录凭据保存在应用配置目录。","platform":["x86"],"categories":["AI赋能"],"icon_url":"https://raw.githubusercontent.com/mickeyttsc/wild-work-fpk/main/template/ui/images/icon_256.png","preview_urls":[],"readme_url":"https://raw.githubusercontent.com/mickeyttsc/wild-work-fpk/main/README.md","bug_report_url":"https://github.com/mickeyttsc/wild-work-fpk/issues","maintainer":"rockswang","maintainer_url":"https://github.com/mickeyttsc","distributor":"Mickey","distributor_url":"https://github.com/mickeyttsc","run_as":"package","install_type":"","is_docker":false,"service_port":"7863","releases":{"2.11.6-1":{"changelog":"自动构建于上游 v2.11.6 (rockswang/wild-work releases)。下载 wildwork-2.11.6-1.fpk 在飞牛 fnOS 应用中心手动安装。","updated_at":"2026-11-09","os_min_version":"1.1.0","packages":{"x86":{"download_url":"https://github.com/mickeyttsc/wild-work-fpk/releases/download/v2.11.6/wildwork-2.11.6-1.fpk","sha256":"9079dc34544a8a9897a6eabc3a81bd9ea0827c1e40319b38d05099788fb640ad","size":10104742}}},"2.11.5-1":{"changelog":"自动构建于上游 v2.11.5 (rockswang/wild-work releases)。下载 wildwork-2.11.5-1.fpk 在飞牛 fnOS 应用中心手动安装。","updated_at":"2026-11-04","os_min_version":"1.1.0","packages":{"x86":{"download_url":"https://github.com/mickeyttsc/wild-work-fpk/releases/download/v2.11.5/wildwork-2.11.5-1.fpk","sha256":"306fb0812f7a8f6e9130551d52f7c6ad2d582742b6919bba83e1e90bff88da32","size":10015501}}},"2.11.4-1":{"changelog":"自动构建于上游 v2.11.4 (rockswang/wild-work releases)。下载 wildwork-2.11.4-1.fpk 在飞牛 fnOS 应用中心手动安装。","updated_at":"2026-11-04","os_min_version":"1.1.0","packages":{"x86":{"download_url":"https://github.com/mickeyttsc/wild-work-fpk/releases/download/v2.11.4/wildwork-2.11.4-1.fpk","sha256":"09a1601cd735c3652b8d29c6d719c044f74a85eb3db222dafe4fcfbe55421044","size":9368854}}}}}}}
+{
+  "schema_version": "2",
+  "source_info": {
+    "name": "aaiuh飞牛应用源",
+    "author": "aaiuh",
+    "homepage": "https://github.com/aaiuh/fnos-apps",
+    "description": "飞牛 fnOS 原生应用集合。免费开源，跟随各应用上游更新。"
+  },
+  "apps": {
+    "HermesWeb": {
+      "display_name": "Hermes Web",
+      "desc": "<p>Hermes Agent 的官方 Web 界面，飞牛 fnOS 原生封装。纯 Python，无构建步骤，会话、记忆与工作区与 Agent 完全共用。</p><p>⭐整包自带 Agent 运行时（CPython 3.14 + venv），安装时不联网、不跑 npm、不依赖系统 Node/Python。</p><p>📌使用说明：安装后在应用中心启动，浏览器打开 http://&lt",
+      "platform": [
+        "x86"
+      ],
+      "categories": [
+        "AI赋能"
+      ],
+      "icon_url": "https://raw.githubusercontent.com/aaiuh/hermes-webui-fnos/main/app/ui/images/icon_256.png",
+      "preview_urls": [],
+      "readme_url": "https://raw.githubusercontent.com/aaiuh/hermes-webui-fnos/main/README.md",
+      "bug_report_url": "https://github.com/aaiuh/hermes-webui-fnos/issues",
+      "maintainer": "nesquena",
+      "maintainer_url": "https://github.com/aaiuh",
+      "distributor": "aaiuh",
+      "distributor_url": "https://github.com/aaiuh",
+      "run_as": "package",
+      "install_type": "",
+      "is_docker": false,
+      "service_port": "8787",
+      "releases": {
+        "0.52.544-2": {
+          "changelog": "跟随上游 nesquena/hermes-webui v0.52.544。\n\n- 整包自带 Agent 运行时（CPython 3.14 + venv），安装时不联网、不跑 npm、不依赖系统 Node/Python\n- appname HermesWeb，端口 8787，数据落 @appshare/HermesWeb\n- 启动脚本遵循 fnOS 生命周期协议（start/stop/status + pidfile）\n- 工作区默认指向 HERMES_HOME/workspace\n\n已在飞牛实测：安装、导入 4.98GB 完整备份、27,718 条消息与 14G 项目文件、登录与工作区均验证通过。",
+          "updated_at": "2026-11-10",
+          "os_min_version": "1.1.0",
+          "packages": {
+            "x86": {
+              "download_url": "https://github.com/aaiuh/hermes-webui-fnos/releases/download/v0.52.544-2/HermesWeb.fpk",
+              "sha256": "d23b34e35495ca5a80e41c29482cfb73d1af14ac1754cb515a47af8d552dfa07",
+              "size": 277272084
+            }
+          }
+        }
+      }
+    },
+    "Hindsight": {
+      "display_name": "Hindsight 记忆库",
+      "desc": "Agent 长期记忆系统，原生运行于飞牛 fnOS，不依赖 Docker。内置 PostgreSQL 与向量检索，支持 onnx 语义嵌入与 flashrank 重排，提供 REST/MCP 接口与 Web 控制台。支持飞牛应用备份与恢复。管理界面需要系统已安装 Node.js 20 以上（不随包携带）。",
+      "platform": [
+        "x86"
+      ],
+      "categories": [
+        "AI赋能"
+      ],
+      "icon_url": "https://raw.githubusercontent.com/aaiuh/hindsight-fnos/main/Hindsight/ICON.PNG",
+      "preview_urls": [],
+      "readme_url": "https://raw.githubusercontent.com/aaiuh/hindsight-fnos/main/Hindsight/README.md",
+      "bug_report_url": "https://github.com/aaiuh/hindsight-fnos/issues",
+      "maintainer": "aaiuh",
+      "maintainer_url": "https://github.com/aaiuh",
+      "distributor": "aaiuh",
+      "distributor_url": "https://github.com/aaiuh",
+      "run_as": "package",
+      "install_type": "",
+      "is_docker": false,
+      "service_port": "8888",
+      "releases": {
+        "1.0.0-14": {
+          "changelog": "跟随上游 Hindsight 1.0.0-14。原生运行，不依赖 Docker；内置 PostgreSQL 与向量检索，onnx 语义嵌入 + flashrank 重排；含官方管理控制台（需系统已装 Node.js 20 以上）；支持飞牛应用备份与恢复。",
+          "updated_at": "2026-10-18",
+          "os_min_version": "1.1.0",
+          "packages": {
+            "x86": {
+              "download_url": "https://github.com/aaiuh/hindsight-fnos/releases/download/v1.0.0-14/Hindsight-1.0.0-14-x86.fpk",
+              "sha256": "4ddd8f60863ee634bf03caee0383bf4275bfe63bf63905109a46093dd99314fe",
+              "size": 69982
+            }
+          }
+        },
+        "1.0.0-15": {
+          "changelog": "跟随上游 Hindsight 1.0.0-15。原生运行，不依赖 Docker；内置 PostgreSQL 与向量检索，onnx 语义嵌入 + flashrank 重排；含官方管理控制台（需系统已装 Node.js 20 以上）；支持飞牛应用备份与恢复。",
+          "updated_at": "2026-10-18",
+          "os_min_version": "1.1.0",
+          "packages": {
+            "x86": {
+              "download_url": "https://github.com/aaiuh/hindsight-fnos/releases/download/v1.0.0-15/Hindsight-1.0.0-15-x86.fpk",
+              "sha256": "7612995c27ba9b018f2502769118dac4be156e4c6fc636a12962c8fe01dd5112",
+              "size": 68067
+            }
+          }
+        },
+        "1.0.0-16": {
+          "changelog": "跟随上游 Hindsight 1.0.0-16。原生运行，不依赖 Docker；内置 PostgreSQL 与向量检索，onnx 语义嵌入 + flashrank 重排；含官方管理控制台（需系统已装 Node.js 20 以上）；支持飞牛应用备份与恢复。",
+          "updated_at": "2026-10-18",
+          "os_min_version": "1.1.0",
+          "packages": {
+            "x86": {
+              "download_url": "https://github.com/aaiuh/hindsight-fnos/releases/download/v1.0.0-16/Hindsight-1.0.0-16-x86.fpk",
+              "sha256": "2b6a3b324a5fc9d630fba6a399943270fe0a73a6b8de4f11d0322987f7a392f6",
+              "size": 68200
+            }
+          }
+        },
+        "1.0.0-17": {
+          "changelog": "新增「资源占用」设置：安装向导或应用设置里可指定本应用最多用几个 CPU 核心，留空则按本机实际核数自动折半（至少留 1 核给系统）。限制通过 cgroup CPU 配额实现，写入与检索时不再占满整机；设为 0 或填到不小于本机核数即为不限制。另：运行时版本与包版本解耦，今后只改脚本时升级不必重下 620 MB 运行时。",
+          "updated_at": "2026-10-20",
+          "os_min_version": "1.1.0",
+          "packages": {
+            "x86": {
+              "download_url": "https://github.com/aaiuh/hindsight-fnos/releases/download/v1.0.0-17/Hindsight-1.0.0-17-x86.fpk",
+              "sha256": "375e7309fd3c4abd0a1dddcb06dd61c03bf85de5c1d84b1db4e6569f93ea1b94",
+              "size": 71172
+            }
+          }
+        },
+        "1.0.0-19": {
+          "changelog": "安装与升级大幅提速：升级时先暂存再复用现有运行时，只改脚本的版本不会重下 630 MB；下载运行时前自动测速、挑最快的镜像。修复「资源占用」里设置的 CPU 核数被误判成不限制的问题。",
+          "updated_at": "2026-10-20",
+          "os_min_version": "1.1.0",
+          "packages": {
+            "x86": {
+              "download_url": "https://github.com/aaiuh/hindsight-fnos/releases/download/v1.0.0-19/Hindsight-1.0.0-19-x86.fpk",
+              "sha256": "f2fcdf8aa2e444f23ea7c8f3eba89992482340c1f1a4253efff5ce98d26d91dc",
+              "size": 72995
+            }
+          }
+        },
+        "1.0.0-20": {
+          "changelog": "应用设置里的「资源占用」现在真的能改了：提交的核数会写入运行配置，重启后生效（之前这个回调是空壳，改了不生效）。安装与升级继续复用运行时，不再重下 630 MB；下载前自动测速挑最快镜像。",
+          "updated_at": "2026-10-20",
+          "os_min_version": "1.1.0",
+          "packages": {
+            "x86": {
+              "download_url": "https://github.com/aaiuh/hindsight-fnos/releases/download/v1.0.0-20/Hindsight-1.0.0-20-x86.fpk",
+              "sha256": "d21a7ead2eb1e15f0030416c93e891090c5d8c7d64fb50be33a53bbd6eb8583b",
+              "size": 73833
+            }
+          }
+        },
+        "1.0.0-21": {
+          "changelog": "升级现在会复用现有运行时，不再重下 660 MB —— 之前暂存了却没被移回，因为 FnDepot 的升级流程不调用 upgrade_callback。修复后整个升级一两分钟完成。另外应用设置里的「资源占用」可以真正改 CPU 核数，重启生效。",
+          "updated_at": "2026-10-20",
+          "os_min_version": "1.1.0",
+          "packages": {
+            "x86": {
+              "download_url": "https://github.com/aaiuh/hindsight-fnos/releases/download/v1.0.0-21/Hindsight-1.0.0-21-x86.fpk",
+              "sha256": "6b6629383b2d05ed3be8facaa9d6b082608812f8485ddac63e4e9850e6de77ad",
+              "size": 73783
+            }
+          }
+        },
+        "1.0.0-22": {
+          "changelog": "跟随上游 Hindsight 1.0.0-22。原生运行，不依赖 Docker；内置 PostgreSQL 与向量检索，onnx 语义嵌入 + flashrank 重排；含官方管理控制台（需系统已装 Node.js 20 以上）；支持飞牛应用备份与恢复。",
+          "updated_at": "2026-10-22",
+          "os_min_version": "1.1.0",
+          "packages": {
+            "x86": {
+              "download_url": "https://github.com/aaiuh/hindsight-fnos/releases/download/v1.0.0-22/Hindsight-1.0.0-22-x86.fpk",
+              "sha256": "ecaa93b2d276183f7b22a8830d49463dab3b44d0da8c9c71e5aa22ce191f10f6",
+              "size": 71086
+            }
+          }
+        },
+        "1.1.0": {
+          "changelog": "跟随上游 Hindsight 1.1.0。原生运行，不依赖 Docker；内置 PostgreSQL 与向量检索，onnx 语义嵌入 + flashrank 重排；含官方管理控制台（需系统已装 Node.js 20 以上）；支持飞牛应用备份与恢复。",
+          "updated_at": "2026-10-25",
+          "os_min_version": "1.1.0",
+          "packages": {
+            "x86": {
+              "download_url": "https://github.com/aaiuh/hindsight-fnos/releases/download/v1.1.0/Hindsight-1.1.0-x86.fpk",
+              "sha256": "2d8471031600c467041c3635bb43c8ece0d26afb3c75f3314084233f3cb67519",
+              "size": 71448
+            }
+          }
+        },
+        "1.2.0": {
+          "changelog": "跟随上游 Hindsight 1.2.0。原生运行，不依赖 Docker；内置 PostgreSQL 与向量检索，onnx 语义嵌入 + flashrank 重排；含官方管理控制台（需系统已装 Node.js 20 以上）；支持飞牛应用备份与恢复。",
+          "updated_at": "2026-11-08",
+          "os_min_version": "1.1.0",
+          "packages": {
+            "x86": {
+              "download_url": "https://github.com/aaiuh/hindsight-fnos/releases/download/v1.2.0/Hindsight-1.2.0-x86.fpk",
+              "sha256": "114190555df23d9a559c7ca8f428e57c6b4731d454d61ef5a43b6ceecf51b48c",
+              "size": 71365
+            }
+          }
+        }
+      }
+    },
+    "dsh-fnos": {
+      "display_name": "DeepSeek Harness",
+      "desc": "DeepSeek AI 开源的插件化智能体框架（命令行 dsh）。本包是飞牛 fnOS 原生封装：复用系统已装的 Node.js 24 运行时，安装时从 npm 拉取 dsh 本体，不打包 Node、不使用 Docker。<br/><br/><strong>安装后使用：</strong><br/>1. 等应用中心显示「运行中」；<br/>2. 打开应用「日志」，复制里面「首次访问链接（含启动 token）」那一行到浏览器打开（dsh 默认要求带启动 token 换 cookie，直接访问端口会返回 401）；<br/>3. 打开后在设置里填 DeepSeek API Key。浏览器会记住登录态，之后可直接访问 http://设备IP:端口。<br/><br/><strong>说明：</strong><br/>1. 安装过程需要访问 npm 源，安装向导里可选国内镜像，装完约占用 900 MB 磁盘。<br/>2. 会话与配置保存在应用共享目录 dsh-fnos 下，升级与卸载都会保留；本次启动的带 token 链接保存在该目录的 entry-url.txt。<br/>3. 由 GitHub Actions 跟随上游 npm 版本自动打包，升级走应用中心正常流程。",
+      "platform": [
+        "x86"
+      ],
+      "categories": [
+        "AI赋能"
+      ],
+      "icon_url": "https://raw.githubusercontent.com/aaiuh/dsh-fnos/main/ICON_256.PNG",
+      "preview_urls": [],
+      "readme_url": "https://raw.githubusercontent.com/aaiuh/dsh-fnos/main/README.md",
+      "bug_report_url": "https://github.com/aaiuh/dsh-fnos/issues",
+      "maintainer": "DeepSeek AI",
+      "maintainer_url": "https://github.com/deepseek-ai/deepseek-harness",
+      "distributor": "aaiuh",
+      "distributor_url": "https://github.com/aaiuh/dsh-fnos",
+      "run_as": "package",
+      "install_type": "",
+      "is_docker": false,
+      "service_port": "3080",
+      "releases": {
+        "0.2.1-2": {
+          "changelog": "跟随上游 dsh 0.2.1-rc.2。\n\n上游 dsh 0.2.1-rc.2。",
+          "updated_at": "2026-10-27",
+          "os_min_version": "1.1.3100",
+          "packages": {
+            "x86": {
+              "download_url": "https://github.com/aaiuh/dsh-fnos/releases/download/v0.2.1-2/dsh-fnos-0.2.1-2-x86.fpk",
+              "sha256": "a9a2cece566aebf9cea9869b26fdd1f23ce910338b4bf5992684a6f4be9a87c9",
+              "size": 19559
+            }
+          }
+        },
+        "0.2.1-3": {
+          "changelog": "跟随上游 dsh 0.2.1-rc.2。\n\n上游 dsh 0.2.1-rc.2。",
+          "updated_at": "2026-10-27",
+          "os_min_version": "1.1.3100",
+          "packages": {
+            "x86": {
+              "download_url": "https://github.com/aaiuh/dsh-fnos/releases/download/v0.2.1-3/dsh-fnos-0.2.1-3-x86.fpk",
+              "sha256": "d552075e69d0e6fff271891505759aaceb13662f8f94212e7d62d2a6092f508a",
+              "size": 21147
+            }
+          }
+        },
+        "0.2.1-4": {
+          "changelog": "跟随上游 dsh 0.2.1-rc.2。\n\n上游 dsh 0.2.1-rc.2。",
+          "updated_at": "2026-10-27",
+          "os_min_version": "1.1.3100",
+          "packages": {
+            "x86": {
+              "download_url": "https://github.com/aaiuh/dsh-fnos/releases/download/v0.2.1-4/dsh-fnos-0.2.1-4-x86.fpk",
+              "sha256": "11d997f89dfd27ee26caba1c8cf7b87f0c7002143c07f2ad45e4ebefe73436fc",
+              "size": 36344
+            }
+          }
+        },
+        "0.2.1-5": {
+          "changelog": "跟随上游 dsh 0.2.1-rc.2。\n\n上游 dsh 0.2.1-rc.2。",
+          "updated_at": "2026-10-27",
+          "os_min_version": "1.1.3100",
+          "packages": {
+            "x86": {
+              "download_url": "https://github.com/aaiuh/dsh-fnos/releases/download/v0.2.1-5/dsh-fnos-0.2.1-5-x86.fpk",
+              "sha256": "7b1d21ae50770300f65d2f1e17afa8353e2c3935b3d8d96298ca63f33ad04f17",
+              "size": 38695
+            }
+          }
+        },
+        "0.2.1-6": {
+          "changelog": "跟随上游 dsh 0.2.1-rc.5。\n\n上游 dsh 0.2.1-rc.5。",
+          "updated_at": "2026-10-29",
+          "os_min_version": "1.1.3100",
+          "packages": {
+            "x86": {
+              "download_url": "https://github.com/aaiuh/dsh-fnos/releases/download/v0.2.1-6/dsh-fnos-0.2.1-6-x86.fpk",
+              "sha256": "fd2965ed324f7922af48fe71a8fb88597a17a246906a673d7ad8638e0574f4e0",
+              "size": 38683
+            }
+          }
+        },
+        "0.2.2-1": {
+          "changelog": "跟随上游 dsh 0.2.2-rc.1。\n\n上游 dsh 0.2.2-rc.1。",
+          "updated_at": "2026-11-05",
+          "os_min_version": "1.1.3100",
+          "packages": {
+            "x86": {
+              "download_url": "https://github.com/aaiuh/dsh-fnos/releases/download/v0.2.2-1/dsh-fnos-0.2.2-1-x86.fpk",
+              "sha256": "fd901382ffcf77b5cd8f85c6f6ab9c2175aad1818619e090cc0b033770f71106",
+              "size": 38683
+            }
+          }
+        }
+      }
+    },
+    "fnmusic-ext": {
+      "display_name": "fnMusic 音源扩展",
+      "desc": "飞牛音乐第三方音源扩展：零侵入接管官方音乐入口，提供 musicdl 聚合、网易云、洛雪自定义源在线搜索播放，内置管理页（音源切换/扫码登录/平台选择/边听边存）。",
+      "platform": [
+        "x86"
+      ],
+      "categories": [
+        "影音娱乐"
+      ],
+      "icon_url": "https://raw.githubusercontent.com/aaiuh/fnos-apps/main/icons/fnmusic-ext.png",
+      "preview_urls": [],
+      "readme_url": "https://raw.githubusercontent.com/javycoder/fnos_music_ext/main/README.md",
+      "bug_report_url": "https://github.com/javycoder/fnos_music_ext/issues",
+      "maintainer": "javycoder",
+      "maintainer_url": "https://github.com/javycoder",
+      "distributor": "javycoder",
+      "distributor_url": "https://github.com/javycoder",
+      "run_as": "package",
+      "install_type": "",
+      "is_docker": false,
+      "service_port": "",
+      "releases": {
+        "2.12.4-0": {
+          "changelog": "自正式版 `v2.12.3` 以来的变更。FPK 安装版本 `2.12.4-0`，tag / WebUI 显示 `v2.12.4`，发布通道 `stable`。适配飞牛音乐 `1.0.10` 与 `1.1.19`。\n\n### 新增\n- 日志导出改为标准 ZIP：文件名使用 `fnmusic-logs-时间-随机标识.zip`，响应类型为 `application/zip`，继续包含近 3 天日志、环境快照并逐行脱敏。\n- 管理页提供「下载到本机」「保存或分享 ZIP」「保存到 NAS」三种入口。电脑保留浏览器下载；手机先打包再调用系统保存/分享；飞牛 App / 飞牛桌面内可调用官方目录选择器，选中的 NAS 目录由宿主网关以当前管理员对应的飞牛用户身份直接写入。\n- 保存到 NAS 后显示完整路径，并提供复制路径与打开所在文件夹；取消目录选择或分享不会生成残留导出文件。\n\n### 修复\n- NAS 保存接口仅由宿主网关处理，要求管理员身份与有效飞牛用户标识；目标目录必须是存储卷内已存在的真实目录，拒绝路径穿越和符号链接。服务端生成文件名并排他创建，不覆盖已有文件；写入完成后校验 ZIP，失败或中断时清理未完成文件。\n- Docker 部署导出日志时补充宿主侧 `proxy.log`、安装日志与环境快照，并用 `log_collection.json` 标明缺失、无权读取或收集不完整，便于区分容器服务与宿主接管问题（#126）。\n- 搜索链路增加同请求 ID 诊断，串联请求接收、各音源结果、取消、上游拒绝与最终合并分页，不记录关键词、Token、Cookie 或完整第三方错误正文。\n- 日志导出通过私有维护通道生成 `proxy_diagnostics.json`，核对官方 Socket 是否由当前代理接管、官方上游是否可达；诊断探测不调用在线音源搜索，也不使用用户登录态。\n- 打包、维护清理、卸载说明与忽略规则识别新 ZIP 导出文件，同时兼容历史 `.logzip`；不把任意 ZIP 视为可清理导出，也不清理用户自选 NAS 目录中的导出成果。\n\n### 安装与维护\n- 官方目录选择器要求 fnOS `1.2.0401` 及以上、飞牛 App `1.34.0` 及以上；独立浏览器或直连 WebUI 仅保留本机下载，并明确提示需从飞牛入口使用 NAS 保存。\n- 发布前重新只读核对官方音乐 `/var/apps/trim.music/manifest`，当前基线仍为 `1.1.19`；同时保留既有 `1.0.10` 适配记录。",
+          "updated_at": "2026-11-09",
+          "os_min_version": "1.2.0",
+          "packages": {
+            "x86": {
+              "download_url": "https://github.com/javycoder/fnos_music_ext/releases/download/v2.12.4/fnmusic-ext-2.12.4-0.fpk",
+              "sha256": "87ae7e5bce671217ca2c1f038f1904a629b0c826a4e4836a0af7a00bc1166d48",
+              "size": 29714378
+            }
+          }
+        },
+        "2.12.3-0": {
+          "changelog": "FPK 安装版本 `2.12.3-0`，tag / WebUI 显示 `v2.12.3`，发布通道 `stable`。适配飞牛音乐 `1.0.10` 与 `1.1.19`。\n\n### 优化与修复\n- 洛雪配置保存与完整音源测试分开。保存仅快速确认目标脚本启停和初始化，不再串行等待搜索、解析与探活；完整测试仍可独立执行。初始化成功不代表已验证播放。\n- 配置保存采用统一 55 秒后端预算，页面从点击开始最多等待一分钟，目录检查、服务准备、源操作与排序共享时限。正常且未变化的源不重复激活或下载。\n- 优先执行取消激活，坏新源不再阻断已确认的取消操作。部分失败时保留已确认修改，并分别提示失败、未执行和结果待核实；未确认项保留原激活配置。\n- 写请求超时后仅回读目标实际状态，不自动重复操作。管理操作在服务端同样受预算约束，避免旧启动恢复任务在手动保存接管后重放旧配置。\n- 脚本排序并入一次保存，页面收到结果后及时结束等待，概览刷新不再延长保存过程。并发保存与排序快速提示忙碌，防止旧请求覆盖新设置。",
+          "updated_at": "2026-11-07",
+          "os_min_version": "1.2.0",
+          "packages": {
+            "x86": {
+              "download_url": "https://github.com/javycoder/fnos_music_ext/releases/download/v2.12.3/fnmusic-ext-2.12.3-0.fpk",
+              "sha256": "f8a67b6595a14e8eafee9d427ccb10f4050743ee7a780f5fb8bd41717c5d27b4",
+              "size": 29704919
+            }
+          }
+        },
+        "2.12.2-0": {
+          "changelog": "本次正式版汇总自 `v2.12.0` 以来的变更。FPK 安装版本 `2.12.2-0`，tag / WebUI 显示 `v2.12.2`，发布通道 `stable`。适配飞牛音乐 `1.0.10` 与 `1.1.19`。\r\n\r\n### 修复\r\n- 兼容飞牛音乐 1.1.19：未传 page 与 size 的搜索采用 100 条窗口，显式分页保持原样；官方 Web 界面不会自动请求第二页，本地结果可能占满窗口。\r\n- 在线歌曲不再伪装为官方文件夹中的物理文件；在线删除仅清理当前用户的在线收藏和播放历史，混合请求保留官方本地删除语义，并明确报告部分失败。\r\n- 本地曲库匹配与推荐排除已删除的曲目及音频文件；自动探测的共享曲库目录在官方设置变更后及时失效并限制并发重试。\r\n- 混合删除在操作官方曲库前完整校验在线收藏与历史条目，损坏的 GUID 会中止请求，避免官方部分已删除后再报错。\r\n- 洛雪解析预算优先分配给当前音质档，后续降档不预先分走首档时间；跨平台候选单次超时后，只要总预算允许就继续尝试其他候选。超时冷却仅影响同一歌曲候选，未完成解析不写入曲目失败缓存。\r\n- 网易搜索与详情按下载档位选择格式和文件大小；账号权益或目标档位不允许选择时保持未知，不再用 SQ/HR 标记恢复成 FLAC。异常大小和码率字段不再中断网易或洛雪的元数据处理。\r\n- MusicDL 搜索按站点限制并发并汇总各站结果，不再因已有少量结果提前停止其他站点；排队或总预算耗尽不误记为站点故障。\r\n- 应用中心升级与保留数据卸载时，备份歌单、推荐缓存、下载缓存、用量账本和绑定索引等仓库内用户状态，避免替换应用目录时丢失。\r\n- 系统启动后首次保存歌曲不再错误进入扫描冷却等待，后续扫描继续遵守合并窗口和冷却规则。\r\n- 自动绑定查询官方曲库时，降权运行使用覆盖完整查询过程的 root 只读租约，并优先按本次落盘文件反查官方曲目（#117）。歌单条目的自动绑定与重试必须先确认显式保存意图；当前官方协议无法可靠区分用户歌单与自动播放列表，因此不会因为加入或重新加入歌单而触发后台下载或绑定（见 #120）。\r\n- 网易七档音质元数据映射与取链 helper 分开，避免同名函数冲突影响搜索和播放。\r\n\r\n### 界面与维护\r\n- 音源验证工具生成有效的隔离配置，限制监听地址，并支持有界音频前缀解码。",
+          "updated_at": "2026-11-07",
+          "os_min_version": "1.2.0",
+          "packages": {
+            "x86": {
+              "download_url": "https://github.com/javycoder/fnos_music_ext/releases/download/v2.12.2/fnmusic-ext-2.12.2-0.fpk",
+              "sha256": "dbedebe9ec3c0e560d97af9f22e1d143c6567abeb614def17adcc57c310f2ed2",
+              "size": 29701723
+            }
+          }
+        }
+      }
+    },
+    "octop-native": {
+      "display_name": "Octop",
+      "desc": "腾讯开源的多用户多智能体 AI 助手平台，支持 Web 控制台、CLI、IM 渠道与定时任务，数据全部本地存储。<br/><br/><strong>安装后使用：</strong><br/>请等到应用中心显示「运行中」再点「打开」，或访问 http://设备IP:8089，用安装向导里设置的用户名或邮箱登录。<br/>忘记密码时打开飞牛「文件管理」，进入应用共享里的 Octop 数据目录，查看 octop-login.txt（仅备份安装或应用「设置」改密；网页改密后不会自动更新）；也可在应用「设置」中改密。<br/><br/><strong>命令行管理：</strong><br/>支持官方 octop CLI（octop provider list / agent list / user list / skills / backup 等，详见 octop --help）。<br/><br/><strong>首次登录后：</strong><br/>请在控制台「设置 → 模型」配置 API Key，并按需配置 IM 渠道、远程桌面、浏览器等。<br/><br/>注意：本地版直接运行在飞牛主机上，安装前会自动关联安装「Python 3.12」开发工具。",
+      "platform": [
+        "x86",
+        "arm"
+      ],
+      "categories": [
+        "AI赋能"
+      ],
+      "icon_url": "https://raw.githubusercontent.com/aaiuh/fnos-apps/main/icons/octop.png",
+      "preview_urls": [],
+      "readme_url": "https://raw.githubusercontent.com/TencentCloud/Octop/main/README.md",
+      "bug_report_url": "https://github.com/TencentCloud/Octop/issues",
+      "maintainer": "TencentCloud",
+      "maintainer_url": "https://github.com/TencentCloud",
+      "distributor": "TencentCloud",
+      "distributor_url": "https://github.com/TencentCloud",
+      "run_as": "package",
+      "install_type": "",
+      "is_docker": false,
+      "service_port": "8089",
+      "releases": {
+        "1.0.3b4": {
+          "changelog": "### 新增\n- 工作台增加云主机页：授权后查看腾讯云 CVM，并由常驻运维专家巡检和变更\n- 后台标签页的定时提醒改为系统通知\n- 启动时同步新的预置模型，腾讯云通道支持 HY4\n\n### 修复\n- 共享专家能用查看者的自定义 MCP 名称\n- 编辑团队会保存示例头像\n- Docker 精简镜像在编译器已移除后仍能发布\n\n### 变更\n- 多实例部署时，腾讯云授权改存在控制面；单机仍用本地文件\n- 云服务器页移到工作台末尾，并注明目前只支持腾讯云 CVM\n- 默认 Docker 标签改为精简版，完整版使用 `:<version>-full` 和 `:full`\n- 连接器可按类别筛选，大额 token 用量会缩写\n- 升级 octop-harness 至 1.0.8\n\n\n## Downloads\n\n### Windows\n\n#### Desktop installer (Recommended)\n- [64-bit (Recommended)](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b4/Octop-desktop-windows-amd64-1.0.3b4.exe) | [ARM64](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b4/Octop-desktop-windows-arm64-1.0.3b4.exe)\n\n#### Portable\n- [64-bit](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b4/Octop-portable-windows-amd64-1.0.3b4.zip) | [ARM64](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b4/Octop-portable-windows-arm64-1.0.3b4.zip)\n\n### macOS\n\n#### Desktop installer (Recommended)\n- [Apple Silicon](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b4/Octop-desktop-darwin-arm64-1.0.3b4.dmg) | [Intel](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b4/Octop-desktop-darwin-amd64-1.0.3b4.dmg)\n\n#### Portable\n- [Apple Silicon](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b4/Octop-portable-darwin-arm64-1.0.3b4.zip) | [Intel](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b4/Octop-portable-darwin-amd64-1.0.3b4.zip)\n\n### Linux\n\n#### Desktop installer (Recommended)\n- [64-bit](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b4/Octop-desktop-linux-amd64-1.0.3b4.tar.gz) | [ARM64](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b4/Octop-desktop-linux-arm64-1.0.3b4.tar.gz)\n\n#### Portable\n- [64-bit](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b4/Octop-portable-linux-amd64-1.0.3b4.zip) | [ARM64](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b4/Octop-portable-linux-arm64-1.0.3b4.zip)\n\n### Docker image\n\n- Lite: `ghcr.io/tencentcloud/octop:1.0.3b4` (`:latest`)\n- Full: `ghcr.io/tencentcloud/octop:1.0.3b4-full` (`:full`)\n\n### fnOS NAS\n- [Docker lite (x86 and ARM)](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b4/Octop-fnos-docker-lite-1.0.3b4.fpk) | [Docker full (desktop, OCR, local models; x86 and ARM)](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b4/Octop-fnos-docker-1.0.3b4.fpk) | [Native x86_64](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b4/Octop-fnos-native-amd64-1.0.3b4.fpk) | [Native ARM64 (no Docker)](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b4/Octop-fnos-native-arm64-1.0.3b4.fpk)\n\n## What's Changed\n* chore: sync main into develop after 1.0.3b3 by @github-actions[bot] in https://github.com/TencentCloud/Octop/pull/2822\n* fix: persist team sample avatars when editing a team by @jubaoliang in https://github.com/TencentCloud/Octop/pull/2844\n* fix: let Docker publish finish when the compiler is already removed by @jubaoliang in https://github.com/TencentCloud/Octop/pull/2842\n* feat(providers): sync new preset models on startup and support HY4 by @Bosheng0422 in https://github.com/TencentCloud/Octop/pull/2830\n* fix: map shared custom MCP names onto the expert harness by @jubaoliang in https://github.com/TencentCloud/Octop/pull/2848\n* Feat/cloud hosts console by @seed30 in https://github.com/TencentCloud/Octop/pull/2778\n* fix(cloud): keep the cloud tab last and note Tencent-only support by @jubaoliang in https://github.com/TencentCloud/Octop/pull/2850\n* feat(dashboard): show cron reminders as system notifications in background tabs by @jubaoliang in https://github.com/TencentCloud/Octop/pull/2851\n* fix(cloud): share Tencent Cloud logins through PostgreSQL by @jubaoliang in https://github.com/TencentCloud/Octop/pull/2854\n* chore: release 1.0.3b4 by @jubaoliang in https://github.com/TencentCloud/Octop/pull/2855\n\n\n**Full Changelog**: https://github.com/TencentCloud/Octop/compare/v1.0.3b3...v1.0.3b4",
+          "updated_at": "2026-11-06",
+          "os_min_version": "1.1.0",
+          "packages": {
+            "x86": {
+              "download_url": "https://github.com/TencentCloud/Octop/releases/download/v1.0.3b4/Octop-fnos-native-amd64-1.0.3b4.fpk",
+              "sha256": "85a2761c0e53ea4f99e39d42d0544febb8e4363ff324df1a6b67131bc7e168fa",
+              "size": 237962406
+            },
+            "arm": {
+              "download_url": "https://github.com/TencentCloud/Octop/releases/download/v1.0.3b4/Octop-fnos-native-arm64-1.0.3b4.fpk",
+              "sha256": "4360c8d1c5a0e370c0f15ffb6655693472fa35c7e09170564042bf6619079d2a",
+              "size": 236683607
+            }
+          }
+        },
+        "1.0.3b3": {
+          "changelog": "### 新增\n- PostgreSQL 可存放技能包和知识库。多实例共用定时任务、频道、头像、插件和已发布专家\n- Docker 与飞牛增加精简版。存储后端增加火山引擎 TOS\n- 可预建 LDAP 账号，聊天列表可隐藏任意专家\n\n### 修复\n- 专家工作区落到允许的存储根下。共享连接器只有创建者能改\n- 聊天历史不再错序，未答完的提问不会被别的会话接走\n- 超长图片先缩小再发送。失效的默认模型会自动换掉\n- 升级记忆库：长会话分批提炼，重启后不重跑\n- 安装清理不再删掉运行环境。PostgreSQL 上的知识库检索和关怀去重恢复正常\n\n### 变更\n- 升级 octop-harness 至 1.0.7\n- 内置专家并入专家市场，安装包不再自带市场目录\n\n\n## Downloads\n\n### Windows\n\n#### Desktop installer (Recommended)\n- [64-bit (Recommended)](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b3/Octop-desktop-windows-amd64-1.0.3b3.exe) | [ARM64](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b3/Octop-desktop-windows-arm64-1.0.3b3.exe)\n\n#### Portable\n- [64-bit](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b3/Octop-portable-windows-amd64-1.0.3b3.zip) | [ARM64](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b3/Octop-portable-windows-arm64-1.0.3b3.zip)\n\n### macOS\n\n#### Desktop installer (Recommended)\n- [Apple Silicon](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b3/Octop-desktop-darwin-arm64-1.0.3b3.dmg) | [Intel](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b3/Octop-desktop-darwin-amd64-1.0.3b3.dmg)\n\n#### Portable\n- [Apple Silicon](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b3/Octop-portable-darwin-arm64-1.0.3b3.zip) | [Intel](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b3/Octop-portable-darwin-amd64-1.0.3b3.zip)\n\n### Linux\n\n#### Desktop installer (Recommended)\n- [64-bit](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b3/Octop-desktop-linux-amd64-1.0.3b3.tar.gz) | [ARM64](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b3/Octop-desktop-linux-arm64-1.0.3b3.tar.gz)\n\n#### Portable\n- [64-bit](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b3/Octop-portable-linux-amd64-1.0.3b3.zip) | [ARM64](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b3/Octop-portable-linux-arm64-1.0.3b3.zip)\n\n### Docker image\n\n- Lite: `ghcr.io/tencentcloud/octop:1.0.3b3` (`:latest`)\n- Full: `ghcr.io/tencentcloud/octop:1.0.3b3-full` (`:full`)\n\n### fnOS NAS\n- [Docker lite (x86 and ARM)](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b3/Octop-fnos-docker-lite-1.0.3b3.fpk) | [Docker full (desktop, OCR, local models; x86 and ARM)](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b3/Octop-fnos-docker-1.0.3b3.fpk) | [Native x86_64](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b3/Octop-fnos-native-amd64-1.0.3b3.fpk) | [Native ARM64 (no Docker)](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b3/Octop-fnos-native-arm64-1.0.3b3.fpk)\n\n## What's Changed\n* chore: sync main into develop after 1.0.3b2 by @github-actions[bot] in https://github.com/TencentCloud/Octop/pull/2735\n* fix(db): adapt executemany on the PostgreSQL connection proxy by @wxhking in https://github.com/TencentCloud/Octop/pull/2736\n* fix(docker): publish a lite image beside the full one by @jubaoliang in https://github.com/TencentCloud/Octop/pull/2746\n* fix(agents): refresh AUTO agents with stale provider fallback refs by @jayfeng7 in https://github.com/TencentCloud/Octop/pull/2394\n* fix(knowledge): preserve remote embedding order by @AbelTomato in https://github.com/TencentCloud/Octop/pull/1454\n* fix(dashboard): restyle the local-shell badge and align account security by @jubaoliang in https://github.com/TencentCloud/Octop/pull/2745\n* test: match the Docker publish warning after lite image tags by @liukewia in https://github.com/TencentCloud/Octop/pull/2755\n* feat: keep skill packages and knowledge on the control-plane database by @jubaoliang in https://github.com/TencentCloud/Octop/pull/2757\n* fix(db): stop fsyncing every SQLite write on Windows by @liukewia in https://github.com/TencentCloud/Octop/pull/2716\n* fix(fnos): name the x86 native package amd64 and stamp store versions at pack time by @liukewia in https://github.com/TencentCloud/Octop/pull/2751\n* fix(dashboard): serve Monaco from",
+          "updated_at": "2026-11-04",
+          "os_min_version": "1.1.0",
+          "packages": {
+            "x86": {
+              "download_url": "https://github.com/TencentCloud/Octop/releases/download/v1.0.3b3/Octop-fnos-native-amd64-1.0.3b3.fpk",
+              "sha256": "b88a15c24713ea814a86d06af87caf33d9a2d1e6dc826af6e26d0565297ccddc",
+              "size": 219014390
+            },
+            "arm": {
+              "download_url": "https://github.com/TencentCloud/Octop/releases/download/v1.0.3b3/Octop-fnos-native-arm64-1.0.3b3.fpk",
+              "sha256": "f6d2ea214b384cb875a9e071ecc851b3b7ed386484dcbbf15e2e40d06cad3bc6",
+              "size": 217763564
+            }
+          }
+        },
+        "1.0.3b2": {
+          "changelog": "### 新增\n- 账号支持 TOTP 与 Passkey：二次验证、无密码登录和恢复码\n- 新增 ragflow 知识库连接器\n\n### 修复\n- 记住登录会自动续期，改密码会退出其他设备。缺 MFA 表的旧库会自动补齐\n- 极简模式里，专家会话超过 10 条可以继续展开。长代码在气泡里换行，已结束的一轮不会在历史加载后再出现一次\n- 停用的会话模型回到 Auto。钉钉和微信切换时，草稿与二维码不再串台，登录回调会保留转发端口\n- 更早回合生成的文件不会再次发出。对话轨迹记下模型实际收到的系统提示\n\n### 变更\n- 通行密钥登录默认关闭，要在应用设置里打开。修改密码放在「账户安全」里\n- 虚拟桌面和系统浏览器默认不启动。未选 MBTI 时显示「未设置」\n- 升级 octop-harness 1.0.6\n\n\n## Downloads\n\n### Windows\n\n#### Desktop installer (Recommended)\n- [64-bit (Recommended)](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b2/Octop-desktop-windows-amd64-1.0.3b2.exe) | [ARM64](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b2/Octop-desktop-windows-arm64-1.0.3b2.exe)\n\n#### Portable\n- [64-bit](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b2/Octop-portable-windows-amd64-1.0.3b2.zip) | [ARM64](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b2/Octop-portable-windows-arm64-1.0.3b2.zip)\n\n### macOS\n\n#### Desktop installer (Recommended)\n- [Apple Silicon](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b2/Octop-desktop-darwin-arm64-1.0.3b2.dmg) | [Intel](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b2/Octop-desktop-darwin-amd64-1.0.3b2.dmg)\n\n#### Portable\n- [Apple Silicon](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b2/Octop-portable-darwin-arm64-1.0.3b2.zip) | [Intel](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b2/Octop-portable-darwin-amd64-1.0.3b2.zip)\n\n### Linux\n\n#### Desktop installer (Recommended)\n- [64-bit](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b2/Octop-desktop-linux-amd64-1.0.3b2.tar.gz) | [ARM64](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b2/Octop-desktop-linux-arm64-1.0.3b2.tar.gz)\n\n#### Portable\n- [64-bit](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b2/Octop-portable-linux-amd64-1.0.3b2.zip) | [ARM64](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b2/Octop-portable-linux-arm64-1.0.3b2.zip)\n\n### fnOS NAS\n- [Docker (recommended; x86 and ARM)](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b2/Octop-fnos-docker-1.0.3b2.fpk) | [Native x86_64](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b2/Octop-fnos-native-1.0.3b2.fpk) | [Native ARM64 (no Docker)](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b2/Octop-fnos-native-arm64-1.0.3b2.fpk)\n\n\n## What's Changed\n* chore: sync main into develop after 1.0.3b1 by @github-actions[bot] in https://github.com/TencentCloud/Octop/pull/2402\n* feat(connectors): add ragflow knowledge connector (#2308) by @Pandakingxbc in https://github.com/TencentCloud/Octop/pull/2403\n* fix(channels): prevent repeated requests when switching channel types (#2314) by @Pandakingxbc in https://github.com/TencentCloud/Octop/pull/2390\n* fix(chat): reset disabled conversation models to Auto (#2316) by @Pandakingxbc in https://github.com/TencentCloud/Octop/pull/2407\n* feat: opt in bundled desktop and harden chat turns by @jubaoliang in https://github.com/TencentCloud/Octop/pull/2446\n* fix(chat): don't append a finished turn again after history loads by @Bosheng0422 in https://github.com/TencentCloud/Octop/pull/2441\n* fix: preserve forwarded ports in OAuth callback URLs by @Bosheng0422 in https://github.com/TencentCloud/Octop/pull/2460\n* docs: document which runtime library owns a change by @liukewia in https://github.com/TencentCloud/Octop/pull/2463\n* fix(chat): wrap long inline code inside message bubbles by @liukewia in https://github.com/TencentCloud/Octop/pull/2411\n* feat: record the model system prompt and harden chat, connectors, and images by @jubaoliang in https://github.com/TencentCloud/Octop/pull/2700\n* feat(auth): TOTP/passkey MFA and passwordless passkey login by @huangcheng in https://github.com/TencentCloud/Octop/pull/2350\n* feat: renew remembered sessions and simplify sharing and chat nav by @jubaoliang in https://github.com/TencentCloud/Octop/pull/2724\n* feat: gate passkey sign-in and fold passwo",
+          "updated_at": "2026-11-02",
+          "os_min_version": "1.1.0",
+          "packages": {
+            "x86": {
+              "download_url": "https://github.com/TencentCloud/Octop/releases/download/v1.0.3b2/Octop-fnos-native-1.0.3b2.fpk",
+              "sha256": "59f297a21a4ccee41c7b10fad4acee857fd035baf94e3a31f120667a21c118f9",
+              "size": 209991306
+            },
+            "arm": {
+              "download_url": "https://github.com/TencentCloud/Octop/releases/download/v1.0.3b2/Octop-fnos-native-arm64-1.0.3b2.fpk",
+              "sha256": "9339af41f74bfbf87bed74f7818a4be315ec988ff99888ccedea6b132bc81a36",
+              "size": 208520068
+            }
+          }
+        }
+      }
+    },
+    "wildwork": {
+      "display_name": "Wild Work",
+      "desc": "wild-work 账号池代理（自封装版）。提供 OpenAI 兼容 API（/v1）与内置 Web 控制台，默认端口 7863。多渠道聚合，支持自动签到。状态数据保存在应用数据目录，登录凭据保存在应用配置目录。",
+      "platform": [
+        "x86"
+      ],
+      "categories": [
+        "AI赋能"
+      ],
+      "icon_url": "https://raw.githubusercontent.com/mickeyttsc/wild-work-fpk/main/template/ui/images/icon_256.png",
+      "preview_urls": [],
+      "readme_url": "https://raw.githubusercontent.com/mickeyttsc/wild-work-fpk/main/README.md",
+      "bug_report_url": "https://github.com/mickeyttsc/wild-work-fpk/issues",
+      "maintainer": "rockswang",
+      "maintainer_url": "https://github.com/mickeyttsc",
+      "distributor": "Mickey",
+      "distributor_url": "https://github.com/mickeyttsc",
+      "run_as": "package",
+      "install_type": "",
+      "is_docker": false,
+      "service_port": "7863",
+      "releases": {
+        "2.11.6-1": {
+          "changelog": "自动构建于上游 v2.11.6 (rockswang/wild-work releases)。下载 wildwork-2.11.6-1.fpk 在飞牛 fnOS 应用中心手动安装。",
+          "updated_at": "2026-11-09",
+          "os_min_version": "1.1.0",
+          "packages": {
+            "x86": {
+              "download_url": "https://github.com/mickeyttsc/wild-work-fpk/releases/download/v2.11.6/wildwork-2.11.6-1.fpk",
+              "sha256": "9079dc34544a8a9897a6eabc3a81bd9ea0827c1e40319b38d05099788fb640ad",
+              "size": 10104742
+            }
+          }
+        },
+        "2.11.5-1": {
+          "changelog": "自动构建于上游 v2.11.5 (rockswang/wild-work releases)。下载 wildwork-2.11.5-1.fpk 在飞牛 fnOS 应用中心手动安装。",
+          "updated_at": "2026-11-04",
+          "os_min_version": "1.1.0",
+          "packages": {
+            "x86": {
+              "download_url": "https://github.com/mickeyttsc/wild-work-fpk/releases/download/v2.11.5/wildwork-2.11.5-1.fpk",
+              "sha256": "306fb0812f7a8f6e9130551d52f7c6ad2d582742b6919bba83e1e90bff88da32",
+              "size": 10015501
+            }
+          }
+        },
+        "2.11.4-1": {
+          "changelog": "自动构建于上游 v2.11.4 (rockswang/wild-work releases)。下载 wildwork-2.11.4-1.fpk 在飞牛 fnOS 应用中心手动安装。",
+          "updated_at": "2026-11-04",
+          "os_min_version": "1.1.0",
+          "packages": {
+            "x86": {
+              "download_url": "https://github.com/mickeyttsc/wild-work-fpk/releases/download/v2.11.4/wildwork-2.11.4-1.fpk",
+              "sha256": "09a1601cd735c3652b8d29c6d719c044f74a85eb3db222dafe4fcfbe55421044",
+              "size": 9368854
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -7,6 +7,54 @@
     "description": "飞牛 fnOS 原生应用集合。免费开源，跟随各应用上游更新。"
   },
   "apps": {
+    "FnNginxConf": {
+      "display_name": "飞牛Nginx转发",
+      "desc": "可视化设计并注入飞牛 Nginx 反向代理配置：只需填写名称、路径与目标地址。",
+      "platform": [
+        "x86"
+      ],
+      "categories": [
+        "系统工具"
+      ],
+      "icon_url": "https://raw.githubusercontent.com/kuilei0926/FnNginxConf/main/ICON_256.PNG",
+      "preview_urls": [],
+      "readme_url": "https://raw.githubusercontent.com/kuilei0926/FnNginxConf/main/README.md",
+      "bug_report_url": "https://github.com/kuilei0926/FnNginxConf/issues",
+      "maintainer": "kuilei0926",
+      "maintainer_url": "https://github.com/kuilei0926",
+      "distributor": "kuilei0926",
+      "distributor_url": "https://github.com/kuilei0926",
+      "run_as": "package",
+      "install_type": "",
+      "is_docker": false,
+      "service_port": "",
+      "releases": {
+        "1.1.0": {
+          "changelog": "**Full Changelog**: https://github.com/kuilei0926/FnNginxConf/compare/v1.0.0...v1.1.0",
+          "updated_at": "2026-09-06",
+          "os_min_version": "1.1.0",
+          "packages": {
+            "x86": {
+              "download_url": "https://github.com/kuilei0926/FnNginxConf/releases/download/v1.1.0/FnNginxConf-1.1.0.fpk",
+              "sha256": "c2c7f543138a369e3cfd68e7784e59cffc8e34d2be2c19871997b897f893827c",
+              "size": 71679
+            }
+          }
+        },
+        "1.0.0": {
+          "changelog": "可视化设计并注入飞牛 Nginx 反向代理配置：仅需填写名称、路径与目标地址。\r\n\r\n- 生成 conf.d 配置并持久化到 ng.conf.zip（ZipCrypto），重启 trim_nginx 生效\r\n- 路径冲突保护：拦截 /app/、/cgi 保留命名空间与官方已有 location\r\n- 统一网关 /app/FnNginxConf 接入，管理员门禁\r\n- 安全机制：输入防注入、nginx -t 校验、全量回滚、异步后台应用\r\n- 跟随系统明暗主题的前端，卸载时自动清理注入配置\r\n- GitHub Actions 自动构建发布\n\n**Full Changelog**: https://github.com/kuilei0926/FnNginxConf/commits/v1.0.0",
+          "updated_at": "2026-08-12",
+          "os_min_version": "1.1.0",
+          "packages": {
+            "x86": {
+              "download_url": "https://github.com/kuilei0926/FnNginxConf/releases/download/v1.0.0/FnNginxConf-1.0.0.fpk",
+              "sha256": "620b8bc605852ea9b7720126e08085dfebe66ecd331a58bb87856e2622211966",
+              "size": 69079
+            }
+          }
+        }
+      }
+    },
     "HermesWeb": {
       "display_name": "Hermes Web",
       "desc": "<p>Hermes Agent 的官方 Web 界面，飞牛 fnOS 原生封装。纯 Python，无构建步骤，会话、记忆与工作区与 Agent 完全共用。</p><p>⭐整包自带 Agent 运行时（CPython 3.14 + venv），安装时不联网、不跑 npm、不依赖系统 Node/Python。</p><p>📌使用说明：安装后在应用中心启动，浏览器打开 NAS 地址的 8787 端口即可。首次登录口令见应用说明，数据保存在本应用的共享目录，与已装的 Hermes Studio 完全独立。</p>",

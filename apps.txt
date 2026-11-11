@@ -21,10 +21,6 @@ aaiuh/dsh-fnos
 
 # 手动刷新触发：2026-10-18T15:34
 
-# aaiuh/hermes-webui-fnos：Hermes Agent 官方 Web 界面（上游 nesquena/hermes-webui）的飞牛原生包。
-# 整包自带 Agent 运行时（CPython + venv），安装时不联网、不跑 npm；CI 每日跟随上游稳定 tag 自动重打。
-# 该仓库只发 Release、不带 fnpack.json，因此用 !release 让脚本直接读 .fpk 资产合成条目。
-aaiuh/hermes-webui-fnos!release https://raw.githubusercontent.com/aaiuh/hermes-webui-fnos/main/app/ui/images/icon_256.png AI赋能
 
 # kuilei0926/FnNginxConf：飞牛 Nginx 转发配置工具（可视化写 conf.d/fnnginx_conf.conf
 # 并重启 trim_nginx）。仓库只发 Release、不带 fnpack.json，用 !release 直接读 .fpk 资产；

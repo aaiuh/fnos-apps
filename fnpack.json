@@ -57,7 +57,7 @@
     },
     "HermesWeb": {
       "display_name": "Hermes Web",
-      "desc": "<p>Hermes Agent 的官方 Web 界面，飞牛 fnOS 原生封装。纯 Python，无构建步骤，会话、记忆与工作区与 Agent 完全共用。</p><p>⭐整包自带 Agent 运行时（CPython 3.14 + venv），安装时不联网、不跑 npm、不依赖系统 Node/Python。</p><p>📌使用说明：安装后在应用中心启动，浏览器打开 NAS 地址的 8787 端口即可。首次登录口令见应用说明，数据保存在本应用的共享目录，与已装的 Hermes Studio 完全独立。</p>",
+      "desc": "<p>Hermes Agent 的官方 Web 界面，飞牛 fnOS 原生封装。纯 Python，无构建步骤，会话、记忆与工作区与 Agent 完全共用。</p><p>⭐整包自带 Agent 运行时（CPython 3.14 + venv），安装时不联网、不跑 npm、不依赖系统 Node/Python。</p><p>📌使用说明：在应用中心直接点开即可（走飞牛统一网关，免二次登录）；手机或脚本也可直连 NAS 的 8787 端口。首次登录口令见应用说明，数据保存在本应用的共享目录，与已装的 Hermes Studio 完全独立。</p>",
       "platform": [
         "x86"
       ],
@@ -75,8 +75,20 @@
       "run_as": "package",
       "install_type": "",
       "is_docker": false,
-      "service_port": "8787",
+      "service_port": "",
       "releases": {
+        "0.52.544-11": {
+          "changelog": "跟随上游 nesquena/hermes-webui v0.52.544；整包自带 Agent 运行时，安装不联网。",
+          "updated_at": "2026-11-11",
+          "os_min_version": "1.1.0",
+          "packages": {
+            "x86": {
+              "download_url": "https://github.com/aaiuh/hermes-webui-fnos/releases/download/v0.52.544-11/HermesWeb.fpk",
+              "sha256": "e006a2eab86d1e557a99266fe400b2d92aa60fc03e17f672ea19a34c76ba2bf2",
+              "size": 282573402
+            }
+          }
+        },
         "0.52.544-4": {
           "changelog": "跟随上游 nesquena/hermes-webui v0.52.544（第 4 次修订）。整包自带 Agent 运行时，安装不联网。",
           "updated_at": "2026-11-10",
@@ -98,18 +110,6 @@
               "download_url": "https://github.com/aaiuh/hermes-webui-fnos/releases/download/v0.52.544-3/HermesWeb.fpk",
               "sha256": "d909172790df9b3ffc04a96051cf91c67ec93f246834c7e278212586bdd5d5e1",
               "size": 277272080
-            }
-          }
-        },
-        "0.52.544-2": {
-          "changelog": "跟随上游 nesquena/hermes-webui v0.52.544。\n\n- 整包自带 Agent 运行时（CPython 3.14 + venv），安装时不联网、不跑 npm、不依赖系统 Node/Python\n- appname HermesWeb，端口 8787，数据落 @appshare/HermesWeb\n- 启动脚本遵循 fnOS 生命周期协议（start/stop/status + pidfile）\n- 工作区默认指向 HERMES_HOME/workspace\n\n已在飞牛实测：安装、导入 4.98GB 完整备份、27,718 条消息与 14G 项目文件、登录与工作区均验证通过。",
-          "updated_at": "2026-11-10",
-          "os_min_version": "1.1.0",
-          "packages": {
-            "x86": {
-              "download_url": "https://github.com/aaiuh/hermes-webui-fnos/releases/download/v0.52.544-2/HermesWeb.fpk",
-              "sha256": "d23b34e35495ca5a80e41c29482cfb73d1af14ac1754cb515a47af8d552dfa07",
-              "size": 277272084
             }
           }
         }
@@ -438,6 +438,23 @@
       "is_docker": false,
       "service_port": "8089",
       "releases": {
+        "1.0.3b5": {
+          "changelog": "### 新增\n- 桌面客户端改为 Electron 壳，登录过期后自动续上\n- 自定义 MCP 可填写 OAuth 应用凭证并完成授权\n- 新增 `octop migrate openclaw` / `octop migrate hermes`，把原有助手迁到一个专家\n- 知识库内的文档和文件夹可以移动。共享专家上可以分享对话\n- 专家市场默认打开「精选」。管理员可按用户查看用量\n\n### 变更\n- 桌面端不再使用 Wails\n- 升级 octop-harness 至 1.0.9、octop-memory 至 1.0.4\n\n### 修复\n- 下线 history v2，启动时把已有归档迁回原有历史表\n- 云端协同不再因心跳超时反复断开\n- 共享会话的回复不再重叠。聊天里的模型和提问顺序保持正确\n\n\n## Downloads\n\nDesktop installers bundle the browser extra only. Desktop control, OCR, and local embedding stay on the Docker full image.\n\n### Windows\n\n#### Desktop installer\n- [64-bit (Recommended)](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b5/Octop-desktop-windows-amd64-1.0.3b5.exe) | [ARM64](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b5/Octop-desktop-windows-arm64-1.0.3b5.exe)\n\n#### Portable\n- [64-bit](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b5/Octop-portable-windows-amd64-1.0.3b5.zip) | [ARM64](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b5/Octop-portable-windows-arm64-1.0.3b5.zip)\n\n### macOS\n\n#### Desktop installer\n- [Apple Silicon](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b5/Octop-desktop-darwin-arm64-1.0.3b5.dmg) | [Intel](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b5/Octop-desktop-darwin-amd64-1.0.3b5.dmg)\n\n#### Portable\n- [Apple Silicon](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b5/Octop-portable-darwin-arm64-1.0.3b5.zip) | [Intel](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b5/Octop-portable-darwin-amd64-1.0.3b5.zip)\n\n### Linux\n\n#### Desktop installer (deb)\n- [64-bit](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b5/Octop-desktop-linux-amd64-1.0.3b5.deb) | [ARM64](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b5/Octop-desktop-linux-arm64-1.0.3b5.deb)\n\n#### rpm\n- [amd64](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b5/Octop-desktop-linux-amd64-1.0.3b5.rpm) | [arm64](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b5/Octop-desktop-linux-arm64-1.0.3b5.rpm)\n\n#### Portable\n- [64-bit](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b5/Octop-portable-linux-amd64-1.0.3b5.zip) | [ARM64](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b5/Octop-portable-linux-arm64-1.0.3b5.zip)\n\n### Docker image\n\n- Lite: `ghcr.io/tencentcloud/octop:1.0.3b5` (`:latest`)\n- Full: `ghcr.io/tencentcloud/octop:1.0.3b5-full` (`:full`)\n\n### fnOS NAS\n- [Docker lite (x86 and ARM)](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b5/Octop-fnos-docker-lite-1.0.3b5.fpk) | [Docker full (desktop, OCR, local models; x86 and ARM)](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b5/Octop-fnos-docker-1.0.3b5.fpk) | [Native x86_64](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b5/Octop-fnos-native-amd64-1.0.3b5.fpk) | [Native ARM64 (no Docker)](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b5/Octop-fnos-native-arm64-1.0.3b5.fpk)\n\n## What's Changed\n* fix(memory): preserve capture and recall runtime switches by @mmhh256 in https://github.com/TencentCloud/Octop/pull/2296\n* chore: sync main into develop after 1.0.3b4 by @github-actions[bot] in https://github.com/TencentCloud/Octop/pull/2858\n* fix(ci): build darwin-arm64 desktop packages on macos-15 by @liukewia in https://github.com/TencentCloud/Octop/pull/2865\n* fix(models,bridge): keep pool preference out of chat and explain collab failures by @jubaoliang in https://github.com/TencentCloud/Octop/pull/2874\n* fix: close the open bug batch and mark pre-market experts as featured by @jubaoliang in https://github.com/TencentCloud/Octop/pull/2878\n* feat(chat): share conversations on a shared expert by @jubaoliang in https://github.com/TencentCloud/Octop/pull/2877\n* fix: keep provider defaults, model names, and upgrade prompts honest by @jubaoliang in https://github.com/TencentCloud/Octop/pull/2880\n* fix(packaging): add python-socks for SOCKS proxy browser attach by @huangche",
+          "updated_at": "2026-11-11",
+          "os_min_version": "1.1.0",
+          "packages": {
+            "x86": {
+              "download_url": "https://github.com/TencentCloud/Octop/releases/download/v1.0.3b5/Octop-fnos-native-amd64-1.0.3b5.fpk",
+              "sha256": "c58a93594c23a43fd9bfaa5400d94b326e19f43ede280043c66b05e3212de0f5",
+              "size": 243657295
+            },
+            "arm": {
+              "download_url": "https://github.com/TencentCloud/Octop/releases/download/v1.0.3b5/Octop-fnos-native-arm64-1.0.3b5.fpk",
+              "sha256": "0c51ab50d9f38164e4e499b3f414b1116ba0978a673d95da2dc783ed9765e955",
+              "size": 242262349
+            }
+          }
+        },
         "1.0.3b4": {
           "changelog": "### 新增\n- 工作台增加云主机页：授权后查看腾讯云 CVM，并由常驻运维专家巡检和变更\n- 后台标签页的定时提醒改为系统通知\n- 启动时同步新的预置模型，腾讯云通道支持 HY4\n\n### 修复\n- 共享专家能用查看者的自定义 MCP 名称\n- 编辑团队会保存示例头像\n- Docker 精简镜像在编译器已移除后仍能发布\n\n### 变更\n- 多实例部署时，腾讯云授权改存在控制面；单机仍用本地文件\n- 云服务器页移到工作台末尾，并注明目前只支持腾讯云 CVM\n- 默认 Docker 标签改为精简版，完整版使用 `:<version>-full` 和 `:full`\n- 连接器可按类别筛选，大额 token 用量会缩写\n- 升级 octop-harness 至 1.0.8\n\n\n## Downloads\n\n### Windows\n\n#### Desktop installer (Recommended)\n- [64-bit (Recommended)](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b4/Octop-desktop-windows-amd64-1.0.3b4.exe) | [ARM64](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b4/Octop-desktop-windows-arm64-1.0.3b4.exe)\n\n#### Portable\n- [64-bit](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b4/Octop-portable-windows-amd64-1.0.3b4.zip) | [ARM64](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b4/Octop-portable-windows-arm64-1.0.3b4.zip)\n\n### macOS\n\n#### Desktop installer (Recommended)\n- [Apple Silicon](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b4/Octop-desktop-darwin-arm64-1.0.3b4.dmg) | [Intel](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b4/Octop-desktop-darwin-amd64-1.0.3b4.dmg)\n\n#### Portable\n- [Apple Silicon](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b4/Octop-portable-darwin-arm64-1.0.3b4.zip) | [Intel](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b4/Octop-portable-darwin-amd64-1.0.3b4.zip)\n\n### Linux\n\n#### Desktop installer (Recommended)\n- [64-bit](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b4/Octop-desktop-linux-amd64-1.0.3b4.tar.gz) | [ARM64](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b4/Octop-desktop-linux-arm64-1.0.3b4.tar.gz)\n\n#### Portable\n- [64-bit](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b4/Octop-portable-linux-amd64-1.0.3b4.zip) | [ARM64](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b4/Octop-portable-linux-arm64-1.0.3b4.zip)\n\n### Docker image\n\n- Lite: `ghcr.io/tencentcloud/octop:1.0.3b4` (`:latest`)\n- Full: `ghcr.io/tencentcloud/octop:1.0.3b4-full` (`:full`)\n\n### fnOS NAS\n- [Docker lite (x86 and ARM)](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b4/Octop-fnos-docker-lite-1.0.3b4.fpk) | [Docker full (desktop, OCR, local models; x86 and ARM)](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b4/Octop-fnos-docker-1.0.3b4.fpk) | [Native x86_64](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b4/Octop-fnos-native-amd64-1.0.3b4.fpk) | [Native ARM64 (no Docker)](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b4/Octop-fnos-native-arm64-1.0.3b4.fpk)\n\n## What's Changed\n* chore: sync main into develop after 1.0.3b3 by @github-actions[bot] in https://github.com/TencentCloud/Octop/pull/2822\n* fix: persist team sample avatars when editing a team by @jubaoliang in https://github.com/TencentCloud/Octop/pull/2844\n* fix: let Docker publish finish when the compiler is already removed by @jubaoliang in https://github.com/TencentCloud/Octop/pull/2842\n* feat(providers): sync new preset models on startup and support HY4 by @Bosheng0422 in https://github.com/TencentCloud/Octop/pull/2830\n* fix: map shared custom MCP names onto the expert harness by @jubaoliang in https://github.com/TencentCloud/Octop/pull/2848\n* Feat/cloud hosts console by @seed30 in https://github.com/TencentCloud/Octop/pull/2778\n* fix(cloud): keep the cloud tab last and note Tencent-only support by @jubaoliang in https://github.com/TencentCloud/Octop/pull/2850\n* feat(dashboard): show cron reminders as system notifications in background tabs by @jubaoliang in https://github.com/TencentCloud/Octop/pull/2851\n* fix(cloud): share Tencent Cloud logins through PostgreSQL by @jubaoliang in https://github.com/TencentCloud/Octop/pull/2854\n* chore: release 1.0.3b4 by @jubaoliang in https://github.com/TencentCloud/Octop/pull/2855\n\n\n**Full Changelog**: https://github.com/TencentCloud/Octop/compare/v1.0.3b3...v1.0.3b4",
           "updated_at": "2026-11-06",
@@ -469,23 +486,6 @@
               "download_url": "https://github.com/TencentCloud/Octop/releases/download/v1.0.3b3/Octop-fnos-native-arm64-1.0.3b3.fpk",
               "sha256": "f6d2ea214b384cb875a9e071ecc851b3b7ed386484dcbbf15e2e40d06cad3bc6",
               "size": 217763564
-            }
-          }
-        },
-        "1.0.3b2": {
-          "changelog": "### 新增\n- 账号支持 TOTP 与 Passkey：二次验证、无密码登录和恢复码\n- 新增 ragflow 知识库连接器\n\n### 修复\n- 记住登录会自动续期，改密码会退出其他设备。缺 MFA 表的旧库会自动补齐\n- 极简模式里，专家会话超过 10 条可以继续展开。长代码在气泡里换行，已结束的一轮不会在历史加载后再出现一次\n- 停用的会话模型回到 Auto。钉钉和微信切换时，草稿与二维码不再串台，登录回调会保留转发端口\n- 更早回合生成的文件不会再次发出。对话轨迹记下模型实际收到的系统提示\n\n### 变更\n- 通行密钥登录默认关闭，要在应用设置里打开。修改密码放在「账户安全」里\n- 虚拟桌面和系统浏览器默认不启动。未选 MBTI 时显示「未设置」\n- 升级 octop-harness 1.0.6\n\n\n## Downloads\n\n### Windows\n\n#### Desktop installer (Recommended)\n- [64-bit (Recommended)](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b2/Octop-desktop-windows-amd64-1.0.3b2.exe) | [ARM64](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b2/Octop-desktop-windows-arm64-1.0.3b2.exe)\n\n#### Portable\n- [64-bit](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b2/Octop-portable-windows-amd64-1.0.3b2.zip) | [ARM64](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b2/Octop-portable-windows-arm64-1.0.3b2.zip)\n\n### macOS\n\n#### Desktop installer (Recommended)\n- [Apple Silicon](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b2/Octop-desktop-darwin-arm64-1.0.3b2.dmg) | [Intel](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b2/Octop-desktop-darwin-amd64-1.0.3b2.dmg)\n\n#### Portable\n- [Apple Silicon](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b2/Octop-portable-darwin-arm64-1.0.3b2.zip) | [Intel](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b2/Octop-portable-darwin-amd64-1.0.3b2.zip)\n\n### Linux\n\n#### Desktop installer (Recommended)\n- [64-bit](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b2/Octop-desktop-linux-amd64-1.0.3b2.tar.gz) | [ARM64](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b2/Octop-desktop-linux-arm64-1.0.3b2.tar.gz)\n\n#### Portable\n- [64-bit](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b2/Octop-portable-linux-amd64-1.0.3b2.zip) | [ARM64](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b2/Octop-portable-linux-arm64-1.0.3b2.zip)\n\n### fnOS NAS\n- [Docker (recommended; x86 and ARM)](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b2/Octop-fnos-docker-1.0.3b2.fpk) | [Native x86_64](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b2/Octop-fnos-native-1.0.3b2.fpk) | [Native ARM64 (no Docker)](https://github.com/TencentCloud/Octop/releases/download/v1.0.3b2/Octop-fnos-native-arm64-1.0.3b2.fpk)\n\n\n## What's Changed\n* chore: sync main into develop after 1.0.3b1 by @github-actions[bot] in https://github.com/TencentCloud/Octop/pull/2402\n* feat(connectors): add ragflow knowledge connector (#2308) by @Pandakingxbc in https://github.com/TencentCloud/Octop/pull/2403\n* fix(channels): prevent repeated requests when switching channel types (#2314) by @Pandakingxbc in https://github.com/TencentCloud/Octop/pull/2390\n* fix(chat): reset disabled conversation models to Auto (#2316) by @Pandakingxbc in https://github.com/TencentCloud/Octop/pull/2407\n* feat: opt in bundled desktop and harden chat turns by @jubaoliang in https://github.com/TencentCloud/Octop/pull/2446\n* fix(chat): don't append a finished turn again after history loads by @Bosheng0422 in https://github.com/TencentCloud/Octop/pull/2441\n* fix: preserve forwarded ports in OAuth callback URLs by @Bosheng0422 in https://github.com/TencentCloud/Octop/pull/2460\n* docs: document which runtime library owns a change by @liukewia in https://github.com/TencentCloud/Octop/pull/2463\n* fix(chat): wrap long inline code inside message bubbles by @liukewia in https://github.com/TencentCloud/Octop/pull/2411\n* feat: record the model system prompt and harden chat, connectors, and images by @jubaoliang in https://github.com/TencentCloud/Octop/pull/2700\n* feat(auth): TOTP/passkey MFA and passwordless passkey login by @huangcheng in https://github.com/TencentCloud/Octop/pull/2350\n* feat: renew remembered sessions and simplify sharing and chat nav by @jubaoliang in https://github.com/TencentCloud/Octop/pull/2724\n* feat: gate passkey sign-in and fold passwo",
-          "updated_at": "2026-11-02",
-          "os_min_version": "1.1.0",
-          "packages": {
-            "x86": {
-              "download_url": "https://github.com/TencentCloud/Octop/releases/download/v1.0.3b2/Octop-fnos-native-1.0.3b2.fpk",
-              "sha256": "59f297a21a4ccee41c7b10fad4acee857fd035baf94e3a31f120667a21c118f9",
-              "size": 209991306
-            },
-            "arm": {
-              "download_url": "https://github.com/TencentCloud/Octop/releases/download/v1.0.3b2/Octop-fnos-native-arm64-1.0.3b2.fpk",
-              "sha256": "9339af41f74bfbf87bed74f7818a4be315ec988ff99888ccedea6b132bc81a36",
-              "size": 208520068
             }
           }
         }

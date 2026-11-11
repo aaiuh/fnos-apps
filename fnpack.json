@@ -55,66 +55,6 @@
         }
       }
     },
-    "HermesWeb": {
-      "display_name": "Hermes Web",
-      "desc": "<p>Hermes Agent 的官方 Web 界面，飞牛 fnOS 原生封装。纯 Python，无构建步骤，会话、记忆与工作区与 Agent 完全共用。</p><p>⭐整包自带 Agent 运行时（CPython 3.14 + venv），安装时不联网、不跑 npm、不依赖系统 Node/Python。</p><p>📌使用说明：在应用中心直接点开即可（走飞牛统一网关，免二次登录）；手机或脚本也可直连 NAS 的 8787 端口。首次登录口令见应用说明，数据保存在本应用的共享目录，与已装的 Hermes Studio 完全独立。</p>",
-      "platform": [
-        "x86"
-      ],
-      "categories": [
-        "AI赋能"
-      ],
-      "icon_url": "https://raw.githubusercontent.com/aaiuh/hermes-webui-fnos/main/app/ui/images/icon_256.png",
-      "preview_urls": [],
-      "readme_url": "https://raw.githubusercontent.com/aaiuh/hermes-webui-fnos/main/README.md",
-      "bug_report_url": "https://github.com/aaiuh/hermes-webui-fnos/issues",
-      "maintainer": "nesquena",
-      "maintainer_url": "https://github.com/aaiuh",
-      "distributor": "aaiuh",
-      "distributor_url": "https://github.com/aaiuh",
-      "run_as": "package",
-      "install_type": "",
-      "is_docker": false,
-      "service_port": "",
-      "releases": {
-        "0.52.544-11": {
-          "changelog": "跟随上游 nesquena/hermes-webui v0.52.544；整包自带 Agent 运行时，安装不联网。",
-          "updated_at": "2026-11-11",
-          "os_min_version": "1.1.0",
-          "packages": {
-            "x86": {
-              "download_url": "https://github.com/aaiuh/hermes-webui-fnos/releases/download/v0.52.544-11/HermesWeb.fpk",
-              "sha256": "e006a2eab86d1e557a99266fe400b2d92aa60fc03e17f672ea19a34c76ba2bf2",
-              "size": 282573402
-            }
-          }
-        },
-        "0.52.544-4": {
-          "changelog": "跟随上游 nesquena/hermes-webui v0.52.544（第 4 次修订）。整包自带 Agent 运行时，安装不联网。",
-          "updated_at": "2026-11-10",
-          "os_min_version": "1.1.0",
-          "packages": {
-            "x86": {
-              "download_url": "https://github.com/aaiuh/hermes-webui-fnos/releases/download/v0.52.544-4/HermesWeb.fpk",
-              "sha256": "d5bb94deebe75cc0c9b7530ea3854e8e7c714c1b74e0254ce805af23dcd2dcf0",
-              "size": 268655880
-            }
-          }
-        },
-        "0.52.544-3": {
-          "changelog": "",
-          "updated_at": "2026-11-10",
-          "os_min_version": "1.1.0",
-          "packages": {
-            "x86": {
-              "download_url": "https://github.com/aaiuh/hermes-webui-fnos/releases/download/v0.52.544-3/HermesWeb.fpk",
-              "sha256": "d909172790df9b3ffc04a96051cf91c67ec93f246834c7e278212586bdd5d5e1",
-              "size": 277272080
-            }
-          }
-        }
-      }
-    },
     "Hindsight": {
       "display_name": "Hindsight 记忆库",
       "desc": "Agent 长期记忆系统，原生运行于飞牛 fnOS，不依赖 Docker。内置 PostgreSQL 与向量检索，支持 onnx 语义嵌入与 flashrank 重排，提供 REST/MCP 接口与 Web 控制台。支持飞牛应用备份与恢复。管理界面需要系统已安装 Node.js 20 以上（不随包携带）。",

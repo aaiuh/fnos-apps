@@ -55,42 +55,6 @@
         }
       }
     },
-    "Hermes": {
-      "display_name": "Ekko Studio",
-      "desc": "Ekko Studio（上游名 Hermes Studio / Hermes Web UI）的飞牛 fnOS 原生封装。<br/><br/><strong>与官方包的区别：</strong>前端按 <code>/studio/</code> 子路径重新构建，因此可以直接挂在飞牛网关或反向代理的子路径下打开，前端资源不再指向站点根路径，不会与飞牛自身的 <code>/assets</code> 冲突。<br/><br/><strong>三个入口：</strong><br/>1. 飞牛桌面点图标——内嵌打开，无需登录飞牛；<br/>2. 子路径访问 <code>http://设备IP:8648/studio/</code>，或经 FnNginxConf / 飞牛网关反代到子路径；<br/>3. 局域网直连 <code>http://设备IP:8648</code>（非 /studio 路径会自动跳转）。<br/><br/><strong>说明：</strong><br/>1. 复用系统已装的 Node.js 24 运行时，不打包 Node，不使用 Docker；<br/>2. 会话、配置与工作目录保存在应用共享目录内，升级与卸载都会保留；<br/>3. 由 GitHub Actions 跟随上游 EKKOLearnAI/ekko-studio 自动重新构建并打包。",
-      "platform": [
-        "x86"
-      ],
-      "categories": [
-        "AI赋能"
-      ],
-      "icon_url": "https://raw.githubusercontent.com/aaiuh/ekko-studio-fnos/main/ICON_256.PNG",
-      "preview_urls": [],
-      "readme_url": "https://raw.githubusercontent.com/aaiuh/ekko-studio-fnos/main/README.md",
-      "bug_report_url": "https://github.com/aaiuh/ekko-studio-fnos/issues",
-      "maintainer": "EKKOLearnAI",
-      "maintainer_url": "https://github.com/EKKOLearnAI/ekko-studio",
-      "distributor": "aaiuh",
-      "distributor_url": "https://github.com/aaiuh/ekko-studio-fnos",
-      "run_as": "package",
-      "install_type": "",
-      "is_docker": false,
-      "service_port": "8648",
-      "releases": {
-        "0.8.23-1": {
-          "changelog": "首个版本，跟随上游 Ekko Studio 0.8.23。\n\n前端按 /studio/ 子路径构建（使用上游 STUDIO_BASE_PATH 环境变量，未改动源码），可直接挂在飞牛网关或反向代理的子路径下打开。",
-          "updated_at": "2026-11-14",
-          "os_min_version": "1.1.3100",
-          "packages": {
-            "x86": {
-              "download_url": "https://github.com/aaiuh/ekko-studio-fnos/releases/download/v0.8.23-1/ekko-studio-fnos-0.8.23-1-x86.fpk",
-              "sha256": "6163bc519e8ce60f210bc5527612814342cb9c74cd87a1237056103ba7357281",
-              "size": 316330628
-            }
-          }
-        }
-      }
-    },
     "Hindsight": {
       "display_name": "Hindsight 记忆库",
       "desc": "Agent 长期记忆系统，原生运行于飞牛 fnOS，不依赖 Docker。内置 PostgreSQL 与向量检索，支持 onnx 语义嵌入与 flashrank 重排，提供 REST/MCP 接口与 Web 控制台。支持飞牛应用备份与恢复。管理界面需要系统已安装 Node.js 20 以上（不随包携带）。",
@@ -386,6 +350,42 @@
               "download_url": "https://github.com/aaiuh/dsh-fnos/releases/download/v0.2.2-6/dsh-fnos-0.2.2-6-x86.fpk",
               "sha256": "2d21a6ad0278103ac5b5eeee04036ebda7666e3d061b9740104c95c4e435644d",
               "size": 44441
+            }
+          }
+        }
+      }
+    },
+    "ekko-studio": {
+      "display_name": "Ekko Studio",
+      "desc": "Ekko Studio（上游包名 hermes-web-ui）的飞牛原生<strong>界面包</strong>。它只提供界面，不含 Agent 内核——内核与数据由独立的 Hermes 应用提供，所以界面和内核可以各自升级、互不影响。<br/><br/><strong>本包做了什么：</strong><br/>1. 前端按 <code>/studio/</code> 子路径构建（使用上游自带的 <code>STUDIO_BASE_PATH</code>，未改动源码），因此能挂在反向代理或飞牛网关的子路径下打开；<br/>2. 启动时以 root 起、再降权回 Hermes 用户运行，数据目录里的文件属主与权限保持原样；<br/>3. 复用系统已装的 Node.js 24 运行时，不打包 Node，不使用 Docker。<br/><br/><strong>依赖说明：</strong><br/>需要先装有 Hermes 应用（内核与数据都在它那里）。本包不复制、不移动、不改写任何数据。",
+      "platform": [
+        "x86"
+      ],
+      "categories": [
+        "AI赋能"
+      ],
+      "icon_url": "https://raw.githubusercontent.com/aaiuh/ekko-studio-fnos/main/ICON_256.PNG",
+      "preview_urls": [],
+      "readme_url": "https://raw.githubusercontent.com/aaiuh/ekko-studio-fnos/main/README.md",
+      "bug_report_url": "https://github.com/aaiuh/ekko-studio-fnos/issues",
+      "maintainer": "EKKOLearnAI",
+      "maintainer_url": "https://github.com/EKKOLearnAI/ekko-studio",
+      "distributor": "aaiuh",
+      "distributor_url": "https://github.com/aaiuh/ekko-studio-fnos",
+      "run_as": "root",
+      "install_type": "",
+      "is_docker": false,
+      "service_port": "8650",
+      "releases": {
+        "0.8.23-4": {
+          "changelog": "跟随上游 Ekko Studio 0.8.23。独立界面包，不含 Agent 内核；数据与内核沿用 Hermes 应用，两者可独立升级。",
+          "updated_at": "2026-11-14",
+          "os_min_version": "1.1.3100",
+          "packages": {
+            "x86": {
+              "download_url": "https://github.com/aaiuh/ekko-studio-fnos/releases/download/v0.8.23-4/ekko-studio-0.8.23-4-x86.fpk",
+              "sha256": "99f54494f16a29e954bfc2a33e9842777020b355db471a18cc2ef4d32ef8fea0",
+              "size": 316411214
             }
           }
         }

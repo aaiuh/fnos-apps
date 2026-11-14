@@ -451,6 +451,48 @@
         }
       }
     },
+    "hermes-console": {
+      "display_name": "Hermes 管理台",
+      "desc": "Hermes / Ekko Studio 的独立管理工作台。用 Go 实现，单个静态二进制约 3 MB，不依赖 Node、Python 或 Docker。<br/><br/><strong>能做什么：</strong><br/>1. <strong>检测与升级 Agent 内核</strong>——读取本机内核版本与上游提交，比对上游 Release，一键升级并完整回显过程；<br/>2. <strong>检测与升级 Studio 界面</strong>——比对 npm 上的最新版本，下载替换本体，旧版自动留作备份可回滚；<br/>3. <strong>服务状态与启停</strong>——Studio 界面与 Hermes 网关的运行状态、端口占用，支持启动、停止、重启；<br/>4. <strong>日志查看</strong>——自动发现应用日志，可按秒自动刷新；<br/>5. <strong>路径设置</strong>——受管应用名、安装目录、数据目录、网关单元都可改，默认自动探测。<br/><br/><strong>说明：</strong><br/>1. 本应用以 root 身份运行，因为要读写 Studio 的安装目录才能完成升级；<br/>2. 工作台本身不存放会话数据，它只管已经装好的 Hermes / Studio，卸载本应用不影响它们；<br/>3. 端口默认 8649，装完访问 http://设备IP:8649 。",
+      "platform": [
+        "x86",
+        "arm"
+      ],
+      "categories": [
+        "系统工具"
+      ],
+      "icon_url": "https://raw.githubusercontent.com/aaiuh/hermes-console/main/ICON_256.PNG",
+      "preview_urls": [],
+      "readme_url": "https://raw.githubusercontent.com/aaiuh/hermes-console/main/README.md",
+      "bug_report_url": "https://github.com/aaiuh/hermes-console/issues",
+      "maintainer": "aaiuh",
+      "maintainer_url": "https://github.com/aaiuh/hermes-console",
+      "distributor": "aaiuh",
+      "distributor_url": "https://github.com/aaiuh/hermes-console",
+      "run_as": "root",
+      "install_type": "",
+      "is_docker": false,
+      "service_port": "8649",
+      "releases": {
+        "1.0.2": {
+          "changelog": "跟随源码更新。",
+          "updated_at": "2026-11-14",
+          "os_min_version": "1.1.3100",
+          "packages": {
+            "x86": {
+              "download_url": "https://github.com/aaiuh/hermes-console/releases/download/v1.0.2/hermes-console-1.0.2-x86.fpk",
+              "sha256": "fbe13a592e7e6e44565404205b2538a91ecb4ca5f3f7482d4a9fad013833c815",
+              "size": 3093335
+            },
+            "arm": {
+              "download_url": "https://github.com/aaiuh/hermes-console/releases/download/v1.0.2/hermes-console-1.0.2-arm.fpk",
+              "sha256": "6c0c82b781cc841ba49a48e0d874b67918963c33cf693b81ff5bd2663964579b",
+              "size": 2804064
+            }
+          }
+        }
+      }
+    },
     "octop-native": {
       "display_name": "Octop",
       "desc": "腾讯开源的多用户多智能体 AI 助手平台，支持 Web 控制台、CLI、IM 渠道与定时任务，数据全部本地存储。<br/><br/><strong>安装后使用：</strong><br/>请等到应用中心显示「运行中」再点「打开」，或访问 http://设备IP:8089，用安装向导里设置的用户名或邮箱登录。<br/>忘记密码时打开飞牛「文件管理」，进入应用共享里的 Octop 数据目录，查看 octop-login.txt（仅备份安装或应用「设置」改密；网页改密后不会自动更新）；也可在应用「设置」中改密。<br/><br/><strong>命令行管理：</strong><br/>支持官方 octop CLI（octop provider list / agent list / user list / skills / backup 等，详见 octop --help）。<br/><br/><strong>首次登录后：</strong><br/>请在控制台「设置 → 模型」配置 API Key，并按需配置 IM 渠道、远程桌面、浏览器等。<br/><br/>注意：本地版直接运行在飞牛主机上，安装前会自动关联安装「Python 3.12」开发工具。",

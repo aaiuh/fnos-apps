@@ -481,13 +481,30 @@
           "packages": {
             "x86": {
               "download_url": "https://github.com/aaiuh/hermes-console/releases/download/v1.0.2/hermes-console-1.0.2-x86.fpk",
-              "sha256": "fbe13a592e7e6e44565404205b2538a91ecb4ca5f3f7482d4a9fad013833c815",
-              "size": 3093335
+              "sha256": "eb205218e9ba294963d06efab2d0c9e9e06a0169b75a54c4c27cb400d575e359",
+              "size": 3093669
             },
             "arm": {
               "download_url": "https://github.com/aaiuh/hermes-console/releases/download/v1.0.2/hermes-console-1.0.2-arm.fpk",
-              "sha256": "6c0c82b781cc841ba49a48e0d874b67918963c33cf693b81ff5bd2663964579b",
-              "size": 2804064
+              "sha256": "8161c8b133509238cdad5235a5bdcf054c1b704d6a491bc751e610b1ac5f73ee",
+              "size": 2807089
+            }
+          }
+        },
+        "1.0.3": {
+          "changelog": "跟随源码更新。",
+          "updated_at": "2026-11-14",
+          "os_min_version": "1.1.3100",
+          "packages": {
+            "x86": {
+              "download_url": "https://github.com/aaiuh/hermes-console/releases/download/v1.0.3/hermes-console-1.0.3-x86.fpk",
+              "sha256": "6937cea8d6bda990d80d77ba95bfc32e4bc4447b581dfde2dd47137ce91e4caf",
+              "size": 3093908
+            },
+            "arm": {
+              "download_url": "https://github.com/aaiuh/hermes-console/releases/download/v1.0.3/hermes-console-1.0.3-arm.fpk",
+              "sha256": "8688fb8221d23b8735f6492685b9c2adecd8cda698189cafd45ebc7be889639e",
+              "size": 2807374
             }
           }
         }

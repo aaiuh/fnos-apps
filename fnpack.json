@@ -55,6 +55,42 @@
         }
       }
     },
+    "Hermes": {
+      "display_name": "Ekko Studio",
+      "desc": "Ekko Studio（上游名 Hermes Studio / Hermes Web UI）的飞牛 fnOS 原生封装。<br/><br/><strong>与官方包的区别：</strong>前端按 <code>/studio/</code> 子路径重新构建，因此可以直接挂在飞牛网关或反向代理的子路径下打开，前端资源不再指向站点根路径，不会与飞牛自身的 <code>/assets</code> 冲突。<br/><br/><strong>三个入口：</strong><br/>1. 飞牛桌面点图标——内嵌打开，无需登录飞牛；<br/>2. 子路径访问 <code>http://设备IP:8648/studio/</code>，或经 FnNginxConf / 飞牛网关反代到子路径；<br/>3. 局域网直连 <code>http://设备IP:8648</code>（非 /studio 路径会自动跳转）。<br/><br/><strong>说明：</strong><br/>1. 复用系统已装的 Node.js 24 运行时，不打包 Node，不使用 Docker；<br/>2. 会话、配置与工作目录保存在应用共享目录内，升级与卸载都会保留；<br/>3. 由 GitHub Actions 跟随上游 EKKOLearnAI/ekko-studio 自动重新构建并打包。",
+      "platform": [
+        "x86"
+      ],
+      "categories": [
+        "AI赋能"
+      ],
+      "icon_url": "https://raw.githubusercontent.com/aaiuh/ekko-studio-fnos/main/ICON_256.PNG",
+      "preview_urls": [],
+      "readme_url": "https://raw.githubusercontent.com/aaiuh/ekko-studio-fnos/main/README.md",
+      "bug_report_url": "https://github.com/aaiuh/ekko-studio-fnos/issues",
+      "maintainer": "EKKOLearnAI",
+      "maintainer_url": "https://github.com/EKKOLearnAI/ekko-studio",
+      "distributor": "aaiuh",
+      "distributor_url": "https://github.com/aaiuh/ekko-studio-fnos",
+      "run_as": "package",
+      "install_type": "",
+      "is_docker": false,
+      "service_port": "8648",
+      "releases": {
+        "0.8.23-1": {
+          "changelog": "首个版本，跟随上游 Ekko Studio 0.8.23。\n\n前端按 /studio/ 子路径构建（使用上游 STUDIO_BASE_PATH 环境变量，未改动源码），可直接挂在飞牛网关或反向代理的子路径下打开。",
+          "updated_at": "2026-11-14",
+          "os_min_version": "1.1.3100",
+          "packages": {
+            "x86": {
+              "download_url": "https://github.com/aaiuh/ekko-studio-fnos/releases/download/v0.8.23-1/ekko-studio-fnos-0.8.23-1-x86.fpk",
+              "sha256": "6163bc519e8ce60f210bc5527612814342cb9c74cd87a1237056103ba7357281",
+              "size": 316330628
+            }
+          }
+        }
+      }
+    },
     "Hindsight": {
       "display_name": "Hindsight 记忆库",
       "desc": "Agent 长期记忆系统，原生运行于飞牛 fnOS，不依赖 Docker。内置 PostgreSQL 与向量检索，支持 onnx 语义嵌入与 flashrank 重排，提供 REST/MCP 接口与 Web 控制台。支持飞牛应用备份与恢复。管理界面需要系统已安装 Node.js 20 以上（不随包携带）。",

@@ -27,10 +27,8 @@ aaiuh/dsh-fnos
 # 资产名带版本号（FnNginxConf-1.1.0.fpk），版本自动识别。
 kuilei0926/FnNginxConf!release https://raw.githubusercontent.com/kuilei0926/FnNginxConf/main/ICON_256.PNG 系统工具
 
-# aaiuh/ekko-studio-fnos：Ekko Studio（上游 EKKOLearnAI/ekko-studio）飞牛原生包，
 # 前端按 /studio/ 子路径重新构建，可挂反向代理子路径。appname 对齐官方包
 # （Hermes / 端口 8648），所以应用中心里显示为同一个应用，可原地替换。
-aaiuh/ekko-studio-fnos
 
 # aaiuh/hermes-console：Hermes / Ekko Studio 的独立管理工作台，Go 单文件约 3 MB，
 # 带 fnpack.json，x86 与 arm 双平台，CI 推送即自动出包。

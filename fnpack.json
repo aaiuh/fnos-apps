@@ -388,6 +388,18 @@
               "size": 316411214
             }
           }
+        },
+        "0.8.23-5": {
+          "changelog": "跟随上游 Ekko Studio 0.8.23。独立界面包，不含 Agent 内核；数据与内核沿用 Hermes 应用，两者可独立升级。",
+          "updated_at": "2026-11-14",
+          "os_min_version": "1.1.3100",
+          "packages": {
+            "x86": {
+              "download_url": "https://github.com/aaiuh/ekko-studio-fnos/releases/download/v0.8.23-5/ekko-studio-0.8.23-5-x86.fpk",
+              "sha256": "4a709b3c7a1f81a1913a0a4e77ec69ebfedc1b3e90788b67a5ee179ced097aa9",
+              "size": 316330535
+            }
+          }
         }
       }
     },

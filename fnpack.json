@@ -355,66 +355,6 @@
         }
       }
     },
-    "ekko-studio": {
-      "display_name": "Ekko Studio",
-      "desc": "Ekko Studio（上游包名 hermes-web-ui）的飞牛原生<strong>界面包</strong>。它只提供界面，不含 Agent 内核——内核与数据由独立的 Hermes 应用提供，所以界面和内核可以各自升级、互不影响。<br/><br/><strong>本包做了什么：</strong><br/>1. 前端按 <code>/studio/</code> 子路径构建（使用上游自带的 <code>STUDIO_BASE_PATH</code>，未改动源码），因此能挂在反向代理或飞牛网关的子路径下打开；<br/>2. 启动时以 root 起、再降权回 Hermes 用户运行，数据目录里的文件属主与权限保持原样；<br/>3. 复用系统已装的 Node.js 24 运行时，不打包 Node，不使用 Docker。<br/><br/><strong>依赖说明：</strong><br/>需要先装有 Hermes 应用（内核与数据都在它那里）。本包不复制、不移动、不改写任何数据。",
-      "platform": [
-        "x86"
-      ],
-      "categories": [
-        "AI赋能"
-      ],
-      "icon_url": "https://raw.githubusercontent.com/aaiuh/ekko-studio-fnos/main/ICON_256.PNG",
-      "preview_urls": [],
-      "readme_url": "https://raw.githubusercontent.com/aaiuh/ekko-studio-fnos/main/README.md",
-      "bug_report_url": "https://github.com/aaiuh/ekko-studio-fnos/issues",
-      "maintainer": "EKKOLearnAI",
-      "maintainer_url": "https://github.com/EKKOLearnAI/ekko-studio",
-      "distributor": "aaiuh",
-      "distributor_url": "https://github.com/aaiuh/ekko-studio-fnos",
-      "run_as": "root",
-      "install_type": "",
-      "is_docker": false,
-      "service_port": "8650",
-      "releases": {
-        "0.8.23-4": {
-          "changelog": "跟随上游 Ekko Studio 0.8.23。独立界面包，不含 Agent 内核；数据与内核沿用 Hermes 应用，两者可独立升级。",
-          "updated_at": "2026-11-14",
-          "os_min_version": "1.1.3100",
-          "packages": {
-            "x86": {
-              "download_url": "https://github.com/aaiuh/ekko-studio-fnos/releases/download/v0.8.23-4/ekko-studio-0.8.23-4-x86.fpk",
-              "sha256": "99f54494f16a29e954bfc2a33e9842777020b355db471a18cc2ef4d32ef8fea0",
-              "size": 316411214
-            }
-          }
-        },
-        "0.8.23-5": {
-          "changelog": "跟随上游 Ekko Studio 0.8.23。独立界面包，不含 Agent 内核；数据与内核沿用 Hermes 应用，两者可独立升级。",
-          "updated_at": "2026-11-14",
-          "os_min_version": "1.1.3100",
-          "packages": {
-            "x86": {
-              "download_url": "https://github.com/aaiuh/ekko-studio-fnos/releases/download/v0.8.23-5/ekko-studio-0.8.23-5-x86.fpk",
-              "sha256": "4a709b3c7a1f81a1913a0a4e77ec69ebfedc1b3e90788b67a5ee179ced097aa9",
-              "size": 316330535
-            }
-          }
-        },
-        "0.8.23-6": {
-          "changelog": "跟随上游 Ekko Studio 0.8.23。独立界面包，不含 Agent 内核；数据与内核沿用 Hermes 应用，两者可独立升级。",
-          "updated_at": "2026-11-15",
-          "os_min_version": "1.1.3100",
-          "packages": {
-            "x86": {
-              "download_url": "https://github.com/aaiuh/ekko-studio-fnos/releases/download/v0.8.23-6/ekko-studio-0.8.23-6-x86.fpk",
-              "sha256": "dced60de76c3ef5dbf35b9cfd3561488e51734ffd21a26029bafd748a1475384",
-              "size": 316304634
-            }
-          }
-        }
-      }
-    },
     "fnmusic-ext": {
       "display_name": "fnMusic 音源扩展",
       "desc": "飞牛音乐第三方音源扩展：零侵入接管官方音乐入口，提供 musicdl 聚合、网易云、洛雪自定义源在线搜索播放，内置管理页（音源切换/扫码登录/平台选择/边听边存）。",

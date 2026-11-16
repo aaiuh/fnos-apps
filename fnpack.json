@@ -352,6 +352,18 @@
               "size": 44441
             }
           }
+        },
+        "0.2.2-8": {
+          "changelog": "跟随上游 dsh 0.2.2-rc.1。\n\n上游 dsh 0.2.2-rc.1。",
+          "updated_at": "2026-11-16",
+          "os_min_version": "1.1.3100",
+          "packages": {
+            "x86": {
+              "download_url": "https://github.com/aaiuh/dsh-fnos/releases/download/v0.2.2-8/dsh-fnos-0.2.2-8-x86.fpk",
+              "sha256": "e7066ffe7038672643ce001e47d3a359e1aa5b3c20b92b73d0534a15699e1473",
+              "size": 45802
+            }
+          }
         }
       }
     },
@@ -572,6 +584,18 @@
       "is_docker": false,
       "service_port": "7863",
       "releases": {
+        "2.12.0-1": {
+          "changelog": "自动构建于上游 v2.12.0 (rockswang/wild-work releases)。下载 wildwork-2.12.0-1.fpk 在飞牛 fnOS 应用中心手动安装。",
+          "updated_at": "2026-11-16",
+          "os_min_version": "1.1.0",
+          "packages": {
+            "x86": {
+              "download_url": "https://github.com/mickeyttsc/wild-work-fpk/releases/download/v2.12.0/wildwork-2.12.0-1.fpk",
+              "sha256": "9f81be6907eacb91f3de62da93853e76102296f41a065ba9d738d4e3e7dbbff0",
+              "size": 10213335
+            }
+          }
+        },
         "2.11.7-1": {
           "changelog": "自动构建于上游 v2.11.7 (rockswang/wild-work releases)。下载 wildwork-2.11.7-1.fpk 在飞牛 fnOS 应用中心手动安装。",
           "updated_at": "2026-11-13",
@@ -593,18 +617,6 @@
               "download_url": "https://github.com/mickeyttsc/wild-work-fpk/releases/download/v2.11.6/wildwork-2.11.6-1.fpk",
               "sha256": "9079dc34544a8a9897a6eabc3a81bd9ea0827c1e40319b38d05099788fb640ad",
               "size": 10104742
-            }
-          }
-        },
-        "2.11.5-1": {
-          "changelog": "自动构建于上游 v2.11.5 (rockswang/wild-work releases)。下载 wildwork-2.11.5-1.fpk 在飞牛 fnOS 应用中心手动安装。",
-          "updated_at": "2026-11-04",
-          "os_min_version": "1.1.0",
-          "packages": {
-            "x86": {
-              "download_url": "https://github.com/mickeyttsc/wild-work-fpk/releases/download/v2.11.5/wildwork-2.11.5-1.fpk",
-              "sha256": "306fb0812f7a8f6e9130551d52f7c6ad2d582742b6919bba83e1e90bff88da32",
-              "size": 10015501
             }
           }
         }

@@ -291,8 +291,14 @@ def fetch_from_releases(repo: str, icon: str = "", categories: list[str] | None 
             continue
         # Gitee 没有 published_at，退回 created_at
         ts = rel.get("published_at") or rel.get("created_at") or ""
+        body = (rel.get("body") or "").strip()
+        if len(body) > 4000:
+            body = body[:4000]
+            # 截断点若落在 URL 中间，会留下 https://github.co 这类半截 host，
+            # 让索引的地址白名单自检失败。把末尾残缺的 URL 整段丢掉。
+            body = re.sub(r"https?://\S*$", "", body).rstrip()
         releases[ver] = {
-            "changelog": (rel.get("body") or "").strip()[:4000],
+            "changelog": body,
             "updated_at": str(ts)[:10],
             "os_min_version": meta.get("os_min_version") or "1.1.0",
             "packages": {

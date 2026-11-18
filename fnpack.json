@@ -503,15 +503,15 @@
             }
           }
         },
-        "0.23.2-8": {
-          "changelog": "从 Nous 官方源码 v0.23.2（ae2a81ccc00e）构建；独立端口 9121 与数据目录 @appshare/hermes-official，走飞牛统一网关入口，可与其他 Hermes 应用并存。",
+        "0.23.2-9": {
+          "changelog": "桌面图标改为直连端口；shim 修复子路径登录跳转；内核 .venv 路径与 webapp 回环绑定修正。",
           "updated_at": "2026-11-18",
           "os_min_version": "1.1.3100",
           "packages": {
             "x86": {
-              "download_url": "https://github.com/aaiuh/hermes-fnos/releases/download/v0.23.2-8/hermes-official-0.23.2-8-x86.fpk",
-              "sha256": "27740b349517bc4daa6f48caba7abe4f4f2da7c766447af69d1422650c09dead",
-              "size": 181145127
+              "download_url": "https://github.com/aaiuh/hermes-fnos/releases/download/v0.23.2-9/hermes-official-0.23.2-9-x86.fpk",
+              "sha256": "6ab95b49c15e1f3ba4442a730d4b7d5eb3d928d2aaab1ed5b25c83537386f5cd",
+              "size": 181115016
             }
           }
         }

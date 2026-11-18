@@ -456,14 +456,26 @@
       "service_port": "9121",
       "releases": {
         "0.23.2-2": {
-          "changelog": "从 Nous 官方源码 v0.23.2（ae2a81ccc00e）构建；独立端口 9121 与数据目录 @appshare/hermes-official，走飞牛统一网关入口，可与其他 Hermes 应用并存。",
+          "changelog": "首个从 Nous 官方源码构建的版本：内核与 Desktop 前端均来自官方 v0.23.2。应用名 hermes-official，端口 9121，数据目录 @appshare/hermes-official，可与其他 Hermes 应用并存；桌面入口走飞牛统一网关。",
           "updated_at": "2026-11-18",
           "os_min_version": "1.1.3100",
           "packages": {
             "x86": {
               "download_url": "https://github.com/aaiuh/hermes-fnos/releases/download/v0.23.2-2/hermes-official-0.23.2-2-x86.fpk",
-              "sha256": "fb9a92e71cd99a7ad0fae548f0ad64d8823e626c5521ab2055fa74bcc6787279",
-              "size": 176559772
+              "sha256": "acf9e13d2ade7add12c2720a348b73f679ecc8e84e601bc55c609c7a46f7b6f1",
+              "size": 176803928
+            }
+          }
+        },
+        "0.23.2-3": {
+          "changelog": "换用 Nous 官方图标（取自官方仓库 apps/desktop/assets/icon.png），其余与 0.23.2-2 一致。",
+          "updated_at": "2026-11-18",
+          "os_min_version": "1.1.3100",
+          "packages": {
+            "x86": {
+              "download_url": "https://github.com/aaiuh/hermes-fnos/releases/download/v0.23.2-3/hermes-official-0.23.2-3-x86.fpk",
+              "sha256": "370d436bba6b72f2eea66f2d10513632710c3378fdf8f170193fcbac287cf8f5",
+              "size": 176769362
             }
           }
         }

@@ -22,7 +22,7 @@ https://raw.githubusercontent.com/aaiuh/fnos-apps/main/fnpack.json
 |---|---|---|---|
 | DeepSeek Harness | DeepSeek AI 开源的插件化智能体框架（命令行 dsh）。 | 0.2.2-8 | AI赋能 |
 | fnMusic 音源扩展 | 飞牛音乐第三方音源扩展：零侵入接管官方音乐入口，提供 musicdl 聚合、网易云、洛雪自定义源在线搜索… | 3.0.0 | 影音娱乐 |
-| Hermes Agent | Nous 官方 Hermes Agent 的飞牛原生包， | 0.23.2-3 | AI赋能 |
+| Hermes Agent | Nous 官方 Hermes Agent 的飞牛原生包， | 0.23.2-4 | AI赋能 |
 | Hindsight 记忆库 | Agent 长期记忆系统，原生运行于飞牛 fnOS，不依赖 Docker。 | 1.2.1 | AI赋能 |
 | Octop | 腾讯开源的多用户多智能体 AI 助手平台，支持 Web 控制台、CLI、IM 渠道与定时任务， | 1.0.3b7 | AI赋能 |
 | Wild Work | wild-work 账号池代理（自封装版）。提供 OpenAI 兼容 API（/v1）与内置 Web 控… | 2.12.0-1 | AI赋能 |

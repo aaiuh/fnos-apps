@@ -480,14 +480,38 @@
           }
         },
         "0.23.2-4": {
-          "changelog": "从 Nous 官方源码 v0.23.2（ae2a81ccc00e）构建；独立端口 9121 与数据目录 @appshare/hermes-official，走飞牛统一网关入口，可与其他 Hermes 应用并存。",
+          "changelog": "换用 Nous 官方图标；界面描述改为「含官方 Desktop 工作区」；去掉与其它应用的对比表述；安装初始化默认端口修正为 9121。",
           "updated_at": "2026-11-18",
           "os_min_version": "1.1.3100",
           "packages": {
             "x86": {
               "download_url": "https://github.com/aaiuh/hermes-fnos/releases/download/v0.23.2-4/hermes-official-0.23.2-4-x86.fpk",
-              "sha256": "50a0845428d5160e0bb40721e3e02633b8b53799832799bac7a63ba532a44736",
-              "size": 176792457
+              "sha256": "bb48b646e824cd3d92c639d07afc12314756465526a7c492f5191797d420812b",
+              "size": 176771316
+            }
+          }
+        },
+        "0.23.2-5": {
+          "changelog": "修复三处导致无法启动的问题：内核入口路径 venv→.venv；editable finder 里的构建机绝对路径改写为包内路径；webapp 改为绑定 127.0.0.1（官方禁止无认证的非回环绑定）。",
+          "updated_at": "2026-11-18",
+          "os_min_version": "1.1.3100",
+          "packages": {
+            "x86": {
+              "download_url": "https://github.com/aaiuh/hermes-fnos/releases/download/v0.23.2-5/hermes-official-0.23.2-5-x86.fpk",
+              "sha256": "dada3173fd8458acf10d252e570f5c6e97497f9ed40110b1488a746fd85fab07",
+              "size": 176734005
+            }
+          }
+        },
+        "0.23.2-8": {
+          "changelog": "从 Nous 官方源码 v0.23.2（ae2a81ccc00e）构建；独立端口 9121 与数据目录 @appshare/hermes-official，走飞牛统一网关入口，可与其他 Hermes 应用并存。",
+          "updated_at": "2026-11-18",
+          "os_min_version": "1.1.3100",
+          "packages": {
+            "x86": {
+              "download_url": "https://github.com/aaiuh/hermes-fnos/releases/download/v0.23.2-8/hermes-official-0.23.2-8-x86.fpk",
+              "sha256": "27740b349517bc4daa6f48caba7abe4f4f2da7c766447af69d1422650c09dead",
+              "size": 181145127
             }
           }
         }
@@ -591,6 +615,18 @@
       "is_docker": false,
       "service_port": "7863",
       "releases": {
+        "2.12.1-1": {
+          "changelog": "自动构建于上游 v2.12.1 (rockswang/wild-work releases)。下载 wildwork-2.12.1-1.fpk 在飞牛 fnOS 应用中心手动安装。",
+          "updated_at": "2026-11-18",
+          "os_min_version": "1.1.0",
+          "packages": {
+            "x86": {
+              "download_url": "https://github.com/mickeyttsc/wild-work-fpk/releases/download/v2.12.1/wildwork-2.12.1-1.fpk",
+              "sha256": "1b334744e050b96dfeb19f2321ec9aba3c92eea140fe0511a923f2aeab110987",
+              "size": 10215437
+            }
+          }
+        },
         "2.12.0-1": {
           "changelog": "自动构建于上游 v2.12.0 (rockswang/wild-work releases)。下载 wildwork-2.12.0-1.fpk 在飞牛 fnOS 应用中心手动安装。",
           "updated_at": "2026-11-16",
@@ -612,18 +648,6 @@
               "download_url": "https://github.com/mickeyttsc/wild-work-fpk/releases/download/v2.11.7/wildwork-2.11.7-1.fpk",
               "sha256": "41ec618c85d5c87edd60e1f7d04346a81d7fc9eb4a8ba9bfb8d7cb60b7594837",
               "size": 10111210
-            }
-          }
-        },
-        "2.11.6-1": {
-          "changelog": "自动构建于上游 v2.11.6 (rockswang/wild-work releases)。下载 wildwork-2.11.6-1.fpk 在飞牛 fnOS 应用中心手动安装。",
-          "updated_at": "2026-11-09",
-          "os_min_version": "1.1.0",
-          "packages": {
-            "x86": {
-              "download_url": "https://github.com/mickeyttsc/wild-work-fpk/releases/download/v2.11.6/wildwork-2.11.6-1.fpk",
-              "sha256": "9079dc34544a8a9897a6eabc3a81bd9ea0827c1e40319b38d05099788fb640ad",
-              "size": 10104742
             }
           }
         }

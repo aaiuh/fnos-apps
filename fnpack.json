@@ -402,6 +402,23 @@
       "is_docker": false,
       "service_port": "",
       "releases": {
+        "3.2.0": {
+          "changelog": "本版本为正式版本。\n\n### 新增\n- 在线歌手搜索：搜索页「歌手」Tab 在本地歌手之后并入网易云音乐与洛雪音源的原生歌手结果，支持查看歌手详情、热门/最新歌曲和专辑列表；点击单曲中的歌手也可进入对应歌手页（#141）。\n- 在线专辑搜索：搜索页「专辑」Tab 在本地专辑之后并入网易云音乐与洛雪音源的原生专辑结果，支持查看专辑详情和完整曲目列表；musicdl 与洛雪其他平台保持原有聚合搜索行为（#141）。\n\n### 修复\n- 每日推荐、热门推荐和猜你喜欢中的本地歌曲没有内嵌封面时，改用同专辑封面或飞牛音乐提供的专辑封面。不改写历史推荐数据；专辑本身没有封面时仍显示占位图（#143）。\n- 在线专辑同名结果不再只按专辑名去重：同名但歌手不同的翻唱、合辑与原创专辑会分别保留，避免周杰伦《叶惠美》等原专辑被同名翻唱顶掉；缺少歌手的重复行仍会合并。\n- 单曲歌手缺少原生 ID 时，歌手页会先用同平台专辑与曲目做严格身份核验，核验不通过时明确提示无法确认，不按名字猜测歌手身份。\n- 修复在线歌手的歌曲、专辑列表翻到第 2 页后为空，以及洛雪专辑列表因每页条数不同而跳过结果的问题。\n- 网易合作专辑分别显示每位歌手，可打开各自的详情页。洛雪歌手核验会继续检查其他同名专辑；音源请求失败时显示错误，不再中断页面。\n\n### 安装与维护\n- 三个安装包怎么选？见 [我该选择哪一个安装包？](https://github.com/javycoder/fnos_music_ext/blob/main/docs/INSTALL.md#which-fpk)。",
+          "updated_at": "2026-11-21",
+          "os_min_version": "1.2.0",
+          "packages": {
+            "x86": {
+              "download_url": "https://github.com/javycoder/fnos_music_ext/releases/download/v3.2.0/fnmusic-ext-3.2.0-0-prebuilt-amd64.fpk",
+              "sha256": "a9041626795c481f9f4c7252f040d50f8820f22340606ea3a2f62a4e005104c6",
+              "size": 534664927
+            },
+            "arm": {
+              "download_url": "https://github.com/javycoder/fnos_music_ext/releases/download/v3.2.0/fnmusic-ext-3.2.0-0-prebuilt-arm64.fpk",
+              "sha256": "e8a47c4376f09ca439b9c0594a81ee02d2ec9f8415d0b0f2885660700d36482c",
+              "size": 514163871
+            }
+          }
+        },
         "3.1.2": {
           "changelog": "本版本为正式版本。\n\n### 新增\n- 管理页「搜索设置」可调整官方网页版单曲搜索的单次返回上限，默认 50 首，支持 1–200 首；显式分页与移动端请求不受影响（#139）。\n\n### 修复\n- 修复每日推荐、热门推荐与猜你喜欢的历史缓存中部分本地歌曲封面无法显示的问题，不改写已有缓存（#138）。\n- 修复专辑搜索显式分页时本地与在线结果的排列及跨页重复；官方分页结果异常时保留原响应，避免错误拼接在线结果（#139）。\n- 大模型用量账本区分 HTTP 错误、网络超时或取消、无效响应和响应缺少用量；尽可能记录已知用量，修复异常字段或正文格式导致请求漏记。服务商明确没有可用提供者时短暂冷却并使用本地兜底，减少无效重试。\n\n### 安装与维护\n- 三个安装包怎么选？见 [我该选择哪一个安装包？](https://github.com/javycoder/fnos_music_ext/blob/main/docs/INSTALL.md#which-fpk)。\n- 管理页显示未知用量原因、最近失败及服务商错误码；历史记录中的异常内容安全转义，部分已知用量与未知部分分别说明。",
           "updated_at": "2026-11-19",
@@ -433,23 +450,6 @@
               "download_url": "https://github.com/javycoder/fnos_music_ext/releases/download/v3.1.1/fnmusic-ext-3.1.1-0-prebuilt-arm64.fpk",
               "sha256": "a0a3c4191f899db7226c32d50a2d49d4c26b3c1ca12029d6feae6e04829c53a7",
               "size": 514099395
-            }
-          }
-        },
-        "3.1.0": {
-          "changelog": "本版本为正式版本。\n\n### 新增\n- musicdl 搜索新增可切换的新版聚合搜索（Beta）：在管理页「实验功能 → musicdl 搜索」打开「新版聚合搜索」开关后，改用 musicdl 官方聚合一次搜索多个平台。如果你之前使用 musicdl 音乐源时搜索不太稳定（搜不到、结果时有时无），可以尝试启用新版 musicdl 聚合搜索。已安装并启用 musicdl 的老用户默认沿用原有搜索，全新安装默认启用新版；保存即时生效并自动清理搜索缓存，不影响网易云与洛雪音源，随时可切回原有搜索。\n- 管理页「已选歌单（音乐页展示顺序）」支持长按拖动排序，鼠标与触屏一致；长按约 0.3 秒后卡片抬起，其余条目实时让位，取消拖动不改变原顺序，原上下调整按钮保留（#136）。\n\n### 安装与维护\n- 三个安装包怎么选？见 [我该选择哪一个安装包？](https://github.com/javycoder/fnos_music_ext/blob/main/docs/INSTALL.md#which-fpk)。",
-          "updated_at": "2026-11-18",
-          "os_min_version": "1.2.0",
-          "packages": {
-            "x86": {
-              "download_url": "https://github.com/javycoder/fnos_music_ext/releases/download/v3.1.0/fnmusic-ext-3.1.0-0-prebuilt-amd64.fpk",
-              "sha256": "fcf563bbf418991deb288902b0b9b19d25c78b2eaf472534b2de15748e747db6",
-              "size": 534580486
-            },
-            "arm": {
-              "download_url": "https://github.com/javycoder/fnos_music_ext/releases/download/v3.1.0/fnmusic-ext-3.1.0-0-prebuilt-arm64.fpk",
-              "sha256": "0971d6b9e1bfdaa1204c9e68797046399b8397461e1038f2a4e3273733989e5d",
-              "size": 514070834
             }
           }
         }

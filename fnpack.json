@@ -402,6 +402,23 @@
       "is_docker": false,
       "service_port": "",
       "releases": {
+        "3.2.1": {
+          "changelog": "本版本为正式版本。\n\n### 新增\n- 管理页「用户存储」的最近扫描状态显示时间与可读的结果说明。（#147）\n\n### 修复\n- 修复搜索到「刀郎」等在线歌手后点击头像显示「加载失败」的问题；网易云与洛雪的在线歌手曲目返回客户端所需的时间字段。（#146）\n- 修复已配置管理员凭据且使用官方扫库路径时，手动扫库与下载落盘后的自动扫库均未发出请求的问题。（#147）\n- 自动扫库结束后保留最近结果和冷却时间；等待扫描不再误显示为失败。（#148）\n\n### 安装与维护\n- 三个安装包怎么选？见 [我该选择哪一个安装包？](https://github.com/javycoder/fnos_music_ext/blob/main/docs/INSTALL.md#which-fpk)。",
+          "updated_at": "2026-11-21",
+          "os_min_version": "1.2.0",
+          "packages": {
+            "x86": {
+              "download_url": "https://github.com/javycoder/fnos_music_ext/releases/download/v3.2.1/fnmusic-ext-3.2.1-0-prebuilt-amd64.fpk",
+              "sha256": "528d93b3e906d8e109770780680e2048d8951331a7665cecffb498426c897316",
+              "size": 534670630
+            },
+            "arm": {
+              "download_url": "https://github.com/javycoder/fnos_music_ext/releases/download/v3.2.1/fnmusic-ext-3.2.1-0-prebuilt-arm64.fpk",
+              "sha256": "05903df2001e687b82b962cc4da9f9717ed1d50cd23a6590dfea353f63152156",
+              "size": 514176547
+            }
+          }
+        },
         "3.2.0": {
           "changelog": "本版本为正式版本。\n\n### 新增\n- 在线歌手搜索：搜索页「歌手」Tab 在本地歌手之后并入网易云音乐与洛雪音源的原生歌手结果，支持查看歌手详情、热门/最新歌曲和专辑列表；点击单曲中的歌手也可进入对应歌手页（#141）。\n- 在线专辑搜索：搜索页「专辑」Tab 在本地专辑之后并入网易云音乐与洛雪音源的原生专辑结果，支持查看专辑详情和完整曲目列表；musicdl 与洛雪其他平台保持原有聚合搜索行为（#141）。\n\n### 修复\n- 每日推荐、热门推荐和猜你喜欢中的本地歌曲没有内嵌封面时，改用同专辑封面或飞牛音乐提供的专辑封面。不改写历史推荐数据；专辑本身没有封面时仍显示占位图（#143）。\n- 在线专辑同名结果不再只按专辑名去重：同名但歌手不同的翻唱、合辑与原创专辑会分别保留，避免周杰伦《叶惠美》等原专辑被同名翻唱顶掉；缺少歌手的重复行仍会合并。\n- 单曲歌手缺少原生 ID 时，歌手页会先用同平台专辑与曲目做严格身份核验，核验不通过时明确提示无法确认，不按名字猜测歌手身份。\n- 修复在线歌手的歌曲、专辑列表翻到第 2 页后为空，以及洛雪专辑列表因每页条数不同而跳过结果的问题。\n- 网易合作专辑分别显示每位歌手，可打开各自的详情页。洛雪歌手核验会继续检查其他同名专辑；音源请求失败时显示错误，不再中断页面。\n\n### 安装与维护\n- 三个安装包怎么选？见 [我该选择哪一个安装包？](https://github.com/javycoder/fnos_music_ext/blob/main/docs/INSTALL.md#which-fpk)。",
           "updated_at": "2026-11-21",
@@ -433,23 +450,6 @@
               "download_url": "https://github.com/javycoder/fnos_music_ext/releases/download/v3.1.2/fnmusic-ext-3.1.2-0-prebuilt-arm64.fpk",
               "sha256": "91fadb26aadeac1f4e466a9d2f8852fcf6c4533c3bdfa1d736fa879945a19034",
               "size": 514118272
-            }
-          }
-        },
-        "3.1.1": {
-          "changelog": "本版本为正式版本。\n\n### 修复\n- 修复 musicdl 聚合音源一个平台都加载不出来：3.1.0 的音源镜像漏带了搜索模块，进程启动后立即退出，临时预览和切换到 musicdl 都过不了健康检查，平台列表一直为空。升级后重新点选 musicdl 即可加载平台。\n\n### 安装与维护\n- 三个安装包怎么选？见 [我该选择哪一个安装包？](https://github.com/javycoder/fnos_music_ext/blob/main/docs/INSTALL.md#which-fpk)。",
-          "updated_at": "2026-11-18",
-          "os_min_version": "1.2.0",
-          "packages": {
-            "x86": {
-              "download_url": "https://github.com/javycoder/fnos_music_ext/releases/download/v3.1.1/fnmusic-ext-3.1.1-0-prebuilt-amd64.fpk",
-              "sha256": "0dcc1e7e552b9411416501161e056239d8c640870a16daf5e214be018ddcf785",
-              "size": 534585494
-            },
-            "arm": {
-              "download_url": "https://github.com/javycoder/fnos_music_ext/releases/download/v3.1.1/fnmusic-ext-3.1.1-0-prebuilt-arm64.fpk",
-              "sha256": "a0a3c4191f899db7226c32d50a2d49d4c26b3c1ca12029d6feae6e04829c53a7",
-              "size": 514099395
             }
           }
         }
@@ -553,6 +553,18 @@
       "is_docker": false,
       "service_port": "7863",
       "releases": {
+        "2.13.0-1": {
+          "changelog": "自动构建于上游 v2.13.0 (rockswang/wild-work releases)。下载 wildwork-2.13.0-1.fpk 在飞牛 fnOS 应用中心手动安装。",
+          "updated_at": "2026-11-21",
+          "os_min_version": "1.1.0",
+          "packages": {
+            "x86": {
+              "download_url": "https://github.com/mickeyttsc/wild-work-fpk/releases/download/v2.13.0/wildwork-2.13.0-1.fpk",
+              "sha256": "8292da43984bf13cc6df5c70465a6483a5169fdb932521b314d7e68e8b73e65d",
+              "size": 13027395
+            }
+          }
+        },
         "2.12.1-1": {
           "changelog": "自动构建于上游 v2.12.1 (rockswang/wild-work releases)。下载 wildwork-2.12.1-1.fpk 在飞牛 fnOS 应用中心手动安装。",
           "updated_at": "2026-11-18",
@@ -574,18 +586,6 @@
               "download_url": "https://github.com/mickeyttsc/wild-work-fpk/releases/download/v2.12.0/wildwork-2.12.0-1.fpk",
               "sha256": "9f81be6907eacb91f3de62da93853e76102296f41a065ba9d738d4e3e7dbbff0",
               "size": 10213335
-            }
-          }
-        },
-        "2.11.7-1": {
-          "changelog": "自动构建于上游 v2.11.7 (rockswang/wild-work releases)。下载 wildwork-2.11.7-1.fpk 在飞牛 fnOS 应用中心手动安装。",
-          "updated_at": "2026-11-13",
-          "os_min_version": "1.1.0",
-          "packages": {
-            "x86": {
-              "download_url": "https://github.com/mickeyttsc/wild-work-fpk/releases/download/v2.11.7/wildwork-2.11.7-1.fpk",
-              "sha256": "41ec618c85d5c87edd60e1f7d04346a81d7fc9eb4a8ba9bfb8d7cb60b7594837",
-              "size": 10111210
             }
           }
         }

@@ -402,6 +402,23 @@
       "is_docker": false,
       "service_port": "",
       "releases": {
+        "3.2.2": {
+          "changelog": "本版本为正式版本。\n\n### 新增\n- 无新增功能。\n\n### 修复\n- 保留在线歌手搜索结果的 ID 映射，修复代理重启后打开「刀郎」等歌手的搜索结果显示「歌手不存在」的问题。单曲中的歌手在核实身份后也保持原入口 ID，避免详情无法显示。（#146）\n- 修复网络盘可写性探测失败后遗留临时文件的问题。（#150）\n\n### 安装与维护\n- 升级前已缓存、且提示不存在的在线歌手链接，请从「歌手」搜索结果重新打开。\n- 三个安装包怎么选？见 [我该选择哪一个安装包？](https://github.com/javycoder/fnos_music_ext/blob/main/docs/INSTALL.md#which-fpk)。",
+          "updated_at": "2026-11-22",
+          "os_min_version": "1.2.0",
+          "packages": {
+            "x86": {
+              "download_url": "https://github.com/javycoder/fnos_music_ext/releases/download/v3.2.2/fnmusic-ext-3.2.2-0-prebuilt-amd64.fpk",
+              "sha256": "9bf478bda87f38686d9b1d98bed64b53c2c444d82a77318569a72530f7a6d49b",
+              "size": 534755396
+            },
+            "arm": {
+              "download_url": "https://github.com/javycoder/fnos_music_ext/releases/download/v3.2.2/fnmusic-ext-3.2.2-0-prebuilt-arm64.fpk",
+              "sha256": "3db003dc6b5aa414833ca202d0bb84984ddc4b3fa9e44a956c1b7451e8616bae",
+              "size": 514262582
+            }
+          }
+        },
         "3.2.1": {
           "changelog": "本版本为正式版本。\n\n### 新增\n- 管理页「用户存储」的最近扫描状态显示时间与可读的结果说明。（#147）\n\n### 修复\n- 修复搜索到「刀郎」等在线歌手后点击头像显示「加载失败」的问题；网易云与洛雪的在线歌手曲目返回客户端所需的时间字段。（#146）\n- 修复已配置管理员凭据且使用官方扫库路径时，手动扫库与下载落盘后的自动扫库均未发出请求的问题。（#147）\n- 自动扫库结束后保留最近结果和冷却时间；等待扫描不再误显示为失败。（#148）\n\n### 安装与维护\n- 三个安装包怎么选？见 [我该选择哪一个安装包？](https://github.com/javycoder/fnos_music_ext/blob/main/docs/INSTALL.md#which-fpk)。",
           "updated_at": "2026-11-21",
@@ -433,23 +450,6 @@
               "download_url": "https://github.com/javycoder/fnos_music_ext/releases/download/v3.2.0/fnmusic-ext-3.2.0-0-prebuilt-arm64.fpk",
               "sha256": "e8a47c4376f09ca439b9c0594a81ee02d2ec9f8415d0b0f2885660700d36482c",
               "size": 514163871
-            }
-          }
-        },
-        "3.1.2": {
-          "changelog": "本版本为正式版本。\n\n### 新增\n- 管理页「搜索设置」可调整官方网页版单曲搜索的单次返回上限，默认 50 首，支持 1–200 首；显式分页与移动端请求不受影响（#139）。\n\n### 修复\n- 修复每日推荐、热门推荐与猜你喜欢的历史缓存中部分本地歌曲封面无法显示的问题，不改写已有缓存（#138）。\n- 修复专辑搜索显式分页时本地与在线结果的排列及跨页重复；官方分页结果异常时保留原响应，避免错误拼接在线结果（#139）。\n- 大模型用量账本区分 HTTP 错误、网络超时或取消、无效响应和响应缺少用量；尽可能记录已知用量，修复异常字段或正文格式导致请求漏记。服务商明确没有可用提供者时短暂冷却并使用本地兜底，减少无效重试。\n\n### 安装与维护\n- 三个安装包怎么选？见 [我该选择哪一个安装包？](https://github.com/javycoder/fnos_music_ext/blob/main/docs/INSTALL.md#which-fpk)。\n- 管理页显示未知用量原因、最近失败及服务商错误码；历史记录中的异常内容安全转义，部分已知用量与未知部分分别说明。",
-          "updated_at": "2026-11-19",
-          "os_min_version": "1.2.0",
-          "packages": {
-            "x86": {
-              "download_url": "https://github.com/javycoder/fnos_music_ext/releases/download/v3.1.2/fnmusic-ext-3.1.2-0-prebuilt-amd64.fpk",
-              "sha256": "5acad1bd95ac6e7e7743832e0191444eba068db74b3863ada79a421a8b3fe6ae",
-              "size": 534620803
-            },
-            "arm": {
-              "download_url": "https://github.com/javycoder/fnos_music_ext/releases/download/v3.1.2/fnmusic-ext-3.1.2-0-prebuilt-arm64.fpk",
-              "sha256": "91fadb26aadeac1f4e466a9d2f8852fcf6c4533c3bdfa1d736fa879945a19034",
-              "size": 514118272
             }
           }
         }

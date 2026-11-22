@@ -77,18 +77,6 @@
       "is_docker": false,
       "service_port": "8888",
       "releases": {
-        "1.0.0-15": {
-          "changelog": "跟随上游 Hindsight 1.0.0-15。原生运行，不依赖 Docker；内置 PostgreSQL 与向量检索，onnx 语义嵌入 + flashrank 重排；含官方管理控制台（需系统已装 Node.js 20 以上）；支持飞牛应用备份与恢复。",
-          "updated_at": "2026-10-18",
-          "os_min_version": "1.1.0",
-          "packages": {
-            "x86": {
-              "download_url": "https://github.com/aaiuh/hindsight-fnos/releases/download/v1.0.0-15/Hindsight-1.0.0-15-x86.fpk",
-              "sha256": "7612995c27ba9b018f2502769118dac4be156e4c6fc636a12962c8fe01dd5112",
-              "size": 68067
-            }
-          }
-        },
         "1.0.0-16": {
           "changelog": "跟随上游 Hindsight 1.0.0-16。原生运行，不依赖 Docker；内置 PostgreSQL 与向量检索，onnx 语义嵌入 + flashrank 重排；含官方管理控制台（需系统已装 Node.js 20 以上）；支持飞牛应用备份与恢复。",
           "updated_at": "2026-10-18",
@@ -194,6 +182,18 @@
               "download_url": "https://github.com/aaiuh/hindsight-fnos/releases/download/v1.2.1/Hindsight-1.2.1-x86.fpk",
               "sha256": "66c941c244922b92a599fcdc61165d73341b3f0bad4e821c695a2c9980011d8a",
               "size": 71378
+            }
+          }
+        },
+        "1.2.3": {
+          "changelog": "跟随上游 Hindsight 1.2.3。原生运行，不依赖 Docker；内置 PostgreSQL 与向量检索，onnx 语义嵌入 + flashrank 重排；含官方管理控制台（需系统已装 Node.js 20 以上）；支持飞牛应用备份与恢复。",
+          "updated_at": "2026-11-22",
+          "os_min_version": "1.1.0",
+          "packages": {
+            "x86": {
+              "download_url": "https://github.com/aaiuh/hindsight-fnos/releases/download/v1.2.3/Hindsight-1.2.3-x86.fpk",
+              "sha256": "fac49cb0f3874521f08b31148c3aefdf069a38cc0fc35115ebd9fa82af9b111d",
+              "size": 71376
             }
           }
         }

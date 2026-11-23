@@ -36,3 +36,10 @@ aaiuh/hermes-console
 # 运行时，不需要 Docker。端口 9121、数据目录 @appshare/hermes-official，与其他 Hermes
 # 系应用完全隔离，可并存运行；桌面入口走飞牛统一网关。自带 fnpack.json，CI 推送即出包。
 aaiuh/hermes-fnos
+
+# iranee/fnos-hermes-agent：Nous 官方 Hermes Agent 的飞牛原生封装，appname 为
+# hermes-agent（与 Studio 的 Hermes 完全隔离，程序/数据/端口/账号均不重叠，可并存）。
+# 内核固定上游稳定 tag v0.23.2，Python 3.14 与 uv 由安装向导从国内镜像联网获取，
+# 因此包仅 110 MB 且 x86_64 与 arm64 通用（资产名带 _all）。仓库不带 fnpack.json，
+# 用 !release 直读 Release 资产。
+iranee/fnos-hermes-agent!release https://raw.githubusercontent.com/iranee/fnos-hermes-agent/main/ICON_256.PNG AI赋能

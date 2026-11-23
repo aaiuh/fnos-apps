@@ -455,6 +455,82 @@
         }
       }
     },
+    "hermes-agent": {
+      "display_name": "Hermes Agent",
+      "desc": "Hermes Agent 开源 AI Agent，支持多平台消息网关、内置学习循环、技能系统和 MCP 扩展。通过飞牛应用中心安装，使用官方 WebApp 对话与工具审批；内核和 WebApp 随包提供，Python 3.14、uv 与依赖在安装时联网获取；重装时保留已有用户数据。<br/><br/><strong>核心能力：</strong><br/>• 多模型支持：OpenAI、Anthropic、Kimi、MiniMax 等<br/>• 消息平台：微信ClawBot、QQ Bot、飞书、WhatsApp、Telegram 等<br/>• 定时任务：自然语言描述的自动化调度<br/>• 持久记忆：跨会话学习和技能进化<br/>• MCP 扩展：连接 GitHub 等外部工具<br/><br/><strong>免责声明：</strong><br/>本应用仅作为服务集成工具，不对 Hermes Agent 软件本身的安全性、稳定性作任何保证。使用过程中产生的所有风险由用户自行承担。",
+      "platform": [
+        "x86",
+        "arm"
+      ],
+      "categories": [
+        "AI赋能"
+      ],
+      "icon_url": "https://raw.githubusercontent.com/iranee/fnos-hermes-agent/main/ICON_256.PNG",
+      "preview_urls": [],
+      "readme_url": "https://raw.githubusercontent.com/iranee/fnos-hermes-agent/main/README.md",
+      "bug_report_url": "https://github.com/iranee/fnos-hermes-agent/issues",
+      "maintainer": "Nous Research",
+      "maintainer_url": "https://github.com/iranee",
+      "distributor": "bbis",
+      "distributor_url": "https://github.com/iranee",
+      "run_as": "package",
+      "install_type": "",
+      "is_docker": false,
+      "service_port": "",
+      "releases": {
+        "0.23.2-08": {
+          "changelog": "# 更新日志\r\n\r\n## 0.23.2-08（2026-11-21）\r\n- Hermes 内核升级至 0.23.2。\r\n- 新增 Hermes 更新技能：询问 Hermes Agent 或本应用的更新时，会对比版本和随包文件差异，并给出升级建议。\r\n- 插件管理页面的搜索框、按钮和分类文字在小屏上错位。\r\n- 横屏时插件列表无法完整浏览。\r\n- 新建对话发送 `/goal` 等命令后没有内容。\r\n- 发送失败或切换会话后，草稿和附件丢失或恢复到错误会话。\r\n- 手机版模型与设置选项难以点选，部分弹窗和短屏文字遮挡输入框。\r\n- 页面缩放被误判为键盘弹出，导致对话区域高度异常。\r\n- 安装、升级预检误判相似目录，以及进程信息短暂不可读导致的安装失败。\r\n- 手机版模型弹窗和搜索框透明、编辑模型不便点击。",
+          "updated_at": "2026-11-21",
+          "os_min_version": "1.1.0",
+          "packages": {
+            "x86": {
+              "download_url": "https://github.com/iranee/fnos-hermes-agent/releases/download/v0.23.2-08/fnos-hermes-agent_v0.23.2-08_all.fpk",
+              "sha256": "f8bebcf1e5f5b4f776b61c18a4ccc20aa70815a9b99b51e3192a3af2fb84dbb4",
+              "size": 115994828
+            },
+            "arm": {
+              "download_url": "https://github.com/iranee/fnos-hermes-agent/releases/download/v0.23.2-08/fnos-hermes-agent_v0.23.2-08_all.fpk",
+              "sha256": "f8bebcf1e5f5b4f776b61c18a4ccc20aa70815a9b99b51e3192a3af2fb84dbb4",
+              "size": 115994828
+            }
+          }
+        },
+        "0.23.1-040": {
+          "changelog": "# 更新日志\r\n\r\n## 0.23.1-040（2026-11-17）\r\n\r\n### 更新\r\n\r\n- 安装包改为 x86_64 和 ARM 设备通用的一个包。\r\n- 其他优化\r\n\r\n## 0.23.1-039（2026-11-17）\r\n\r\n### 更新\r\n\r\n- 内核升级成功后，更新页不再重复显示\"已成功\"文字。\r\n- 内核升级期间停用模型、通讯页面。\r\n- 内核升级期间概况日志只提示一条\"正在升级内核\"，不再逐条报错。\r\n- 其他优化\r\n\r\n## 0.23.1-038（2026-11-16）\r\n\r\n### 修复\r\n\r\n- 内核更新后提示验证失败、日志报 `Kernel process exited unsuccessfully`。\r\n- 手机上网页对话的附件菜单要点多次才能选中。\r\n- 手机上点模型选择框的搜索框会穿到对话输入框。\r\n\r\n### 更新\r\n\r\n- 手机版附件菜单放大，模型选择框缩小并改为不透明。\r\n- 更新页去掉\"本小时还可主动检测 N 次\"提示，版本号在手机上不再被拆行。",
+          "updated_at": "2026-11-17",
+          "os_min_version": "1.1.0",
+          "packages": {
+            "x86": {
+              "download_url": "https://github.com/iranee/fnos-hermes-agent/releases/download/v0.23.1-040/fnos-hermes-agent_v0.23.1-040_all.fpk",
+              "sha256": "4e41e924d3eeefde05f66e8009028c04d2452d52e27a4a6b04e2e1a504e8869b",
+              "size": 112507805
+            },
+            "arm": {
+              "download_url": "https://github.com/iranee/fnos-hermes-agent/releases/download/v0.23.1-040/fnos-hermes-agent_v0.23.1-040_all.fpk",
+              "sha256": "4e41e924d3eeefde05f66e8009028c04d2452d52e27a4a6b04e2e1a504e8869b",
+              "size": 112507805
+            }
+          }
+        },
+        "0.23.1-037": {
+          "changelog": "## 新版亮点\r\n\r\n这一版的对话页换成了 Hermes 上游官方 WebApp，管理面板只负责配置、服务和更新。\r\n\r\n- **官方 WebApp**：「对话」页内嵌的就是上游官方 WebApp，源码固定到上游的版本标签和提交。界面和交互跟上游一致，本项目只补了手机触屏适配，并关掉了它自带的更新入口。\r\n- **访问更安全**：WebApp 经应用自己的代理打开，每个请求都核对 fnOS 管理员身份，Gateway 端口只在本机使用。\r\n- **打开更快**：WebApp 在运行时，面板会在后台先加载对话页，点「对话」就能直接用。在同一个浏览器标签页里重开面板，会沿用上次的登录，新开标签页会自动重新登录一次。\r\n- **手机适配**：模型选择里的搜索框、收藏星标和关闭按钮按触屏重新调整过，轻点就能操作。\r\n- **连接更稳**：网络短暂切换或手机切到后台时，面板先保留上一次的服务状态。\r\n- **更新跟进**：更新页可选稳定版，也可以开启「同步上游提交」跟随上游 main 分支，并显示本机落后多少个提交。注意 main 分支不是正式发布版。",
+          "updated_at": "2026-11-15",
+          "os_min_version": "1.1.0",
+          "packages": {
+            "arm": {
+              "download_url": "https://github.com/iranee/fnos-hermes-agent/releases/download/v0.23.1-037/fnos-hermes-agent_v0.23.1-037_arm64.fpk",
+              "sha256": "9007fec40268f15e70e36d0b86cbc729417f11ba27c058d8a28ebe2a1fcde27f",
+              "size": 112494669
+            },
+            "x86": {
+              "download_url": "https://github.com/iranee/fnos-hermes-agent/releases/download/v0.23.1-037/fnos-hermes-agent_v0.23.1-037_x86_64.fpk",
+              "sha256": "dd573bc5417e6d8b49f49c8aa106332d6cb8a7df1d0df243e7057503b16522c3",
+              "size": 112492191
+            }
+          }
+        }
+      }
+    },
     "octop-native": {
       "display_name": "Octop",
       "desc": "腾讯开源的多用户多智能体 AI 助手平台，支持 Web 控制台、CLI、IM 渠道与定时任务，数据全部本地存储。<br/><br/><strong>安装后使用：</strong><br/>请等到应用中心显示「运行中」再点「打开」，或访问 http://设备IP:8089，用安装向导里设置的用户名或邮箱登录。<br/>忘记密码时打开飞牛「文件管理」，进入应用共享里的 Octop 数据目录，查看 octop-login.txt（仅备份安装或应用「设置」改密；网页改密后不会自动更新）；也可在应用「设置」中改密。<br/><br/><strong>命令行管理：</strong><br/>支持官方 octop CLI（octop provider list / agent list / user list / skills / backup 等，详见 octop --help）。<br/><br/><strong>首次登录后：</strong><br/>请在控制台「设置 → 模型」配置 API Key，并按需配置 IM 渠道、远程桌面、浏览器等。<br/><br/>注意：本地版直接运行在飞牛主机上，安装前会自动关联安装「Python 3.12」开发工具。",

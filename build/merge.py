@@ -212,6 +212,12 @@ def _pick_fpks(assets: list, prefix: str = "") -> dict[str, dict]:
         if prefix and not name.startswith(prefix):
             continue
         low = name.lower()
+        # 资产名带 _all / universal / noarch 表示一个包通吃两种架构，
+        # 要同时登记到 x86 与 arm，否则 arm 设备在 packages 里找不到下载地址。
+        if any(t in low for t in ("_all", "-all", "universal", "noarch")):
+            out.setdefault("x86", a)
+            out.setdefault("arm", a)
+            continue
         arch = "arm" if ("arm64" in low or "aarch64" in low) else "x86"
         out.setdefault(arch, a)
     return out

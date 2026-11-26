@@ -222,6 +222,23 @@
       "is_docker": false,
       "service_port": "",
       "releases": {
+        "3.2.3": {
+          "changelog": "本版本为正式版本。\n\n### 新增\n- 搜索歌手时，本地曲库与在线音源里的同一位歌手合并显示为一个条目：打开本地歌手可以同时看到本地与在线的歌曲、专辑（本地已有的不重复列出），歌曲数与专辑数显示合计。存在多个同名歌手、或本地只有一两首歌时，仅在能通过 MusicBrainz / Wikidata 公开资料确认身份后才合并（只发送曲目的 ISRC 编码），否则保持分开显示。\n- 搜索结果中的本地歌手卡片补全显示实际歌曲数。\n\n### 修复\n- 大模型推荐一直提示超时：失败原因现在区分连接、发送请求、读取响应等阶段，并显示配置的超时时长；修复「最近失败」的时间显示成 2001 年的问题。管理页补充了读取超时与空正文的排查说明。（#151）\n- 搜索歌手不再长时间等待：本地与在线歌手的核对在后台进行，最坏情况下的响应时间与上一版本相同，核对未完成时先显示未合并的结果。用于核对身份的外部公开资料服务连不上时会暂停重试，不再每次搜索都空等。\n- 打开已合并的歌手页面时，减少重复拉取在线曲目。\n\n### 安装与维护\n- 三个安装包怎么选？见 [我该选择哪一个安装包？](https://github.com/javycoder/fnos_music_ext/blob/main/docs/INSTALL.md#which-fpk)。",
+          "updated_at": "2026-11-26",
+          "os_min_version": "1.2.0",
+          "packages": {
+            "x86": {
+              "download_url": "https://github.com/javycoder/fnos_music_ext/releases/download/v3.2.3/fnmusic-ext-3.2.3-0-prebuilt-amd64.fpk",
+              "sha256": "9c88fc094c6f5311c62f0b1f574b4da88445fcc2a9bb0fd2d34133154dbe28ef",
+              "size": 534766520
+            },
+            "arm": {
+              "download_url": "https://github.com/javycoder/fnos_music_ext/releases/download/v3.2.3/fnmusic-ext-3.2.3-0-prebuilt-arm64.fpk",
+              "sha256": "457d8f87fc2607018d6f5fd241067cdc3d561e49c91cb222e55c6a5226079b0f",
+              "size": 514257287
+            }
+          }
+        },
         "3.2.2": {
           "changelog": "本版本为正式版本。\n\n### 新增\n- 无新增功能。\n\n### 修复\n- 保留在线歌手搜索结果的 ID 映射，修复代理重启后打开「刀郎」等歌手的搜索结果显示「歌手不存在」的问题。单曲中的歌手在核实身份后也保持原入口 ID，避免详情无法显示。（#146）\n- 修复网络盘可写性探测失败后遗留临时文件的问题。（#150）\n\n### 安装与维护\n- 升级前已缓存、且提示不存在的在线歌手链接，请从「歌手」搜索结果重新打开。\n- 三个安装包怎么选？见 [我该选择哪一个安装包？](https://github.com/javycoder/fnos_music_ext/blob/main/docs/INSTALL.md#which-fpk)。",
           "updated_at": "2026-11-22",
@@ -253,23 +270,6 @@
               "download_url": "https://github.com/javycoder/fnos_music_ext/releases/download/v3.2.1/fnmusic-ext-3.2.1-0-prebuilt-arm64.fpk",
               "sha256": "05903df2001e687b82b962cc4da9f9717ed1d50cd23a6590dfea353f63152156",
               "size": 514176547
-            }
-          }
-        },
-        "3.2.0": {
-          "changelog": "本版本为正式版本。\n\n### 新增\n- 在线歌手搜索：搜索页「歌手」Tab 在本地歌手之后并入网易云音乐与洛雪音源的原生歌手结果，支持查看歌手详情、热门/最新歌曲和专辑列表；点击单曲中的歌手也可进入对应歌手页（#141）。\n- 在线专辑搜索：搜索页「专辑」Tab 在本地专辑之后并入网易云音乐与洛雪音源的原生专辑结果，支持查看专辑详情和完整曲目列表；musicdl 与洛雪其他平台保持原有聚合搜索行为（#141）。\n\n### 修复\n- 每日推荐、热门推荐和猜你喜欢中的本地歌曲没有内嵌封面时，改用同专辑封面或飞牛音乐提供的专辑封面。不改写历史推荐数据；专辑本身没有封面时仍显示占位图（#143）。\n- 在线专辑同名结果不再只按专辑名去重：同名但歌手不同的翻唱、合辑与原创专辑会分别保留，避免周杰伦《叶惠美》等原专辑被同名翻唱顶掉；缺少歌手的重复行仍会合并。\n- 单曲歌手缺少原生 ID 时，歌手页会先用同平台专辑与曲目做严格身份核验，核验不通过时明确提示无法确认，不按名字猜测歌手身份。\n- 修复在线歌手的歌曲、专辑列表翻到第 2 页后为空，以及洛雪专辑列表因每页条数不同而跳过结果的问题。\n- 网易合作专辑分别显示每位歌手，可打开各自的详情页。洛雪歌手核验会继续检查其他同名专辑；音源请求失败时显示错误，不再中断页面。\n\n### 安装与维护\n- 三个安装包怎么选？见 [我该选择哪一个安装包？](https://github.com/javycoder/fnos_music_ext/blob/main/docs/INSTALL.md#which-fpk)。",
-          "updated_at": "2026-11-21",
-          "os_min_version": "1.2.0",
-          "packages": {
-            "x86": {
-              "download_url": "https://github.com/javycoder/fnos_music_ext/releases/download/v3.2.0/fnmusic-ext-3.2.0-0-prebuilt-amd64.fpk",
-              "sha256": "a9041626795c481f9f4c7252f040d50f8820f22340606ea3a2f62a4e005104c6",
-              "size": 534664927
-            },
-            "arm": {
-              "download_url": "https://github.com/javycoder/fnos_music_ext/releases/download/v3.2.0/fnmusic-ext-3.2.0-0-prebuilt-arm64.fpk",
-              "sha256": "e8a47c4376f09ca439b9c0594a81ee02d2ec9f8415d0b0f2885660700d36482c",
-              "size": 514163871
             }
           }
         }

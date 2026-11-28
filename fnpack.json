@@ -29,6 +29,18 @@
       "is_docker": false,
       "service_port": "",
       "releases": {
+        "1.1.3": {
+          "changelog": "## 1.1.3 — 生成的规则补 `X-Forwarded-Prefix`\n\n### 改了什么\n\n生成的每条 `location` 增加一行：\n\n```nginx\nproxy_set_header X-Forwarded-Prefix /路径;\n```\n\n### 为什么需要\n\n应用挂在 `/路径` 下时，如果后端不知道自己在子路径里，它生成的跳转链接就会丢掉前缀。\n\n典型症状——访问 `/hermes-agent/` 被 302 到 `/login`：\n\n```\n无该头：  Location: /login                          ← 跳到飞牛登录页，页面「打不开」\n有该头：  Location: /hermes-agent/login?next=%2Fhermes-agent%2F\n```\n\n凡是会自主生成跳转链接、且跑在子路径下的应用都会中招，不限于某一个应用。\n\n### 兼容性\n\n对不读这个头的应用**无副作用**（nginx 只是多传一个请求头），可以放心对全部规则启用。\n\n### 安装\n\n应用中心 →「从文件安装」→ 选择下方 `FnNginxConf-1.1.3.fpk`。\n\n已有 1.1.2 的用户：安装后需在界面点一次「应用配置」，让 `conf.d` 按新模板重新生成。\n\n---\n\n**完整改动**：https://github.com/aaiuh/fnos-nginx-conf/compare/v1.1.2...v1.1.3",
+          "updated_at": "2026-11-28",
+          "os_min_version": "1.1.0",
+          "packages": {
+            "x86": {
+              "download_url": "https://github.com/aaiuh/fnos-nginx-conf/releases/download/v1.1.3/FnNginxConf-1.1.3.fpk",
+              "sha256": "0c8a21313531db1f2ce2b9a6b63105ea4ab90c2302205812ea43b63e407323df",
+              "size": 72506
+            }
+          }
+        },
         "1.1.2": {
           "changelog": "**Full Changelog**: https://github.com/aaiuh/fnos-nginx-conf/compare/v1.1.1...v1.1.2\n\n**Full Changelog**: https://github.com/aaiuh/fnos-nginx-conf/compare/v1.1.1...v1.1.2\n\n**Full Changelog**: https://github.com/aaiuh/fnos-nginx-conf/compare/v1.1.1...v1.1.2\n\n**Full Changelog**: https://github.com/aaiuh/fnos-nginx-conf/compare/v1.1.1...v1.1.2",
           "updated_at": "2026-11-16",

@@ -25,7 +25,7 @@ https://raw.githubusercontent.com/aaiuh/fnos-apps/main/fnpack.json
 | Hindsight 记忆库 | Agent 长期记忆系统，原生运行于飞牛 fnOS，不依赖 Docker。 | 1.2.3 | AI赋能 |
 | Octop | 腾讯开源的多用户多智能体 AI 助手平台，支持 Web 控制台、CLI、IM 渠道与定时任务， | 1.0.3b8 | AI赋能 |
 | Wild Work | wild-work 账号池代理（自封装版）。提供 OpenAI 兼容 API（/v1）与内置 Web 控… | 2.13.1-1 | AI赋能 |
-| 飞牛Nginx转发 | 可视化设计并注入飞牛 Nginx 反向代理配置：只需填写名称、路径与目标地址。 | 1.1.2 | 系统工具 |
+| 飞牛Nginx转发 | 可视化设计并注入飞牛 Nginx 反向代理配置：只需填写名称、路径与目标地址。 | 1.1.3 | 系统工具 |
 
 共 **6** 个应用。本表由 CI 从 `fnpack.json` 自动生成，**请勿手改**。
 
